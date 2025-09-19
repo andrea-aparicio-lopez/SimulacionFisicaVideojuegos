@@ -30,6 +30,8 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
+RenderItem* sphere;
+
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -54,7 +56,15 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-	}
+
+	PxSphereGeometry sphereGeo = PxSphereGeometry(5.0f);
+	PxShape* sphereShape = CreateShape(sphereGeo);
+	PxTransform* sphereTr = new PxTransform(0, 0, 0);
+	PxVec4 sphereColor(1, 0, 1, 1);
+
+	sphere = new RenderItem(sphereShape, sphereTr, sphereColor);
+	RegisterRenderItem(sphere);
+}
 
 
 // Function to configure what happens in each step of physics
@@ -84,7 +94,8 @@ void cleanupPhysics(bool interactive)
 	transport->release();
 	
 	gFoundation->release();
-	}
+	RegisterRenderItem(sphere);
+}
 
 // Function called when a key is pressed
 void keyPress(unsigned char key, const PxTransform& camera)
