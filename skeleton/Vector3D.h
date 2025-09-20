@@ -1,41 +1,36 @@
 #pragma once
 
 class Vector3D {
-
-	double x, y, z;
-
 public:
-	Vector3D() : x(), y(), z() {};
-	Vector3D(double a) : x(a), y(a), z(a) {};
-	Vector3D(double a, double b, double c) : x(a), y(b), z(c) {};
 
-	double mod() {
-		// operaciones
-	}
+	float x, y, z;
 
-	Vector3D normalize() {
-		//
-	}
+	Vector3D();
+	Vector3D(float a);
+	Vector3D(float a, float b, float c);
+
+	float modulo() const;
+	void normalize();
 
 
 public:
-	static Vector3D Vector3D::operator+(Vector3D& v1, Vector3D& v2) {
-		return Vector3D(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+	inline Vector3D operator+(const Vector3D& other) {
+		return Vector3D(x + other.x, y + other.y, z + other.z);
 	}
 
-	static Vector3D Vector3D::operator-(Vector3D& v1, Vector3D& v2) {
-		return Vector3D(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+	inline Vector3D operator-(const Vector3D& other) {
+		return Vector3D(x - other.x, y - other.y, z - other.z);
 	}
 
-	static bool Vector3D::operator==(Vector3D& v1, Vector3D& v2) {
-		return v1.x == v2.x && v1.y == v2.y && v1.z == v2.z;
+	inline bool operator==(const Vector3D& other) {
+		return x == other.x && y == other.y && z == other.z;
 	}
 
-	static Vector3D Vector3D::operator*(Vector3D& v, float a) {
-		return Vector3D(v.x * a, v.y * a, v.z * a);
+	inline Vector3D operator*(const float& a) {
+		return Vector3D(x * a, y * a, z * a);
 	}
 
-	static double Vector3D::operator*(Vector3D& v1, Vector3D& v2) {
-		return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
+	inline float operator*(const Vector3D& other) {
+		return (x * other.x + y * other.y + z * other.z);
 	}
 };
