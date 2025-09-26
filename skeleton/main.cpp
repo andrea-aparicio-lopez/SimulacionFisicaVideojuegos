@@ -7,7 +7,7 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
-#include "Vector3D.h"
+#include "Particle.h"
 
 #include <iostream>
 
@@ -31,10 +31,7 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
-RenderItem* ori;
-RenderItem* xAxis;
-RenderItem* yAxis;
-RenderItem* zAxis;
+Particle* p;
 
 
 // Initialize physics engine
@@ -61,37 +58,7 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
-	// EJES
-	Vector3D origin(0), x_axis(10,0,0), y_axis(0,10,0), z_axis(0,0,10);
-	
-	PxSphereGeometry sphereGeo = PxSphereGeometry(1.0f);
-	// Origen de coordenadas
-	PxShape* originShape = CreateShape(sphereGeo);
-	PxTransform* originTr = new PxTransform(origin.x, origin.y, origin.z);
-	PxVec4 originColor(1, 1, 1, 1);
-	ori = new RenderItem(originShape, originTr, originColor);
-	RegisterRenderItem(ori);
-
-	// Eje X
-	PxShape* xShape = CreateShape(sphereGeo);
-	PxTransform* xTr = new PxTransform(x_axis.x, x_axis.y, x_axis.z);
-	PxVec4 xColor(x_axis.x, x_axis.y, x_axis.z, 1);
-	xAxis = new RenderItem(xShape, xTr, xColor);
-	RegisterRenderItem(xAxis);
-
-	// Eje Y
-	PxShape* yShape = CreateShape(sphereGeo);
-	PxTransform* yTr = new PxTransform(y_axis.x, y_axis.y, y_axis.z);
-	PxVec4 yColor(y_axis.x, y_axis.y, y_axis.z, 1);
-	yAxis = new RenderItem(yShape, yTr, yColor);
-	RegisterRenderItem(yAxis);
-
-	// Eje Z
-	PxShape* zShape = CreateShape(sphereGeo);
-	PxTransform* zTr = new PxTransform(z_axis.x, z_axis.y, z_axis.z);
-	PxVec4 zColor(z_axis.x, z_axis.y, z_axis.z, 1);
-	zAxis = new RenderItem(zShape, zTr, zColor);
-	RegisterRenderItem(zAxis);
+	p = new Particle(PxVec3(0), PxVec3(10,0,0) );
 }
 
 
@@ -104,6 +71,8 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
+
+	p->integrate(t);
 }
 
 // Function to clean data
@@ -122,10 +91,8 @@ void cleanupPhysics(bool interactive)
 	transport->release();
 	
 	gFoundation->release();
-	DeregisterRenderItem(ori);
-	DeregisterRenderItem(xAxis);
-	DeregisterRenderItem(yAxis);
-	DeregisterRenderItem(zAxis);
+
+	delete p;
 }
 
 // Function called when a key is pressed
