@@ -31,7 +31,7 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
-Particle* p;
+Particle* particle;
 
 
 // Initialize physics engine
@@ -58,7 +58,7 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
-	p = new Particle(PxVec3(0), PxVec3(10,0,0) );
+	particle = new Particle(PxVec3(0), PxVec3(0,0,0), PxVec3(0, 20, 0), 0.999 , Particle::EULER_SEMIIMPLICIT );
 }
 
 
@@ -72,7 +72,7 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 
-	p->integrate(t);
+	particle->integrate(t);
 }
 
 // Function to clean data
@@ -92,7 +92,7 @@ void cleanupPhysics(bool interactive)
 	
 	gFoundation->release();
 
-	delete p;
+	delete particle;
 }
 
 // Function called when a key is pressed

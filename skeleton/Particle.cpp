@@ -2,10 +2,12 @@
 
 using namespace physx;
 
-Particle::Particle(PxVec3 pos, PxVec3 vel, uint8_t mode)
+Particle::Particle(PxVec3 pos, PxVec3 vel, PxVec3 a, double damping, uint8_t mode)
 	: tr(new PxTransform(pos))
 	, prevPos(tr->p)
 	, vel(vel) 
+	, accel(a)
+	, damping(damping)
 	, integrMode(mode)
 {
 	// Inicializar RenderItem
@@ -28,19 +30,22 @@ void Particle::integrate(double t) {
 	case integrateMode::EULER:
 		prevPos = tr->p;
 		tr->p += t * vel;
-		vel += t * PxVec3(0); // velocidad constante, aceleración = 0
+		vel += t * accel; // velocidad constante, aceleración = 0
+		vel *= damping;
 		break;
 
 	case integrateMode::VERLET: {
+		// Falta el damping aquí
 		auto const currPos = tr->p;
-		tr->p = 2 * tr->p - prevPos + pow(t, 2) * Vector3(0); //  aceleración = 0
+		tr->p = 2 * tr->p - prevPos + pow(t, 2) * accel; //  aceleración = 0
 		prevPos = currPos;
 		break;
 	}
 	case integrateMode::EULER_SEMIIMPLICIT:
 	default:
 		prevPos = tr->p;
-		vel += t * PxVec3(0); // velocidad constante, aceleración = 0
+		vel += t * accel; // velocidad constante, aceleración = 0
+		vel *= damping;
 		tr->p += t * vel;
 		break;
 	}
