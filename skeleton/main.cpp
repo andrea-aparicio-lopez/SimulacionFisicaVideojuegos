@@ -8,6 +8,7 @@
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
 #include "Particle.h"
+#include "Arrow.h"
 
 #include <iostream>
 
@@ -32,6 +33,7 @@ PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
 Particle* particle;
+Arrow* proyectile;
 
 
 // Initialize physics engine
@@ -58,7 +60,10 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
-	particle = new Particle(PxVec3(0), PxVec3(0,0,0), PxVec3(0, 20, 0), 0.999 , Particle::EULER_SEMIIMPLICIT );
+	//particle = new Particle(PxVec3(0), PxVec3(0,0,0), PxVec3(0, 10, 0), 0.999 , Particle::EULER_SEMIIMPLICIT );
+	Camera* camera = GetCamera();
+	proyectile = new Arrow(camera->getEye(), camera->getDir(), 50.f);
+
 }
 
 
@@ -72,7 +77,8 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 
-	particle->integrate(t);
+	//particle->integrate(t);
+	proyectile->integrate(t);
 }
 
 // Function to clean data
@@ -92,7 +98,8 @@ void cleanupPhysics(bool interactive)
 	
 	gFoundation->release();
 
-	delete particle;
+	//delete particle;
+	delete proyectile;
 }
 
 // Function called when a key is pressed
