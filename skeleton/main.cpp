@@ -8,7 +8,9 @@
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
 #include "Particle.h"
-#include "Arrow.h"
+#include "Projectile.h"
+#include "Target.h"
+#include "Floor.h"
 
 #include <iostream>
 
@@ -32,8 +34,9 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
-Particle* particle;
-Arrow* proyectile;
+std::vector<Projectile*> proyectiles;
+Target* target;
+Floor* ground;
 
 
 // Initialize physics engine
@@ -61,9 +64,9 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 
 	//particle = new Particle(PxVec3(0), PxVec3(0,0,0), PxVec3(0, 10, 0), 0.999 , Particle::EULER_SEMIIMPLICIT );
-	Camera* camera = GetCamera();
-	proyectile = new Arrow(camera->getEye(), camera->getDir(), 50.f);
-
+	ground = new Floor(PxVec3(0));
+	target = new Target(PxVec3(-100, 5, -100), PxVec3(10,10,3));
+	
 }
 
 
@@ -78,7 +81,8 @@ void stepPhysics(bool interactive, double t)
 	gScene->fetchResults(true);
 
 	//particle->integrate(t);
-	proyectile->integrate(t);
+	for(auto p : proyectiles)
+		p->integrate(t);
 }
 
 // Function to clean data
@@ -99,7 +103,8 @@ void cleanupPhysics(bool interactive)
 	gFoundation->release();
 
 	//delete particle;
-	delete proyectile;
+	for (auto p : proyectiles)
+		delete p;
 }
 
 // Function called when a key is pressed
@@ -113,8 +118,19 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	//case ' ':	break;
 	case ' ':
 	{
+		// Bala por defecto
+		proyectiles.push_back(new Projectile(GetCamera()->getEye(), GetCamera()->getDir(), 80.f));
 		break;
 	}
+	case 'M':
+		// Bala más pesada y lenta
+		proyectiles.push_back(new Projectile(GetCamera()->getEye(), GetCamera()->getDir(), 80.f, { .6,.6,.2,1 }));
+		proyectiles[proyectiles.size() -1]->setMass(3.f);
+		break;
+	case 'N':
+		// Bala más rápida
+		proyectiles.push_back(new Projectile(GetCamera()->getEye(), GetCamera()->getDir(), 250.f, { .6,0,.2,1 }));
+		break;
 	default:
 		break;
 	}
