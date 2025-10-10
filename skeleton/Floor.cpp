@@ -13,4 +13,6 @@ Floor::Floor(PxVec3 pos, PxVec4 color)
 
 Floor::~Floor() {
 	DeregisterRenderItem(renderItem);
+	delete renderItem;
+	delete tr;
 }

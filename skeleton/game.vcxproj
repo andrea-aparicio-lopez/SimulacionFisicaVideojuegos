@@ -261,6 +261,8 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneProjectiles.cpp" />
     <ClCompile Include="Target.cpp" />
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
@@ -273,6 +275,8 @@
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneProjectiles.h" />
     <ClInclude Include="Target.h" />
     <ClInclude Include="Vector3D.h" />
   </ItemGroup>

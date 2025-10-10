@@ -14,4 +14,6 @@ Target::Target(PxVec3 pos, PxVec3 size)
 
 Target::~Target() {
 	DeregisterRenderItem(renderItem);
+	delete renderItem;
+	delete tr;
 }
