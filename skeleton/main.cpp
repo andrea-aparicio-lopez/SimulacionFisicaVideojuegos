@@ -7,7 +7,10 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
+
+#include "Particle.h"
 #include "SceneProjectiles.h"
+#include "ScenePSystem.h"
 
 #include <iostream>
 
@@ -32,7 +35,7 @@ PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
 Scene* s;
-
+std::vector<Particle*> axis;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -58,8 +61,24 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
-	//particle = new Particle(PxVec3(0), PxVec3(0,0,0), PxVec3(0, 10, 0), 0.999 , Particle::EULER_SEMIIMPLICIT );
-	s = new SceneProjectiles();
+	// AXIS
+	Particle* p = new Particle();
+	axis.push_back(p);
+
+	p = new Particle({ 25, 0, 0 });
+	p->setColor({ 1,0,0,1 });
+	axis.push_back(p);
+
+	p = new Particle({ 0, 25, 0 });
+	p->setColor({ 0,1,0,1 });
+	axis.push_back(p);
+
+	p = new Particle({ 0, 0, 25 });
+	p->setColor({ 0,0,1,1 });
+	axis.push_back(p);
+
+	s = new ScenePSystem();
+	s->start();
 }
 
 
@@ -95,6 +114,8 @@ void cleanupPhysics(bool interactive)
 	gFoundation->release();
 
 	delete s;
+	for (auto p : axis)
+		delete p;
 }
 
 // Function called when a key is pressed

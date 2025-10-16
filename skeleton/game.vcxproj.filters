@@ -19,6 +19,8 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="ParticleGen.cpp" />
+    <ClCompile Include="GaussianGen.cpp" />
+    <ClCompile Include="ScenePSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -39,6 +41,8 @@
     <ClInclude Include="SceneProjectiles.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="ParticleGen.h" />
+    <ClInclude Include="GaussianGen.h" />
+    <ClInclude Include="ScenePSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

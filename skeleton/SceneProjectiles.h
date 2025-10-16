@@ -11,7 +11,7 @@ class SceneProjectiles : public Scene
 {
 public:
 	SceneProjectiles();
-	~SceneProjectiles() override;
+	~SceneProjectiles();
 
 	void start() override;
 
