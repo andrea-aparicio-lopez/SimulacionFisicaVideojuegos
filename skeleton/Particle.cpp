@@ -4,24 +4,26 @@
 
 using namespace physx;
 
-Particle::Particle(PxVec3 pos, PxVec3 vel, PxVec3 a, PxVec4 color, double ltime, double damping, uint8_t mode)
+Particle::Particle(PxVec3 pos, PxVec3 vel, PxVec3 a, PxVec4 color, float size,
+	double ltime, double dist, double damping, uint8_t mode)
 	: _tr(new PxTransform(pos))
 	, _prevPos(_tr->p)
 	, _vel(vel) 
 	, _accel(a)
 	, _color(color)
+	, _size(size)
 
 	, _lifetime(ltime)
+	, _distance(dist)
 	, _alive(true)
 
 	, _damping(damping)
 	, _integrMode(mode)
 {
 	// Inicializar RenderItem
-	PxSphereGeometry geo = PxSphereGeometry(1.0f);
+	PxSphereGeometry geo = PxSphereGeometry(_size);
 	auto shape = CreateShape(geo);
 	_renderItem = new RenderItem(shape, _tr, _color);
-	RegisterRenderItem(_renderItem);
 }
 
 Particle::Particle(Particle* const& other) 
@@ -30,15 +32,17 @@ Particle::Particle(Particle* const& other)
 	, _vel(other->_vel)
 	, _accel(other->_accel)
 	, _color(other->_color)
+	, _size(other->_size)
 
 	, _lifetime(other->_lifetime)
+	, _distance(other->_distance)
 	, _alive(true)
 
 	, _damping(other->_damping)
 	, _integrMode(other->_integrMode)
 {
 	// Inicializar RenderItem
-	PxSphereGeometry geo = PxSphereGeometry(1.0f);
+	PxSphereGeometry geo = PxSphereGeometry(_size);
 	auto shape = CreateShape(geo);
 	_renderItem = new RenderItem(shape, _tr, _color);
 	RegisterRenderItem(_renderItem);
@@ -76,7 +80,8 @@ void Particle::integrate(double dt) {
 	}
 
 	_lifetime -= dt;
-	_alive = _lifetime > 0.;
+	_distance -= (_tr->p - _prevPos).magnitude();
+	_alive = _lifetime > 0. && _distance > 0.;
 }
 
 physx::PxVec3 Particle::getPos() const {
@@ -109,8 +114,23 @@ void Particle::setColor(physx::PxVec4 color) {
 	_renderItem->color = color;
 }
 
+void Particle::setSize(float size) {
+	_size = size;
+	//PxSphereGeometry geo;
+	//_renderItem->shape->getSphereGeometry(geo);
+	//geo.radius = PxReal(size);
+}
+
+double Particle::getLifetime() const {
+	return _lifetime;
+}
+
 void Particle::setLifetime(double lifetime) {
 	_lifetime = lifetime;
+}
+
+void Particle::setDistance(double dist) {
+	_distance = dist;
 }
 
 bool Particle::isAlive() const {

@@ -10,7 +10,7 @@ class ParticleGen
 {
 protected:
 	ParticleGen(ParticleSystem* sys, physx::PxVec3 pos, float vel, physx::PxVec3 dir, 
-				double probGen, double lifetime, int n);
+				double probGen, int n = 1);
 
 public:
 	virtual ~ParticleGen();
@@ -24,9 +24,9 @@ protected:
 	physx::PxVec3 _distPos;
 	float _distVel;
 	physx::PxVec3 _distDir;
+	double _distLifetime;
 
 	double _probGen;
-	double _lifetime;
 	int _nParticles;
 
 	std::mt19937 _mt;
@@ -46,7 +46,7 @@ public:
 	inline void setDir(physx::PxVec3 dir) { dir.normalize(); _dir = dir; }
 	inline void setProbGen(float prob) { _probGen = prob; }
 
-	void setDistPosVelDir(physx::PxVec3 distPos, float distVel, physx::PxVec3 distDir);
+	void setDistAttributes(physx::PxVec3 distPos, float distVel, physx::PxVec3 distDir, double distLifetime);
 	
 	void setPModel(Particle* p);
 

@@ -253,6 +253,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Axis.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GaussianGen.cpp" />
     <ClCompile Include="ParticleGen.cpp" />
@@ -268,9 +269,11 @@
     <ClCompile Include="ScenePSystem.cpp" />
     <ClCompile Include="SceneProjectiles.cpp" />
     <ClCompile Include="Target.cpp" />
+    <ClCompile Include="UniformGen.cpp" />
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Axis.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="GaussianGen.h" />
     <ClInclude Include="ParticleGen.h" />
@@ -286,6 +289,7 @@
     <ClInclude Include="ScenePSystem.h" />
     <ClInclude Include="SceneProjectiles.h" />
     <ClInclude Include="Target.h" />
+    <ClInclude Include="UniformGen.h" />
     <ClInclude Include="Vector3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,6 +5,7 @@
 class Particle;
 class ParticleGen;
 class GaussianGen;
+class UniformGen;
 
 class ParticleSystem
 {
@@ -25,5 +26,6 @@ public:
 
 	friend ParticleGen;
 	friend GaussianGen;
+	friend UniformGen;
 };
 

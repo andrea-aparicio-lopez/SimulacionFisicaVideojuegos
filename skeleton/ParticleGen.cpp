@@ -5,13 +5,13 @@
 using namespace physx;
 
 ParticleGen::ParticleGen(ParticleSystem* sys, physx::PxVec3 pos, float vel, physx::PxVec3 dir, 
-						double probGen, double lifetime, int n) 
+						double probGen, int n) 
 	: _pSystem(sys)
 	, _pos(pos)
 	, _vel(vel)
 	, _dir(dir)
+
 	, _probGen(probGen)
-	, _lifetime(lifetime)
 	, _nParticles(n)
 	, _pModel(nullptr)
 
@@ -26,10 +26,11 @@ ParticleGen::~ParticleGen() {
 	delete _pModel;
 }
 
-void ParticleGen::setDistPosVelDir(PxVec3 distPos, float distVel, PxVec3 distDir) {
+void ParticleGen::setDistAttributes(PxVec3 distPos, float distVel, PxVec3 distDir, double distLifetime) {
 	_distPos = distPos;
 	_distVel = distVel;
 	_distDir = distDir;
+	_distLifetime = distLifetime;
 }
 
 void ParticleGen::setPModel(Particle* p) {

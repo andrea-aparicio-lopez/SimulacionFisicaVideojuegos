@@ -8,6 +8,7 @@
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
 
+#include "Axis.h"
 #include "Particle.h"
 #include "SceneProjectiles.h"
 #include "ScenePSystem.h"
@@ -34,8 +35,9 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
+Axis* axis;
 Scene* s;
-std::vector<Particle*> axis;
+
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -62,21 +64,9 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 
 	// AXIS
-	Particle* p = new Particle();
-	axis.push_back(p);
+	axis = new Axis();
 
-	p = new Particle({ 25, 0, 0 });
-	p->setColor({ 1,0,0,1 });
-	axis.push_back(p);
-
-	p = new Particle({ 0, 25, 0 });
-	p->setColor({ 0,1,0,1 });
-	axis.push_back(p);
-
-	p = new Particle({ 0, 0, 25 });
-	p->setColor({ 0,0,1,1 });
-	axis.push_back(p);
-
+	// SCENE
 	s = new ScenePSystem();
 	s->start();
 }
@@ -113,9 +103,8 @@ void cleanupPhysics(bool interactive)
 	
 	gFoundation->release();
 
+	delete axis;
 	delete s;
-	for (auto p : axis)
-		delete p;
 }
 
 // Function called when a key is pressed
