@@ -19,6 +19,6 @@ public:
 protected:
 	std::normal_distribution<double> _d{ -1,1 };
 
-	physx::PxVec3 _accel = {0, -10., 0};
+	physx::PxVec3 _accel = {0, 0., 0};
 };
 

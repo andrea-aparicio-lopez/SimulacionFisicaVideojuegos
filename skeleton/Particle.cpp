@@ -4,7 +4,7 @@
 
 using namespace physx;
 
-Particle::Particle(PxVec3 pos, PxVec3 vel, PxVec3 a, PxVec4 color, float size,
+Particle::Particle(PxVec3 pos, PxVec3 vel, PxVec3 a, PxVec4 color, float size, double mass,
 	double ltime, double dist, double damping, uint8_t mode)
 	: _tr(new PxTransform(pos))
 	, _prevPos(_tr->p)
@@ -19,6 +19,9 @@ Particle::Particle(PxVec3 pos, PxVec3 vel, PxVec3 a, PxVec4 color, float size,
 
 	, _damping(damping)
 	, _integrMode(mode)
+
+	, _mass(mass)
+	, _force({0,0,0})
 {
 	// Inicializar RenderItem
 	PxSphereGeometry geo = PxSphereGeometry(_size);
@@ -55,25 +58,27 @@ Particle::~Particle() {
 }
 
 void Particle::integrate(double dt) {
+	auto a = _accel + (_force / _mass);
+
 	switch (_integrMode)
 	{
 	case integrateMode::EULER:
 		_prevPos = _tr->p;
 		_tr->p += dt * _vel;
-		_vel += dt * _accel;
+		_vel += dt * a;
 		_vel *= pow(_damping, dt);
 		break;
 
 	case integrateMode::VERLET: {
 		auto const currPos = _tr->p;
-		_tr->p = 2 * _tr->p - _prevPos + pow(dt, 2) * _accel;
+		_tr->p = 2 * _tr->p - _prevPos + pow(dt, 2) * a;
 		_prevPos = currPos;
 		break;
 	}
 	case integrateMode::EULER_SEMIIMPLICIT:
 	default:
 		_prevPos = _tr->p;
-		_vel += dt * _accel;
+		_vel += dt * a;
 		_tr->p += dt * _vel;
 		_vel *= pow(_damping, dt);
 		break;
@@ -116,9 +121,6 @@ void Particle::setColor(physx::PxVec4 color) {
 
 void Particle::setSize(float size) {
 	_size = size;
-	//PxSphereGeometry geo;
-	//_renderItem->shape->getSphereGeometry(geo);
-	//geo.radius = PxReal(size);
 }
 
 double Particle::getLifetime() const {
@@ -135,4 +137,12 @@ void Particle::setDistance(double dist) {
 
 bool Particle::isAlive() const {
 	return _alive;
+}
+
+void Particle::addForce(PxVec3 force) {
+	_force += force;
+}
+
+void Particle::clearForce() {
+	_force = { 0,0,0 };
 }

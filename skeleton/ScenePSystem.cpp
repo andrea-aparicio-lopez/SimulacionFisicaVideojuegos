@@ -24,7 +24,7 @@ void ScenePSystem::start() {
 
 	gen->setPModel(p);
 	gen->setDistAttributes({ 5, 5, 5 }, 10, { 5,0,0 }, 10.);
-	_pSystem->addGen(gen);
+	_pSystem->addParticleGen(gen);
 
 	// Generador 2: Blancas
 	gen = new GaussianGen(_pSystem, { 0, 100, 0 }, 0, { 0,-1,0 }, .1, 3);
@@ -37,7 +37,7 @@ void ScenePSystem::start() {
 
 	gen->setPModel(p);
 	gen->setDistAttributes({ 50,0,100 }, 5.f, { -1, 0, 0 }, 5.0);
-	_pSystem->addGen(gen);
+	_pSystem->addParticleGen(gen);
 
 	// Generador 3: Azules
 	gen = new GaussianGen(_pSystem, { 40, 20, -10 }, 40.f, { -30,40,0 }, .7, 1);
@@ -50,7 +50,7 @@ void ScenePSystem::start() {
 
 	gen->setPModel(p);
 	gen->setDistAttributes({ 1,0,1 }, 3.f, { -0.1, 0, 0 }, 1.0);
-	_pSystem->addGen(gen);
+	_pSystem->addParticleGen(gen);
 
 
 	// Generador 4 UNIFORME: Verdes
@@ -64,7 +64,7 @@ void ScenePSystem::start() {
 
 	uGen->setPModel(p);
 	uGen->setDistAttributes({ 5,0,5 }, 5.f, { -0.5, 0, 0 }, 1.0);
-	_pSystem->addGen(uGen);
+	_pSystem->addParticleGen(uGen);
 
 }
 

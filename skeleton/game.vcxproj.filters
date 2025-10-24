@@ -23,6 +23,8 @@
     <ClCompile Include="ScenePSystem.cpp" />
     <ClCompile Include="Axis.cpp" />
     <ClCompile Include="UniformGen.cpp" />
+    <ClCompile Include="ForceGenerator.cpp" />
+    <ClCompile Include="GravityGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -47,6 +49,8 @@
     <ClInclude Include="ScenePSystem.h" />
     <ClInclude Include="Axis.h" />
     <ClInclude Include="UniformGen.h" />
+    <ClInclude Include="ForceGenerator.h" />
+    <ClInclude Include="GravityGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

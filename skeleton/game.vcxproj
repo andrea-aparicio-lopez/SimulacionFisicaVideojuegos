@@ -255,7 +255,9 @@
   <ItemGroup>
     <ClCompile Include="Axis.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="GaussianGen.cpp" />
+    <ClCompile Include="GravityGenerator.cpp" />
     <ClCompile Include="ParticleGen.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -275,7 +277,9 @@
   <ItemGroup>
     <ClInclude Include="Axis.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GaussianGen.h" />
+    <ClInclude Include="GravityGenerator.h" />
     <ClInclude Include="ParticleGen.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Projectile.h" />

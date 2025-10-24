@@ -11,6 +11,7 @@ public:
 		physx::PxVec3 a = physx::PxVec3(0), 
 		physx::PxVec4 color = physx::PxVec4(1),
 		float size = 0.5f,
+		double mass = 1.0f,
 		double lifetime = 1000,
 		double dist = 100,
 		double damping = 0.999,
@@ -41,6 +42,9 @@ protected:
 
 	RenderItem* _renderItem;
 
+	double _mass;
+	physx::PxVec3 _force;
+
 public:
 	physx::PxVec3 getPos() const;
 	void setPos(physx::PxVec3 pos);
@@ -66,5 +70,9 @@ public:
 		EULER_SEMIIMPLICIT,
 		VERLET
 	};
+
+	void addForce(physx::PxVec3 force);
+	void clearForce();
+	void calculateAccel() {};
 };
 
