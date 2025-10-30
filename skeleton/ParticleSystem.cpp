@@ -14,10 +14,17 @@ ParticleSystem::~ParticleSystem() {
 
 	for (auto gen : _particleGenerators)
 		delete gen;
+
+	for (auto gen : _forceGeneratos)
+		delete gen;
 }
 
 void ParticleSystem::addParticleGen(ParticleGen* gen) {
 	_particleGenerators.push_back(gen);
+}
+
+void ParticleSystem::addForceGen(ForceGenerator* gen) {
+	_forceGeneratos.push_back(gen);
 }
 
 void ParticleSystem::update(double dt) {
@@ -26,7 +33,7 @@ void ParticleSystem::update(double dt) {
 	for(auto gen : _particleGenerators)
 		gen->generateP();
 	
-	// añadir fuerzas
+	// aplicar fuerzas
 	for (auto f : _forceGeneratos) {
 		for (auto p : _particles)
 			f->applyForce(p);

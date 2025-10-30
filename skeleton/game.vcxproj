@@ -257,6 +257,7 @@
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="GaussianGen.cpp" />
+    <ClCompile Include="GravityForceGen.cpp" />
     <ClCompile Include="GravityGenerator.cpp" />
     <ClCompile Include="ParticleGen.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
@@ -268,6 +269,7 @@
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneForceSystem.cpp" />
     <ClCompile Include="ScenePSystem.cpp" />
     <ClCompile Include="SceneProjectiles.cpp" />
     <ClCompile Include="Target.cpp" />
@@ -279,6 +281,7 @@
     <ClInclude Include="Floor.h" />
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GaussianGen.h" />
+    <ClInclude Include="GravityForceGen.h" />
     <ClInclude Include="GravityGenerator.h" />
     <ClInclude Include="ParticleGen.h" />
     <ClInclude Include="ParticleSystem.h" />
@@ -290,6 +293,7 @@
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneForceSystem.h" />
     <ClInclude Include="ScenePSystem.h" />
     <ClInclude Include="SceneProjectiles.h" />
     <ClInclude Include="Target.h" />

@@ -18,20 +18,18 @@ protected:
 	std::list<Particle*> _particles;
 	std::list<ParticleGen*> _particleGenerators;
 
+	std::list<ForceGenerator*> _forceGeneratos;
+
 	void addParticle(Particle* p);
 
 public:
 	void addParticleGen(ParticleGen* gen);
+	void addForceGen(ForceGenerator* gen);
 
 	void update(double dt);
 
 	friend ParticleGen;
 	friend GaussianGen;
 	friend UniformGen;
-
-protected:
-	std::list<ForceGenerator*> _forceGeneratos;
-public:
-	void addForceGen(ForceGenerator* gen);
 };
 

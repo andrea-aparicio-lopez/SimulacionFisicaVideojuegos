@@ -71,8 +71,10 @@ public:
 		VERLET
 	};
 
+	double getMass() const;
+	void setMass(double m);
+
 	void addForce(physx::PxVec3 force);
 	void clearForce();
-	void calculateAccel() {};
 };
 

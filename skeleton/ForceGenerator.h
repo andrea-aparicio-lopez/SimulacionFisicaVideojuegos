@@ -11,7 +11,7 @@ protected:
 
 public:
 	~ForceGenerator();
-	virtual physx::PxVec3 applyForce(Particle* p) = 0;
+	virtual void applyForce(Particle* p) = 0;
 
 protected:
 	physx::PxVec3 _pos;

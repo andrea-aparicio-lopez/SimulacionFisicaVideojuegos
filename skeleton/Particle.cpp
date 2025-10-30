@@ -43,6 +43,9 @@ Particle::Particle(Particle* const& other)
 
 	, _damping(other->_damping)
 	, _integrMode(other->_integrMode)
+
+	, _mass(other->_mass)
+	, _force({ 0,0,0 })
 {
 	// Inicializar RenderItem
 	PxSphereGeometry geo = PxSphereGeometry(_size);
@@ -121,6 +124,14 @@ void Particle::setColor(physx::PxVec4 color) {
 
 void Particle::setSize(float size) {
 	_size = size;
+}
+
+double Particle::getMass() const {
+	return _mass;
+}
+
+void Particle::setMass(double m) {
+	_mass = m;
 }
 
 double Particle::getLifetime() const {
