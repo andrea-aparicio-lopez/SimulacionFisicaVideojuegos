@@ -2,6 +2,7 @@
 #include "ParticleSystem.h"
 #include "GaussianGen.h"
 #include "GravityForceGen.h"
+#include "WindForceGen.h"
 #include "Particle.h"
 
 using namespace physx;
@@ -39,6 +40,7 @@ void SceneForceSystem::start() {
 	p->setSize(1.0f);
 	p->setLifetime(7.);
 	p->setDistance(200.);
+	p->setMass(10.0);
 
 	gen->setPModel(p);
 	gen->setDistAttributes({ 1,0,1 }, 3.f, { -0.1, 0, 0 }, 1.0);
@@ -46,8 +48,14 @@ void SceneForceSystem::start() {
 
 
 	// FUERZAS
-	auto forceGen = new GravityForceGen(PxVec3(0));
+	// Gravedad
+	ForceGenerator* forceGen = new GravityForceGen(PxVec3(0));
 	_pSystem->addForceGen(forceGen);
+
+	// Viento en dirección del eje x positivo
+	forceGen = new WindForceGen(PxVec3(0), PxVec3(100, 100, 100), PxVec3(40,0,0));
+	_pSystem->addForceGen(forceGen);
+
 }
 
 void SceneForceSystem::integrate(double dt) {
