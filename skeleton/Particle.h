@@ -31,7 +31,7 @@ protected:
 	physx::PxVec3 _accel;	// aceleración
 
 	physx::PxVec4 _color;
-	float _size;
+	float _size;	// radio
 
 	double _lifetime;
 	double _distance;

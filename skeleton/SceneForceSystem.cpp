@@ -3,6 +3,7 @@
 #include "GaussianGen.h"
 #include "GravityForceGen.h"
 #include "WindForceGen.h"
+#include "TornadoForceGen.h"
 #include "Particle.h"
 
 using namespace physx;
@@ -24,8 +25,8 @@ void SceneForceSystem::start() {
 
 	Particle* p = new Particle();
 	p->setColor({ 0.8,0.5,0,1 });
-	p->setLifetime(3.);
-	p->setDistance(100.);
+	p->setLifetime(10.);
+	p->setDistance(1000.);
 
 	gen->setPModel(p);
 	gen->setDistAttributes({ 5, 5, 5 }, 10, { 5,0,0 }, 10.);
@@ -38,8 +39,8 @@ void SceneForceSystem::start() {
 	p = new Particle();
 	p->setColor({ .5,.5,.8,1 });
 	p->setSize(1.0f);
-	p->setLifetime(7.);
-	p->setDistance(200.);
+	p->setLifetime(10.);
+	p->setDistance(2000.);
 	p->setMass(10.0);
 
 	gen->setPModel(p);
@@ -53,8 +54,13 @@ void SceneForceSystem::start() {
 	_pSystem->addForceGen(forceGen);
 
 	// Viento en dirección del eje x positivo
-	forceGen = new WindForceGen(PxVec3(0), PxVec3(100, 100, 100), PxVec3(40,0,0));
-	_pSystem->addForceGen(forceGen);
+	//forceGen = new WindForceGen(PxVec3(0), PxVec3(100, 50, 50), PxVec3(40,0,0));
+	//_pSystem->addForceGen(forceGen);
+
+	// Torbellino
+	forceGen = new TornadoForceGen(PxVec3(0), PxVec3(0,1,0), 100, 6);
+	_pSystem->addForceGen(forceGen); 
+
 
 }
 
