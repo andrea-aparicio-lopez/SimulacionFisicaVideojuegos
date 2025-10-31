@@ -254,6 +254,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Axis.cpp" />
+    <ClCompile Include="ExplosionForceGen.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="GaussianGen.cpp" />
@@ -280,6 +281,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Axis.h" />
+    <ClInclude Include="ExplosionForceGen.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GaussianGen.h" />
