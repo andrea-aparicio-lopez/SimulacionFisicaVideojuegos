@@ -1,4 +1,5 @@
 #include "ExplosionForceGen.h"
+#include "Particle.h"
 
 using namespace physx;
 
@@ -15,5 +16,9 @@ ExplosionForceGen::~ExplosionForceGen() {
 }
 
 void ExplosionForceGen::applyForce(Particle* p) {
-	// TODO
+	auto d = p->getPos() - _pos;
+	auto r_sqrd = pow(_r, 2);
+	if (d.magnitudeSquared() < r_sqrd) {
+		p->addForce(_k * d / d.magnitudeSquared());
+	}
 }

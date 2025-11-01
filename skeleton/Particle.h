@@ -42,7 +42,7 @@ protected:
 
 	RenderItem* _renderItem;
 
-	double _mass;
+	double _massInv;	// Inverso de la masa
 	physx::PxVec3 _force;
 
 public:

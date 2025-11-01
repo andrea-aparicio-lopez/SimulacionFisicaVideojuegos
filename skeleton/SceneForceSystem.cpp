@@ -1,10 +1,11 @@
 #include "SceneForceSystem.h"
+#include "Particle.h"
 #include "ParticleSystem.h"
 #include "GaussianGen.h"
 #include "GravityForceGen.h"
 #include "WindForceGen.h"
 #include "TornadoForceGen.h"
-#include "Particle.h"
+#include "ExplosionForceGen.h"
 
 using namespace physx;
 
@@ -21,7 +22,7 @@ void SceneForceSystem::start() {
 	// PARTÍCULAS
 	
 	// Generador 1: Amarillas
-	auto gen = new GaussianGen(_pSystem, { 0,0,15 }, 15.f, { 0,1,0 }, 0.3, 1);
+	auto gen = new GaussianGen(_pSystem, { 0,15,0 }, 15.f, { 0,1,0 }, 0.3, 1);
 
 	Particle* p = new Particle();
 	p->setColor({ 0.8,0.5,0,1 });
@@ -58,10 +59,12 @@ void SceneForceSystem::start() {
 	//_pSystem->addForceGen(forceGen);
 
 	// Torbellino
-	forceGen = new TornadoForceGen(PxVec3(0), PxVec3(0,1,0), 100, 6);
+	//forceGen = new TornadoForceGen(PxVec3(0), PxVec3(0,1,0), 100, 6);
+	//_pSystem->addForceGen(forceGen); 
+
+	// Explosión
+	forceGen = new ExplosionForceGen(PxVec3(0), 50, 200);
 	_pSystem->addForceGen(forceGen); 
-
-
 }
 
 void SceneForceSystem::integrate(double dt) {

@@ -20,9 +20,11 @@ Particle::Particle(PxVec3 pos, PxVec3 vel, PxVec3 a, PxVec4 color, float size, d
 	, _damping(damping)
 	, _integrMode(mode)
 
-	, _mass(mass)
 	, _force({0,0,0})
 {
+	if (mass != 0) _massInv = pow(mass,-1);
+	else _massInv = INT_MAX;
+
 	// Inicializar RenderItem
 	PxSphereGeometry geo = PxSphereGeometry(_size);
 	auto shape = CreateShape(geo);
@@ -44,7 +46,7 @@ Particle::Particle(Particle* const& other)
 	, _damping(other->_damping)
 	, _integrMode(other->_integrMode)
 
-	, _mass(other->_mass)
+	, _massInv(other->_massInv)
 	, _force({ 0,0,0 })
 {
 	// Inicializar RenderItem
@@ -61,7 +63,7 @@ Particle::~Particle() {
 }
 
 void Particle::integrate(double dt) {
-	auto a = _accel + (_force / _mass);
+	auto a = _accel + (_force * _massInv);
 
 	switch (_integrMode)
 	{
@@ -127,11 +129,12 @@ void Particle::setSize(float size) {
 }
 
 double Particle::getMass() const {
-	return _mass;
+	return pow(_massInv, -1);
 }
 
 void Particle::setMass(double m) {
-	_mass = m;
+	if (m != 0) _massInv = pow(m, -1);
+	else _massInv = INT_MAX;
 }
 
 double Particle::getLifetime() const {

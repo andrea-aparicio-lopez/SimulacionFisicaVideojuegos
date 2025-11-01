@@ -10,6 +10,7 @@ public:
 	void applyForce(Particle* p) override;
 
 protected:
+	// TODO: onda expansiva, radio inicial = 0
 	double _r;	// radio de explosión
 	double _k; // fuerza de la exlosión
 };
