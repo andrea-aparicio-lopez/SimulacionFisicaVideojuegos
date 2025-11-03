@@ -21,6 +21,8 @@ Particle::Particle(PxVec3 pos, PxVec3 vel, PxVec3 a, PxVec4 color, float size, d
 	, _integrMode(mode)
 
 	, _force({0,0,0})
+
+	, _renderItem(nullptr)
 {
 	if (mass != 0) _massInv = pow(mass,-1);
 	else _massInv = INT_MAX;

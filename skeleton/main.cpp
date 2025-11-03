@@ -13,6 +13,7 @@
 #include "SceneProjectiles.h"
 #include "ScenePSystem.h"
 #include "SceneForceSystem.h"
+#include "SceneProyecto.h"
 
 #include <iostream>
 
@@ -68,7 +69,7 @@ void initPhysics(bool interactive)
 	axis = new Axis();
 
 	// SCENE
-	s = new SceneForceSystem();
+	s = new SceneProyecto();
 	s->start();
 }
 

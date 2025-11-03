@@ -40,10 +40,10 @@ protected:
 	double _damping;
 	uint8_t _integrMode;
 
-	RenderItem* _renderItem;
-
 	double _massInv;	// Inverso de la masa
 	physx::PxVec3 _force;
+
+	RenderItem* _renderItem;
 
 public:
 	physx::PxVec3 getPos() const;

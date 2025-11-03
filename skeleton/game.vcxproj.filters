@@ -30,6 +30,8 @@
     <ClCompile Include="WindForceGen.cpp" />
     <ClCompile Include="TornadoForceGen.cpp" />
     <ClCompile Include="ExplosionForceGen.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SceneProyecto.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -61,6 +63,8 @@
     <ClInclude Include="WindForceGen.h" />
     <ClInclude Include="TornadoForceGen.h" />
     <ClInclude Include="ExplosionForceGen.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="SceneProyecto.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
