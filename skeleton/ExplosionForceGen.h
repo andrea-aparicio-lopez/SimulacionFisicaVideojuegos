@@ -12,13 +12,15 @@ public:
 	virtual void setActive(bool v) override;
 
 protected:
-	// TODO: onda expansiva, radio inicial = 0
-	double _r;	// radio de explosión
+	const double V_EXP = 340.; // velocidad expansión sonido en aire
+	double _r;		// radio con onda expansiva
+	//double _rMax;	// radio máximo de explosión
 	double _k; // fuerza de la exlosión
 
 	double _duration;	// duración total de la explosión
 	double _t = 0.;		// tiempo que lleva activa
 	double _exp = 1.0;	// e^(-t/T)
+
 
 };
 

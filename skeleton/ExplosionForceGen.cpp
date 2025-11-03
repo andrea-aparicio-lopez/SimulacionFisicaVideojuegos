@@ -7,7 +7,8 @@ using namespace physx;
 
 ExplosionForceGen::ExplosionForceGen(PxVec3 pos, double r, double k, double t)
 	: ForceGenerator(pos, false)
-	, _r(r)
+	//, _rMax(r)
+	, _r(0.)
 	, _k(k)
 	, _duration(t)
 {
@@ -29,13 +30,17 @@ void ExplosionForceGen::applyForce(Particle* p) {
 void ExplosionForceGen::update(double dt) {
 	_t += dt;
 	if (_duration < _t) setActive(false);
-	else _exp = exp(-_t / _duration);
+	else {
+		_exp = exp(-_t / _duration);
+		_r += V_EXP * _t;
+	}
 }
 
 void ExplosionForceGen::setActive(bool v) {
 	if (v) {
 		_t = 0.;
 		_exp = 1.;
+		_r = 0.;
 	}
 	ForceGenerator::setActive(v);
 }

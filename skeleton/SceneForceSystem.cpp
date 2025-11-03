@@ -61,11 +61,11 @@ void SceneForceSystem::start() {
 	//_pSystem->addForceGen(forceGen);
 
 	// Torbellino
-	forceGen = new TornadoForceGen(PxVec3(0), PxVec3(0,1,0), 100, 6);
-	_pSystem->addForceGen(forceGen); 
+	//forceGen = new TornadoForceGen(PxVec3(0), PxVec3(0,1,0), 100, 6);
+	//_pSystem->addForceGen(forceGen); 
 
 	// Explosión
-	_explosion = new ExplosionForceGen(PxVec3(0), 50, 600, 2);
+	_explosion = new ExplosionForceGen(PxVec3(0), 50, 6000, 2);
 	_pSystem->addForceGen(_explosion); 
 }
 
