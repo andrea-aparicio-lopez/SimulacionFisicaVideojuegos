@@ -8,6 +8,7 @@ public:
 	~WindForceGen();
 
 	virtual void applyForce(Particle* p) override;
+	virtual void update(double dt) override;
 
 protected:
 	physx::PxVec3 _range; // Area de efecto (pos-range, pos+range)

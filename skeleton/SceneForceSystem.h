@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 class ParticleSystem;
+class ExplosionForceGen;
 
 class SceneForceSystem : public Scene
 {
@@ -16,5 +17,6 @@ public:
 
 protected:
 	ParticleSystem* _pSystem;
+	ExplosionForceGen* _explosion;
 };
 

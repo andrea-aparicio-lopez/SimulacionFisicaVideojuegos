@@ -33,15 +33,19 @@ void ParticleSystem::update(double dt) {
 	for(auto gen : _particleGenerators)
 		gen->generateP();
 	
-	// aplicar fuerzas
+	// aplicar fuerzas y actualizar el generador después
 	for (auto f : _forceGeneratos) {
-		for (auto p : _particles)
-			f->applyForce(p);
+		if (f->isActive()) {
+			for (auto p : _particles)
+				f->applyForce(p);
+			f->update(dt);
+		}
 	}
 
 	// actualizar partículas
 	for (auto p : _particles)
 		p->integrate(dt);
+
 
 	// eliminar partículas
 	_particles.erase(std::remove_if(_particles.begin(), _particles.end(),
@@ -56,6 +60,7 @@ void ParticleSystem::update(double dt) {
 	// resetear fuerzas
 	for (auto p : _particles)
 		p->clearForce();
+
 }
 
 void ParticleSystem::addParticle(Particle* p) {

@@ -17,3 +17,7 @@ GravityForceGen::~GravityForceGen() {
 void GravityForceGen::applyForce(Particle* p) {
 	p->addForce(p->getMass() * _g);
 }
+
+void GravityForceGen::update(double dt) {
+
+}

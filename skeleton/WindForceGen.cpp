@@ -26,6 +26,10 @@ void WindForceGen::applyForce(Particle* p) {
 	}
 }
 
+void WindForceGen::update(double dt) {
+
+}
+
 bool WindForceGen::withinRange(PxVec3 const& pos) const {
 	return (pos.x > _pos.x - _range.x && pos.x < _pos.x + _range.x)
 		&& (pos.y > _pos.y - _range.y && pos.y < _pos.y + _range.y)

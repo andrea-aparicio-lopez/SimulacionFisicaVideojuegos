@@ -7,6 +7,8 @@
 #include "TornadoForceGen.h"
 #include "ExplosionForceGen.h"
 
+#include <iostream>
+
 using namespace physx;
 
 SceneForceSystem::SceneForceSystem() : Scene() {
@@ -30,7 +32,7 @@ void SceneForceSystem::start() {
 	p->setDistance(1000.);
 
 	gen->setPModel(p);
-	gen->setDistAttributes({ 5, 5, 5 }, 10, { 5,0,0 }, 10.);
+	gen->setDistAttributes({ 3, 3, 3 }, 10, { 1,0,0 }, 10.);
 	_pSystem->addParticleGen(gen);
 
 
@@ -54,21 +56,24 @@ void SceneForceSystem::start() {
 	ForceGenerator* forceGen = new GravityForceGen(PxVec3(0));
 	_pSystem->addForceGen(forceGen);
 
-	// Viento en dirección del eje x positivo
-	//forceGen = new WindForceGen(PxVec3(0), PxVec3(100, 50, 50), PxVec3(40,0,0));
+	// Viento
+	//forceGen = new WindForceGen(PxVec3(0,100,0), PxVec3(80, 50, 100), PxVec3(0,0,-200));
 	//_pSystem->addForceGen(forceGen);
 
 	// Torbellino
-	//forceGen = new TornadoForceGen(PxVec3(0), PxVec3(0,1,0), 100, 6);
-	//_pSystem->addForceGen(forceGen); 
+	forceGen = new TornadoForceGen(PxVec3(0), PxVec3(0,1,0), 100, 6);
+	_pSystem->addForceGen(forceGen); 
 
 	// Explosión
-	forceGen = new ExplosionForceGen(PxVec3(0), 50, 200);
-	_pSystem->addForceGen(forceGen); 
+	_explosion = new ExplosionForceGen(PxVec3(0), 50, 600, 2);
+	_pSystem->addForceGen(_explosion); 
 }
 
 void SceneForceSystem::integrate(double dt) {
 	_pSystem->update(dt);
 }
 
-void SceneForceSystem::processKey(unsigned char key, const physx::PxTransform& camera) {}
+void SceneForceSystem::processKey(unsigned char key, const physx::PxTransform& camera) {
+	if (key == ' ')
+		_explosion->setActive(true); 
+}
