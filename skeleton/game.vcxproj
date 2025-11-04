@@ -259,7 +259,6 @@
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="GaussianGen.cpp" />
     <ClCompile Include="GravityForceGen.cpp" />
-    <ClCompile Include="GravityGenerator.cpp" />
     <ClCompile Include="ParticleGen.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -277,8 +276,10 @@
     <ClCompile Include="SceneProjectiles.cpp" />
     <ClCompile Include="Target.cpp" />
     <ClCompile Include="TornadoForceGen.cpp" />
+    <ClCompile Include="TrailParticleGen.cpp" />
     <ClCompile Include="UniformGen.cpp" />
     <ClCompile Include="Vector3D.cpp" />
+    <ClCompile Include="WeatherParticleSys.cpp" />
     <ClCompile Include="WindForceGen.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -288,7 +289,6 @@
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GaussianGen.h" />
     <ClInclude Include="GravityForceGen.h" />
-    <ClInclude Include="GravityGenerator.h" />
     <ClInclude Include="ParticleGen.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
@@ -306,8 +306,10 @@
     <ClInclude Include="SceneProjectiles.h" />
     <ClInclude Include="Target.h" />
     <ClInclude Include="TornadoForceGen.h" />
+    <ClInclude Include="TrailParticleGen.h" />
     <ClInclude Include="UniformGen.h" />
     <ClInclude Include="Vector3D.h" />
+    <ClInclude Include="WeatherParticleSys.h" />
     <ClInclude Include="WindForceGen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

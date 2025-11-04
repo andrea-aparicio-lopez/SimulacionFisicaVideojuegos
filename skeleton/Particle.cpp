@@ -50,6 +50,8 @@ Particle::Particle(Particle* const& other)
 
 	, _massInv(other->_massInv)
 	, _force({ 0,0,0 })
+
+	//, _renderItem(other->_renderItem)
 {
 	// Inicializar RenderItem
 	PxSphereGeometry geo = PxSphereGeometry(_size);
@@ -96,6 +98,10 @@ void Particle::integrate(double dt) {
 	_alive = _lifetime > 0. && _distance > 0.;
 }
 
+physx::PxTransform* Particle::getTr() {
+	return _tr;
+}
+
 physx::PxVec3 Particle::getPos() const {
 	return _tr->p;
 }
@@ -124,6 +130,10 @@ physx::PxVec4 Particle::getColor() const {
 void Particle::setColor(physx::PxVec4 color) {
 	_color = color;
 	_renderItem->color = color;
+}
+
+float Particle::getSize() const {
+	return _size;
 }
 
 void Particle::setSize(float size) {
@@ -161,4 +171,13 @@ void Particle::addForce(PxVec3 force) {
 
 void Particle::clearForce() {
 	_force = { 0,0,0 };
+}
+
+void Particle::setRenderItem(RenderItem* item) {
+	if (_renderItem != nullptr) {
+		_renderItem->release();
+	}
+
+	_renderItem = item;
+	RegisterRenderItem(item);
 }

@@ -27,7 +27,7 @@ void GaussianGen::generateP() {
 
 	for (int i = 0; i < _nParticles; ++i) {
 		double prob = _d(_mt);
-		if (prob < _probGen) {
+		if (abs(prob) < _probGen) {
 
 			PxVec3 pos = _pos + _d(_mt) * _distPos;
 			float vel = _vel + _d(_mt) * _distVel;

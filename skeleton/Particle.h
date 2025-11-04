@@ -46,6 +46,8 @@ protected:
 	RenderItem* _renderItem;
 
 public:
+	physx::PxTransform* getTr();
+
 	physx::PxVec3 getPos() const;
 	void setPos(physx::PxVec3 pos);
 
@@ -58,6 +60,7 @@ public:
 	physx::PxVec4 getColor() const;
 	void setColor(physx::PxVec4 color);
 
+	float getSize() const;
 	void setSize(float size);
 
 	double getLifetime() const;
@@ -76,5 +79,7 @@ public:
 
 	void addForce(physx::PxVec3 force);
 	void clearForce();
+
+	void setRenderItem(RenderItem* item);
 };
 

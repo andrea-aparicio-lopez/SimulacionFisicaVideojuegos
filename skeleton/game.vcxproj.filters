@@ -23,15 +23,16 @@
     <ClCompile Include="ScenePSystem.cpp" />
     <ClCompile Include="Axis.cpp" />
     <ClCompile Include="UniformGen.cpp" />
-    <ClCompile Include="ForceGenerator.cpp" />
-    <ClCompile Include="GravityGenerator.cpp" />
-    <ClCompile Include="GravityForceGen.cpp" />
     <ClCompile Include="SceneForceSystem.cpp" />
-    <ClCompile Include="WindForceGen.cpp" />
-    <ClCompile Include="TornadoForceGen.cpp" />
-    <ClCompile Include="ExplosionForceGen.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneProyecto.cpp" />
+    <ClCompile Include="ExplosionForceGen.cpp" />
+    <ClCompile Include="ForceGenerator.cpp" />
+    <ClCompile Include="GravityForceGen.cpp" />
+    <ClCompile Include="TornadoForceGen.cpp" />
+    <ClCompile Include="WindForceGen.cpp" />
+    <ClCompile Include="TrailParticleGen.cpp" />
+    <ClCompile Include="WeatherParticleSys.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -56,15 +57,16 @@
     <ClInclude Include="ScenePSystem.h" />
     <ClInclude Include="Axis.h" />
     <ClInclude Include="UniformGen.h" />
-    <ClInclude Include="ForceGenerator.h" />
-    <ClInclude Include="GravityGenerator.h" />
-    <ClInclude Include="GravityForceGen.h" />
     <ClInclude Include="SceneForceSystem.h" />
-    <ClInclude Include="WindForceGen.h" />
-    <ClInclude Include="TornadoForceGen.h" />
-    <ClInclude Include="ExplosionForceGen.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneProyecto.h" />
+    <ClInclude Include="ExplosionForceGen.h" />
+    <ClInclude Include="ForceGenerator.h" />
+    <ClInclude Include="GravityForceGen.h" />
+    <ClInclude Include="TornadoForceGen.h" />
+    <ClInclude Include="WindForceGen.h" />
+    <ClInclude Include="TrailParticleGen.h" />
+    <ClInclude Include="WeatherParticleSys.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -27,7 +27,7 @@ public:
 	void addParticleGen(ParticleGen* gen);
 	void addForceGen(ForceGenerator* gen);
 
-	void update(double dt);
+	virtual void update(double dt);
 
 	friend ParticleGen;
 	friend GaussianGen;

@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include "RenderUtils.hpp"
 
 class Player;
 class Floor;
@@ -20,7 +21,7 @@ protected:
 	Player* _player;
 	Floor* _ground;
 	ParticleSystem* _weather;
-
+	Camera* _camera;
 
 };
 
