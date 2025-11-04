@@ -5,6 +5,7 @@
 class Player;
 class Floor;
 class ParticleSystem;
+class ForceGenerator;
 
 class SceneProyecto : public Scene
 {
@@ -20,7 +21,13 @@ public:
 protected:
 	Player* _player;
 	Floor* _ground;
-	ParticleSystem* _weather;
+	
+	ParticleSystem* _weatherSys;
+
+	ForceGenerator* _gravityGen;
+	ForceGenerator* _windGen;
+	ForceGenerator* _tornadoGen;
+	
 	Camera* _camera;
 
 };

@@ -33,6 +33,7 @@
     <ClCompile Include="WindForceGen.cpp" />
     <ClCompile Include="TrailParticleGen.cpp" />
     <ClCompile Include="WeatherParticleSys.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -67,6 +68,7 @@
     <ClInclude Include="WindForceGen.h" />
     <ClInclude Include="TrailParticleGen.h" />
     <ClInclude Include="WeatherParticleSys.h" />
+    <ClInclude Include="Obstacle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -1,5 +1,7 @@
 #include "ForceGenerator.h"
 
+using namespace physx;
+
 ForceGenerator::ForceGenerator(physx::PxVec3 pos, bool active) : _pos(pos), _active(active)
 {
 
@@ -15,4 +17,8 @@ bool ForceGenerator::isActive() const {
 
 void ForceGenerator::setActive(bool v) {
 	_active = v;
+}
+
+void ForceGenerator::setPos(PxVec3 pos) {
+	_pos = pos;
 }

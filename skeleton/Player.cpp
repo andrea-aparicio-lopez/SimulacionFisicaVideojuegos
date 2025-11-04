@@ -9,7 +9,7 @@
 using namespace physx;
 
 Player::Player(PxVec3 pos)
-	: _player(new Particle(pos, PxVec3(10, 0, 0), PxVec3(0), PxVec4(0.3, 0.55, 0.3, 1), 1.0, 50., 0., 0.))
+	: _player(new Particle(pos, PxVec3(0, 0, 0), PxVec3(0), PxVec4(0.3, 0.55, 0.3, 1), 1.0, 50., 0., 0.))
 {
 	// Inicializar RenderItem de _player
 	PxBoxGeometry geo = PxBoxGeometry(1,_halfHeight*2,1);
@@ -35,8 +35,10 @@ Player::~Player() {
 
 void Player::update(double dt) {
 	_player->integrate(dt);
-	_trailGen->setPos(_player->getPos() - PxVec3(_player->getSize(), _halfHeight, 0));
-	_trailSys->update(dt);
+	if (_player->getVel() != PxVec3(0)) {
+		_trailGen->setPos(_player->getPos() - PxVec3(_player->getSize(), _halfHeight, 0));
+		_trailSys->update(dt);
+	}
 
 	for (auto p : _projectiles)
 		p->integrate(dt);
@@ -45,7 +47,9 @@ void Player::update(double dt) {
 void Player::handleInput(unsigned char key) {
 	switch (key) {
 	case ' ':
-		shoot();
+		if (_player->getVel() == PxVec3(0))
+			_player->setVel(PxVec3(10, 0, 0));
+		else shoot();
 		break;
 	default:
 		break;
