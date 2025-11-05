@@ -13,9 +13,10 @@ Player::Player(PxVec3 pos)
 {
 	// Inicializar RenderItem de _player
 	PxBoxGeometry geo = PxBoxGeometry(1,_halfHeight*2,1);
-	auto shape = CreateShape(geo);
+	PxShape* shape = CreateShape(geo);
 	auto item = new RenderItem(shape, _player->getTr(), _player->getColor());
 	_player->setRenderItem(item);
+	
 
 
 	// RASTRO
@@ -45,7 +46,7 @@ void Player::update(double dt) {
 }
 
 void Player::handleInput(unsigned char key) {
-	switch (key) {
+	switch (toupper(key)) {
 	case ' ':
 		if (_player->getVel() == PxVec3(0))
 			_player->setVel(PxVec3(10, 0, 0));

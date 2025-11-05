@@ -5,6 +5,7 @@
 #include <PxPhysicsAPI.h>
 #include <list>
 #include <exception>
+#include <iostream>
 
 using namespace physx;
 

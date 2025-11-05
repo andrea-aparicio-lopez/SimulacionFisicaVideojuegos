@@ -14,10 +14,6 @@ ParticleSystem::~ParticleSystem() {
 
 	for (auto gen : _particleGenerators)
 		delete gen;
-
-	// TODO: forceGen compartidos, el sistema no es propietario y no los borra
-	for (auto gen : _forceGeneratos)
-		delete gen;
 }
 
 void ParticleSystem::addParticleGen(ParticleGen* gen) {

@@ -28,7 +28,7 @@ protected:
 	ParticleGen* _explPartGen;
 	ForceGenerator* _explForceGen;
 
-	Player* _player; // temporal, para saber cuándo explotar
+	Player* _player; // temporal, para saber cuándo explotar hasta que haya colisiones
 
 	bool _alive = true;
 };

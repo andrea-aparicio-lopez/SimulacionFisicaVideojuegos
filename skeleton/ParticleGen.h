@@ -30,7 +30,6 @@ protected:
 	int _nParticles;
 
 	std::mt19937 _mt;
-	// std::uniform_real_distribution<double> _u{ 0,1 };
 
 	ParticleSystem* _pSystem;
 	Particle* _pModel;

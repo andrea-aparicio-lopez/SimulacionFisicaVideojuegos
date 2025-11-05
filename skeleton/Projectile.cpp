@@ -20,14 +20,12 @@ Projectile::Projectile(PxVec3 pos, PxVec3 dir, float v_sim, PxVec4 color)
 
 	// Inicializar RenderItem
 	PxSphereGeometry geo = PxSphereGeometry(.5);
-	auto shape = CreateShape(geo);
+	PxShape* shape = CreateShape(geo);
 	renderItem = new RenderItem(shape, tr, color);
-	RegisterRenderItem(renderItem);
 }
 
 Projectile::~Projectile() {
-	DeregisterRenderItem(renderItem);
-	delete renderItem;
+	renderItem->release();
 	delete tr;
 }
 

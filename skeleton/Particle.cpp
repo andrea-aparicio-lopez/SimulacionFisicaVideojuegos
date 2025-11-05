@@ -29,8 +29,9 @@ Particle::Particle(PxVec3 pos, PxVec3 vel, PxVec3 a, PxVec4 color, float size, d
 
 	// Inicializar RenderItem
 	PxSphereGeometry geo = PxSphereGeometry(_size);
-	auto shape = CreateShape(geo);
+	PxShape* shape = CreateShape(geo);
 	_renderItem = new RenderItem(shape, _tr, _color);
+	//shape->release();
 }
 
 Particle::Particle(Particle* const& other) 
@@ -54,14 +55,12 @@ Particle::Particle(Particle* const& other)
 {
 	// Inicializar RenderItem
 	PxSphereGeometry geo = PxSphereGeometry(_size);
-	auto shape = CreateShape(geo);
+	PxShape* shape = CreateShape(geo);
 	_renderItem = new RenderItem(shape, _tr, _color);
-	RegisterRenderItem(_renderItem);
 }
 
 Particle::~Particle() {
 	_renderItem->release();
-	DeregisterRenderItem(_renderItem);
 	delete _tr;
 }
 
@@ -176,9 +175,7 @@ void Particle::setRenderItem(RenderItem* item) {
 	if (_renderItem != nullptr) {
 		_renderItem->release();
 	}
-
 	_renderItem = item;
-	RegisterRenderItem(item);
 }
 
 void Particle::removeRenderItem() {

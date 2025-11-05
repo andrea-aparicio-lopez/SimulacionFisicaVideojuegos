@@ -9,6 +9,7 @@ class Floor;
 class ParticleSystem;
 class ForceGenerator;
 class Obstacle;
+class Projectile;
 
 class SceneProyecto : public Scene
 {
@@ -32,6 +33,7 @@ protected:
 	ForceGenerator* _tornadoGen;
 
 	std::list<Obstacle*> _obstacles;
+	std::list<Projectile*> _projectiles;
 	
 	Camera* _camera;
 

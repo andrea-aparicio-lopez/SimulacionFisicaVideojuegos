@@ -17,7 +17,7 @@ public:
 	void generateP() override;
 
 protected:
-	std::normal_distribution<double> _d{ -1,1 };
+	std::normal_distribution<double> _d{ 0,1 };
 
 	physx::PxVec3 _accel = {0, 0., 0};
 };
