@@ -24,8 +24,7 @@ Particle::Particle(PxVec3 pos, PxVec3 vel, PxVec3 a, PxVec4 color, float size, d
 
 	, _renderItem(nullptr)
 {
-	if (mass != 0) _massInv = pow(mass,-1);
-	else _massInv = INT_MAX;
+	setMass(mass);
 
 	// Inicializar RenderItem
 	PxSphereGeometry geo = PxSphereGeometry(_size);
@@ -66,6 +65,8 @@ Particle::~Particle() {
 
 void Particle::integrate(double dt) {
 	auto a = _accel + (_force * _massInv);
+
+	clearForce();
 
 	switch (_integrMode)
 	{

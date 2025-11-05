@@ -52,7 +52,7 @@ void SceneProyecto::start() {
 	_weatherSys->addForceGen(_windGen);
 
 	// Tornado
-	_tornadoGen = new TornadoForceGen(_player->getPos() + PxVec3(100,0,0), PxVec3(0, 0, 1), 10, 20);
+	_tornadoGen = new TornadoForceGen(_player->getPos() + PxVec3(100,0,0), PxVec3(0, 0, 1), 10, 10);
 	_weatherSys->addForceGen(_tornadoGen);
 
 

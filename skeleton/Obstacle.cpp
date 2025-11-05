@@ -25,6 +25,7 @@ Obstacle::Obstacle(PxVec3 pos, Player* player)
 	Particle* p = new Particle();
 	p->setColor({ 0.8,0.5,0,1 });
 	p->setSize(0.3f);
+	p->setMass(5.f);
 	p->setLifetime(3.);
 	p->setDistance(20.);
 	p->removeRenderItem();

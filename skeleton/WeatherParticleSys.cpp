@@ -15,6 +15,7 @@ WeatherParticleSys::WeatherParticleSys(Player* player)
 	auto p = new Particle();
 	p->setColor({ 1,1,1,1 });
 	p->setSize(0.1f);
+	p->setMass(0.5f);
 	p->setLifetime(10.);
 	p->setDistance(80.);
 	p->removeRenderItem();

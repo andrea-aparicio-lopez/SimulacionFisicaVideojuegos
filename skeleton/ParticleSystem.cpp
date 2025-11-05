@@ -55,10 +55,6 @@ void ParticleSystem::update(double dt) {
 			return false;
 		}), _particles.end());
 
-	// resetear fuerzas
-	for (auto p : _particles)
-		p->clearForce();
-
 }
 
 void ParticleSystem::addParticle(Particle* p) {

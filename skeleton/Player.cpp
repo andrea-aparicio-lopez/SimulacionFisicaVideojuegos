@@ -73,6 +73,5 @@ float Player::getHalfHeight() const {
 }
 
 void Player::shoot() {
-	std::cout << "shooting\n";
-	_projectiles.push_back(new Projectile(_player->getPos(), PxVec3(1,0.15,0), 60.f, PxVec4(1,0,0,1)));
+	_projectiles.push_back(new Projectile(_player->getPos(), PxVec3(1,0.15,0), 60.f, PxVec4(1,0,0.8,1)));
 }
