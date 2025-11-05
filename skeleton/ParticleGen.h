@@ -10,7 +10,7 @@ class ParticleGen
 {
 protected:
 	ParticleGen(ParticleSystem* sys, physx::PxVec3 pos, float vel, physx::PxVec3 dir, 
-				double probGen, int n = 1);
+				double probGen, int n = 1, bool active = true);
 
 public:
 	virtual ~ParticleGen();
@@ -35,20 +35,27 @@ protected:
 	ParticleSystem* _pSystem;
 	Particle* _pModel;
 
+	bool _active;
+
 public:
 	inline physx::PxVec3 getPos() const { return _pos; }
-	inline float getVel() const { return _vel; }
-	inline physx::PxVec3 getDir() const { return _dir; }
-	inline float getProbGen() const { return _probGen; }
-
 	inline void setPos(physx::PxVec3 pos) { _pos = pos; }
+	
+	inline float getVel() const { return _vel; }
 	inline void setVel(float vel) { _vel = vel; }
+	
+	inline physx::PxVec3 getDir() const { return _dir; }
 	inline void setDir(physx::PxVec3 dir) { dir.normalize(); _dir = dir; }
+
+	inline float getProbGen() const { return _probGen; }
 	inline void setProbGen(float prob) { _probGen = prob; }
 
 	void setDistAttributes(physx::PxVec3 distPos, float distVel, physx::PxVec3 distDir, double distLifetime);
 	
 	void setPModel(Particle* p);
+
+	bool isActive() const;
+	virtual void setActive(bool v);
 
 };
 

@@ -51,7 +51,6 @@ Particle::Particle(Particle* const& other)
 	, _massInv(other->_massInv)
 	, _force({ 0,0,0 })
 
-	//, _renderItem(other->_renderItem)
 {
 	// Inicializar RenderItem
 	PxSphereGeometry geo = PxSphereGeometry(_size);
@@ -180,4 +179,11 @@ void Particle::setRenderItem(RenderItem* item) {
 
 	_renderItem = item;
 	RegisterRenderItem(item);
+}
+
+void Particle::removeRenderItem() {
+	if (_renderItem != nullptr) {
+		_renderItem->release();
+		_renderItem = nullptr;
+	}
 }

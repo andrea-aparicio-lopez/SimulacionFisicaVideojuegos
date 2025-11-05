@@ -32,7 +32,8 @@ void ParticleSystem::update(double dt) {
 
 	// crear particulas 
 	for(auto gen : _particleGenerators)
-		gen->generateP();
+		if(gen->isActive())
+			gen->generateP();
 	
 	// aplicar fuerzas y actualizar el generador después
 	for (auto f : _forceGeneratos) {

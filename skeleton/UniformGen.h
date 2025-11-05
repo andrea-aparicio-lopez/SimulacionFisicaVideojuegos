@@ -10,7 +10,7 @@ class UniformGen : public ParticleGen
 public:
 	UniformGen(ParticleSystem* sys,
 		physx::PxVec3 pos, float vel, physx::PxVec3 dir,
-		double probGen, int n = 1);
+		double probGen, int n = 1, bool active = true);
 	~UniformGen();
 
 	void generateP() override;

@@ -9,8 +9,8 @@
 using namespace physx;
 
 UniformGen::UniformGen(ParticleSystem* sys, PxVec3 pos, float vel, PxVec3 dir,
-	double probGen, int n)
-	: ParticleGen(sys, pos, vel, dir, probGen, n)
+	double probGen, int n, bool active)
+	: ParticleGen(sys, pos, vel, dir, probGen, n, active)
 {
 
 }

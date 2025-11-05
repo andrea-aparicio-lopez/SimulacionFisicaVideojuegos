@@ -7,6 +7,7 @@
 #include "GravityForceGen.h"
 #include "WindForceGen.h"
 #include "TornadoForceGen.h"
+#include "Obstacle.h"
 
 #include <iostream>
 
@@ -23,6 +24,9 @@ SceneProyecto::~SceneProyecto() {
 	delete _gravityGen;
 	delete _windGen;
 	delete _tornadoGen;
+
+	for (auto obs : _obstacles)
+		delete obs;
 
 	Scene::~Scene();
 }
@@ -47,6 +51,10 @@ void SceneProyecto::start() {
 	_tornadoGen = new TornadoForceGen(_player->getPos() + PxVec3(100,0,0), PxVec3(0, 0, 1), 10, 10);
 	_weatherSys->addForceGen(_tornadoGen);
 
+
+	// OBSTACULO INICIAL
+	_obstacles.push_back(new Obstacle(PxVec3(20, 3, 0), _player));
+
 	_camera = GetCamera();
 	_camera->setPosition(_player->getPos() + PxVec3(0, 0, 50));
 	_camera->setDirection(_player->getPos() - _camera->getEye());
@@ -54,6 +62,9 @@ void SceneProyecto::start() {
 
 void SceneProyecto::integrate(double dt) {
 	_player->update(dt);
+	for (auto obs : _obstacles)
+		obs->update(dt);
+
 	_weatherSys->update(dt);
 	_camera->setPosition(_player->getPos() + PxVec3(0, 0, 50));
 }

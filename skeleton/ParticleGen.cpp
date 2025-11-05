@@ -5,7 +5,7 @@
 using namespace physx;
 
 ParticleGen::ParticleGen(ParticleSystem* sys, physx::PxVec3 pos, float vel, physx::PxVec3 dir, 
-						double probGen, int n) 
+						double probGen, int n, bool active) 
 	: _pSystem(sys)
 	, _pos(pos)
 	, _vel(vel)
@@ -18,6 +18,8 @@ ParticleGen::ParticleGen(ParticleSystem* sys, physx::PxVec3 pos, float vel, phys
 	, _distPos(0)
 	, _distVel(0)
 	, _distDir(0)
+
+	, _active(active)
 {
 	_dir.normalize();
 }
@@ -36,4 +38,12 @@ void ParticleGen::setDistAttributes(PxVec3 distPos, float distVel, PxVec3 distDi
 void ParticleGen::setPModel(Particle* p) {
 	delete _pModel;
 	_pModel = p;
+}
+
+bool ParticleGen::isActive() const {
+	return _active;
+}
+
+void ParticleGen::setActive(bool v) {
+	_active = v;
 }

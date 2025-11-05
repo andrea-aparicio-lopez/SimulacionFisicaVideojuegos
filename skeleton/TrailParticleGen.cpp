@@ -12,6 +12,7 @@ TrailParticleGen::TrailParticleGen(ParticleSystem* sys, PxVec3 pos)
 	p->setLifetime(2.);
 	p->setDistance(3.);
 	p->setSize(0.15);
+	p->removeRenderItem();
 
 	setPModel(p);
 	setDistAttributes({ 0, 0.2, 0 }, 1, { 1,0,0 }, 0.5);

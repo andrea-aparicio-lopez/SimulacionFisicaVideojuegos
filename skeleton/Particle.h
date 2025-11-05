@@ -81,5 +81,6 @@ public:
 	void clearForce();
 
 	void setRenderItem(RenderItem* item);
+	void removeRenderItem();
 };
 

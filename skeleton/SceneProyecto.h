@@ -2,10 +2,13 @@
 #include "Scene.h"
 #include "RenderUtils.hpp"
 
+#include <list>
+
 class Player;
 class Floor;
 class ParticleSystem;
 class ForceGenerator;
+class Obstacle;
 
 class SceneProyecto : public Scene
 {
@@ -27,6 +30,8 @@ protected:
 	ForceGenerator* _gravityGen;
 	ForceGenerator* _windGen;
 	ForceGenerator* _tornadoGen;
+
+	std::list<Obstacle*> _obstacles;
 	
 	Camera* _camera;
 

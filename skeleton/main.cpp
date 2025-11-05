@@ -66,7 +66,7 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 
 	// AXIS
-	axis = new Axis();
+	//axis = new Axis();
 
 	// SCENE
 	s = new SceneProyecto();
@@ -105,7 +105,7 @@ void cleanupPhysics(bool interactive)
 	
 	gFoundation->release();
 
-	delete axis;
+	//delete axis;
 	delete s;
 }
 
