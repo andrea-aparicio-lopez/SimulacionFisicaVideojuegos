@@ -15,6 +15,6 @@ public:
 protected:
 	Player* _player;
 
-	physx::PxVec3 _offset = { 80,30,0 };
+	physx::PxVec3 _offset = { 50,30,0 };
 };
 

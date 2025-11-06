@@ -20,7 +20,7 @@ WeatherParticleSys::WeatherParticleSys(Player* player)
 	p->setDistance(80.);
 	p->removeRenderItem();
 	snowGen->setPModel(p);
-	snowGen->setDistAttributes({ 30,0,0 }, 0.f, { -1, 0, 0 }, 3.0);
+	snowGen->setDistAttributes({ 60,0,0 }, 0.f, { -1, 0, 0 }, 3.0);
 	addParticleGen(snowGen);
 
 

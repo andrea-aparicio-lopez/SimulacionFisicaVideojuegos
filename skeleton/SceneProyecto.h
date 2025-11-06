@@ -10,6 +10,7 @@ class ParticleSystem;
 class ForceGenerator;
 class Obstacle;
 class Projectile;
+class Forest;
 
 class SceneProyecto : public Scene
 {
@@ -25,6 +26,7 @@ public:
 protected:
 	Player* _player;
 	Floor* _ground;
+	Forest* _forest;
 	
 	ParticleSystem* _weatherSys;
 

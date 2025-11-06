@@ -9,6 +9,7 @@
 #include "TornadoForceGen.h"
 #include "Obstacle.h"
 #include "Projectile.h"
+#include "Forest.h"
 
 #include <iostream>
 
@@ -21,6 +22,7 @@ SceneProyecto::SceneProyecto() : Scene() {
 SceneProyecto::~SceneProyecto() {
 	delete _player;
 	delete _ground;
+	delete _forest;
 	delete _weatherSys;
 	delete _gravityGen;
 	delete _windGen;
@@ -56,12 +58,21 @@ void SceneProyecto::start() {
 	_weatherSys->addForceGen(_tornadoGen);
 
 
-	// OBSTACULO INICIAL
+	// OBSTACULOS
 	_obstacles.push_back(new Obstacle(PxVec3(20, 3, 0), _player));
+	_obstacles.push_back(new Obstacle(PxVec3(200, 3, 0), _player));
+	_obstacles.push_back(new Obstacle(PxVec3(290, 3, 0), _player));
+	_obstacles.push_back(new Obstacle(PxVec3(440, 3, 0), _player));
+
+	// ÁRBOLES
+	// TODO: clase environment que agrupe todos los árboles y los vaya generando/borrando según avance el player
+	_forest = new Forest(_player);
+
 
 	_camera = GetCamera();
 	_camera->setPosition(_player->getPos() + PxVec3(0, 0, 40));
 	_camera->setDirection(_player->getPos() - _camera->getEye());
+
 }
 
 void SceneProyecto::integrate(double dt) {
@@ -71,6 +82,8 @@ void SceneProyecto::integrate(double dt) {
 
 	for (auto p : _projectiles)
 		p->integrate(dt);
+
+	_forest->update(dt);
 
 	_weatherSys->update(dt);
 	_camera->setPosition(_player->getPos() + PxVec3(0, 0, 50));

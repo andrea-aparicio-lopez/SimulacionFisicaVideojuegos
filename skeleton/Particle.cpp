@@ -30,7 +30,6 @@ Particle::Particle(PxVec3 pos, PxVec3 vel, PxVec3 a, PxVec4 color, float size, d
 	PxSphereGeometry geo = PxSphereGeometry(_size);
 	PxShape* shape = CreateShape(geo);
 	_renderItem = new RenderItem(shape, _tr, _color);
-	//shape->release();
 }
 
 Particle::Particle(Particle* const& other) 
