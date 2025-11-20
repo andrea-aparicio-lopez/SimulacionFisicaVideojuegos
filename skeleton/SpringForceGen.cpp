@@ -25,3 +25,11 @@ void SpringForceGen::applyForce(Particle* p) {
 void SpringForceGen::update(double dt) {
 
 }
+
+double SpringForceGen::getK() const {
+	return _k;
+}
+
+void SpringForceGen::setK(double k) {
+	_k = k;
+}

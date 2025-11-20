@@ -38,6 +38,7 @@
     <ClCompile Include="Forest.cpp" />
     <ClCompile Include="SpringForceGen.cpp" />
     <ClCompile Include="SceneSprings.cpp" />
+    <ClCompile Include="SpringParticlesForceGen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="Forest.h" />
     <ClInclude Include="SpringForceGen.h" />
     <ClInclude Include="SceneSprings.h" />
+    <ClInclude Include="SpringParticlesForceGen.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

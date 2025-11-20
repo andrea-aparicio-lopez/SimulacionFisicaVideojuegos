@@ -10,6 +10,9 @@ public:
 	void applyForce(Particle* p) override;
 	void update(double dt) override;
 
+	double getK() const;
+	void setK(double k);
+
 protected:
 	double _k;
 	double _l; // longitud en reposo

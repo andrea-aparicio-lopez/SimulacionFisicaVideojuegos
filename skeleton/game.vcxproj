@@ -278,6 +278,7 @@
     <ClCompile Include="SceneProjectiles.cpp" />
     <ClCompile Include="SceneSprings.cpp" />
     <ClCompile Include="SpringForceGen.cpp" />
+    <ClCompile Include="SpringParticlesForceGen.cpp" />
     <ClCompile Include="Target.cpp" />
     <ClCompile Include="TornadoForceGen.cpp" />
     <ClCompile Include="TrailParticleGen.cpp" />
@@ -313,6 +314,7 @@
     <ClInclude Include="SceneProjectiles.h" />
     <ClInclude Include="SceneSprings.h" />
     <ClInclude Include="SpringForceGen.h" />
+    <ClInclude Include="SpringParticlesForceGen.h" />
     <ClInclude Include="Target.h" />
     <ClInclude Include="TornadoForceGen.h" />
     <ClInclude Include="TrailParticleGen.h" />
