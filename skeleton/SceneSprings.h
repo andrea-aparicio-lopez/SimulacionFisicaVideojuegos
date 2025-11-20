@@ -31,5 +31,6 @@ protected:
 	Target* _anchor;
 
 	ParticleSystem* _pSystemJoinedParticles;
+	ParticleSystem* _pSystemSlinky;
 };
 
