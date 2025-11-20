@@ -40,6 +40,8 @@
     <ClCompile Include="SceneSprings.cpp" />
     <ClCompile Include="SpringParticlesForceGen.cpp" />
     <ClCompile Include="ElasticBandForceGen.cpp" />
+    <ClCompile Include="BuoyantForceGen.cpp" />
+    <ClCompile Include="SceneBuoyancy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -81,6 +83,8 @@
     <ClInclude Include="SceneSprings.h" />
     <ClInclude Include="SpringParticlesForceGen.h" />
     <ClInclude Include="ElasticBandForceGen.h" />
+    <ClInclude Include="BuoyantForceGen.h" />
+    <ClInclude Include="SceneBuoyancy.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -138,6 +138,20 @@ void Particle::setSize(float size) {
 	_size = size;
 }
 
+float Particle::getVolume() const {
+	PxBoxGeometry geo;
+	if (_renderItem->shape->getBoxGeometry(geo))
+		return 8 * geo.halfExtents.x * geo.halfExtents.y * geo.halfExtents.z;
+	else return 1.f;
+}
+
+PxVec3 Particle::getBoxDimensions() const {
+	PxBoxGeometry geo;
+	if (_renderItem->shape->getBoxGeometry(geo))
+		return geo.halfExtents;
+	else PxVec3(0);
+}
+
 double Particle::getMass() const {
 	return pow(_massInv, -1);
 }

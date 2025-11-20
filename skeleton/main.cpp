@@ -15,6 +15,7 @@
 #include "SceneForceSystem.h"
 #include "SceneProyecto.h"
 #include "SceneSprings.h"
+#include "SceneBuoyancy.h"
 
 #include <iostream>
 
@@ -70,7 +71,8 @@ void initPhysics(bool interactive)
 	//axis = new Axis();
 
 	// SCENE
-	s = new SceneSprings();
+	//s = new SceneSprings();
+	s = new SceneBuoyancy();
 	s->start();
 }
 

@@ -254,6 +254,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Axis.cpp" />
+    <ClCompile Include="BuoyantForceGen.cpp" />
     <ClCompile Include="ElasticBandForceGen.cpp" />
     <ClCompile Include="ExplosionForceGen.cpp" />
     <ClCompile Include="Floor.cpp" />
@@ -273,6 +274,7 @@
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneBuoyancy.cpp" />
     <ClCompile Include="SceneForceSystem.cpp" />
     <ClCompile Include="SceneProyecto.cpp" />
     <ClCompile Include="ScenePSystem.cpp" />
@@ -291,6 +293,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Axis.h" />
+    <ClInclude Include="BuoyantForceGen.h" />
     <ClInclude Include="ElasticBandForceGen.h" />
     <ClInclude Include="ExplosionForceGen.h" />
     <ClInclude Include="Floor.h" />
@@ -310,6 +313,7 @@
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneBuoyancy.h" />
     <ClInclude Include="SceneForceSystem.h" />
     <ClInclude Include="SceneProyecto.h" />
     <ClInclude Include="ScenePSystem.h" />

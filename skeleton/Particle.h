@@ -63,6 +63,9 @@ public:
 	float getSize() const;
 	void setSize(float size);
 
+	float getVolume() const;
+	physx::PxVec3 getBoxDimensions() const;
+
 	double getLifetime() const;
 	void setLifetime(double lifetime);
 	void setDistance(double dist);
