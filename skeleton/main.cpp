@@ -14,6 +14,7 @@
 #include "ScenePSystem.h"
 #include "SceneForceSystem.h"
 #include "SceneProyecto.h"
+#include "SceneSprings.h"
 
 #include <iostream>
 
@@ -69,7 +70,7 @@ void initPhysics(bool interactive)
 	//axis = new Axis();
 
 	// SCENE
-	s = new SceneProyecto();
+	s = new SceneSprings();
 	s->start();
 }
 

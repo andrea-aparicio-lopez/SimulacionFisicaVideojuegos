@@ -21,9 +21,9 @@ protected:
 
 	std::list<ForceGenerator*> _forceGeneratos; // La escena es responsable de borrar los generadores de fuerzas, no el sistema
 
-	void addParticle(Particle* p);
 
 public:
+	void addParticle(Particle* p);
 	void addParticleGen(ParticleGen* gen);
 	void addForceGen(ForceGenerator* gen);
 

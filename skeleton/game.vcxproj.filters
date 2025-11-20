@@ -36,6 +36,8 @@
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="Forest.cpp" />
+    <ClCompile Include="SpringForceGen.cpp" />
+    <ClCompile Include="SceneSprings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -73,6 +75,8 @@
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="Forest.h" />
+    <ClInclude Include="SpringForceGen.h" />
+    <ClInclude Include="SceneSprings.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
