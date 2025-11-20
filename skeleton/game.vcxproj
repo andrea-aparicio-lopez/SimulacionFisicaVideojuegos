@@ -254,6 +254,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Axis.cpp" />
+    <ClCompile Include="ElasticBandForceGen.cpp" />
     <ClCompile Include="ExplosionForceGen.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
@@ -290,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Axis.h" />
+    <ClInclude Include="ElasticBandForceGen.h" />
     <ClInclude Include="ExplosionForceGen.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="ForceGenerator.h" />

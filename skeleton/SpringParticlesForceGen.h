@@ -7,7 +7,6 @@ public:
 	~SpringParticlesForceGen();
 
 	void applyForce(Particle* p) override;
-	void update(double dt) override;
 
 	void setParticles(Particle* p1, Particle* p2);
 

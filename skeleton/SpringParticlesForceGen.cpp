@@ -34,10 +34,6 @@ void SpringParticlesForceGen::applyForce(Particle* p) {
 	}
 }
 
-void SpringParticlesForceGen::update(double dt) {
-
-}
-
 void SpringParticlesForceGen::setParticles(Particle* p1, Particle* p2) {
 	if (_p1 != nullptr)
 		delete _p1;

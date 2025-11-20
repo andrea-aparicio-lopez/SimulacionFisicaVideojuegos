@@ -39,6 +39,7 @@
     <ClCompile Include="SpringForceGen.cpp" />
     <ClCompile Include="SceneSprings.cpp" />
     <ClCompile Include="SpringParticlesForceGen.cpp" />
+    <ClCompile Include="ElasticBandForceGen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="SpringForceGen.h" />
     <ClInclude Include="SceneSprings.h" />
     <ClInclude Include="SpringParticlesForceGen.h" />
+    <ClInclude Include="ElasticBandForceGen.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
