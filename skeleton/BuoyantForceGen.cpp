@@ -1,5 +1,6 @@
 #include "BuoyantForceGen.h"
 #include "Particle.h"
+#include <iostream>
 
 using namespace physx;
 
@@ -17,14 +18,16 @@ BuoyantForceGen::~BuoyantForceGen() {
 void BuoyantForceGen::applyForce(Particle* p) {
 	float v = p->getVolume();
 	float h = p->getPos().y;
+	float d = p->getBoxDimensions().y / 2;
 	float immersed;
 
-	if (h - p->getBoxDimensions().y > _pos.y)
+	if (h - d > _pos.y)
 		immersed = 0.f;
-	else if (h + p->getBoxDimensions().y < _pos.y)
-		immersed = 1.0;
+	else if (h + d < _pos.y)
+		immersed = 1.f;
 	else
-		immersed = (_pos.y - h) / (2 * p->getBoxDimensions().y) + 0.5;
+		//immersed = (_pos.y - h) / (2 *d);
+		immersed = (_pos.y - (h - d)) / (2 * d);
 
 	PxVec3 f = { 0, _g * _d * immersed * p->getVolume(), 0};
 	

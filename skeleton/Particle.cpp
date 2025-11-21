@@ -141,7 +141,7 @@ void Particle::setSize(float size) {
 float Particle::getVolume() const {
 	PxBoxGeometry geo;
 	if (_renderItem->shape->getBoxGeometry(geo))
-		return 8 * geo.halfExtents.x * geo.halfExtents.y * geo.halfExtents.z;
+		return geo.halfExtents.x * geo.halfExtents.y * geo.halfExtents.z;
 	else return 1.f;
 }
 

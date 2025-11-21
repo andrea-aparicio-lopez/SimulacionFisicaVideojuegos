@@ -4,6 +4,7 @@
 #include "Target.h"
 #include "BuoyantForceGen.h"
 #include "GravityForceGen.h"
+#include "DragForceGen.h"
 
 #include <iostream>
 
@@ -18,6 +19,7 @@ SceneBuoyancy::~SceneBuoyancy() {
 	delete _pSys;
 	delete _buoyantForceGen;
 	delete _gravityForceGen;
+	delete _dragForceGen;
 
 	Scene::~Scene();
 }
@@ -30,11 +32,14 @@ void SceneBuoyancy::start() {
 	_gravityForceGen = new GravityForceGen(PxVec3(0));
 	_pSys->addForceGen(_gravityForceGen);
 
-	_buoyantForceGen = new BuoyantForceGen(_water->transform()->p, 1.f);
+	_dragForceGen = new DragForceGen(PxVec3(0), 0.5);
+	_pSys->addForceGen(_dragForceGen);
+
+	_buoyantForceGen = new BuoyantForceGen(_water->transform()->p, 1000.f);
 	_pSys->addForceGen(_buoyantForceGen);
 
 	// Partícula 1 sobre el agua inicialmente
-	Particle* p = new Particle(_water->transform()->p + PxVec3(-10, 10, 10), PxVec3(0), PxVec3(0), PxVec4(0.8, 0.8, 0.8, 1.), 1.f, 15.f, DBL_MAX, DBL_MAX);
+	Particle* p = new Particle(_water->transform()->p + PxVec3(-10, 10, 10), PxVec3(0), PxVec3(0), PxVec4(0.8, 0.8, 0.8, 1.), 1.f, 1500.f, DBL_MAX, DBL_MAX);
 	PxBoxGeometry geo = PxBoxGeometry(PxVec3(1,3,1));
 	PxShape* shape = CreateShape(geo);
 	auto rI = new RenderItem(shape, p->getTr(), p->getColor());
@@ -43,7 +48,7 @@ void SceneBuoyancy::start() {
 	_pSys->addParticle(p);
 
 	// Partícula 2 medio hundida inicialmente. Masa modificable por teclado
-	p = new Particle(_water->transform()->p + PxVec3(0, 0, 0), PxVec3(0), PxVec3(0), PxVec4(0.5, 0.8, 0.9, 1.), 1.f, 15.f, DBL_MAX, DBL_MAX);
+	p = new Particle(_water->transform()->p + PxVec3(0, 0, 0), PxVec3(0), PxVec3(0), PxVec4(0.5, 0.8, 0.9, 1.), 1.f, 3000.f, DBL_MAX, DBL_MAX);
 	shape = CreateShape(geo);
 	rI = new RenderItem(shape, p->getTr(), p->getColor());
 	p->setRenderItem(rI);
@@ -52,7 +57,7 @@ void SceneBuoyancy::start() {
 	_p = p;
 
 	// Partícula 3 completamente sumergida inicialmente
-	p = new Particle(_water->transform()->p + PxVec3(10, -10, -10), PxVec3(0), PxVec3(0), PxVec4(0.8, 0.8, 0.8, 1.), 1.f, 15.f, DBL_MAX, DBL_MAX);
+	p = new Particle(_water->transform()->p + PxVec3(10, -10, -10), PxVec3(0), PxVec3(0), PxVec4(0.8, 0.8, 0.8, 1.), 1.f, 6000.f, DBL_MAX, DBL_MAX);
 	shape = CreateShape(geo);
 	rI = new RenderItem(shape, p->getTr(), p->getColor());
 	p->setRenderItem(rI);
@@ -69,11 +74,11 @@ void SceneBuoyancy::processKey(unsigned char key, const physx::PxTransform& came
 	switch (toupper(key))
 	{
 	case 'M':
-		_p->setMass(_p->getMass() + 1.f);
+		_p->setMass(_p->getMass() + 100.f);
 		std::cout << "Aumentando masa\n";
 		break;
 	case 'N':
-		_p->setMass(max(1.0, _p->getMass() - 1.f));
+		_p->setMass(max(1.0, _p->getMass() - 100.f));
 		std::cout << "Reduciendo masa\n";
 		break;
 	default:

@@ -255,6 +255,7 @@
   <ItemGroup>
     <ClCompile Include="Axis.cpp" />
     <ClCompile Include="BuoyantForceGen.cpp" />
+    <ClCompile Include="DragForceGen.cpp" />
     <ClCompile Include="ElasticBandForceGen.cpp" />
     <ClCompile Include="ExplosionForceGen.cpp" />
     <ClCompile Include="Floor.cpp" />
@@ -294,6 +295,7 @@
   <ItemGroup>
     <ClInclude Include="Axis.h" />
     <ClInclude Include="BuoyantForceGen.h" />
+    <ClInclude Include="DragForceGen.h" />
     <ClInclude Include="ElasticBandForceGen.h" />
     <ClInclude Include="ExplosionForceGen.h" />
     <ClInclude Include="Floor.h" />

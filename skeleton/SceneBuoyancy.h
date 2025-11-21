@@ -22,6 +22,7 @@ protected:
     ParticleSystem* _pSys;
     ForceGenerator* _buoyantForceGen;
     ForceGenerator* _gravityForceGen;
+    ForceGenerator* _dragForceGen;
 
     Particle* _p;
 };
