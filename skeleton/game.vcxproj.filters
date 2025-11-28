@@ -43,6 +43,8 @@
     <ClCompile Include="BuoyantForceGen.cpp" />
     <ClCompile Include="SceneBuoyancy.cpp" />
     <ClCompile Include="DragForceGen.cpp" />
+    <ClCompile Include="RigidBodyGenerator.cpp" />
+    <ClCompile Include="RigidBodySystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -87,6 +89,8 @@
     <ClInclude Include="BuoyantForceGen.h" />
     <ClInclude Include="SceneBuoyancy.h" />
     <ClInclude Include="DragForceGen.h" />
+    <ClInclude Include="RigidBodyGenerator.h" />
+    <ClInclude Include="RigidBodySystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
