@@ -8,6 +8,7 @@ public:
 	~ExplosionForceGen();
 
 	void applyForce(Particle* p) override;
+	void applyForce(physx::PxRigidBody* rb) override;
 	virtual void update(double dt) override;
 	virtual void setActive(bool v) override;
 

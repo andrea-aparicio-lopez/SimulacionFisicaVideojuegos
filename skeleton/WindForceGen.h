@@ -8,6 +8,7 @@ public:
 	~WindForceGen();
 
 	virtual void applyForce(Particle* p) override;
+	virtual void applyForce(physx::PxRigidBody* rb) override;
 	virtual void update(double dt) override;
 
 protected:

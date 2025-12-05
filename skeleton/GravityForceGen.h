@@ -10,6 +10,7 @@ public:
 	~GravityForceGen();
 
 	void applyForce(Particle* p) override;
+	void applyForce(physx::PxRigidBody* rb) override;
 	void update(double dt) override;
 
 protected:

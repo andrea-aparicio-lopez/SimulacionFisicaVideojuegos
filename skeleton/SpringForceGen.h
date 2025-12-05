@@ -8,6 +8,7 @@ public:
 	~SpringForceGen();
 
 	void applyForce(Particle* p) override;
+	void applyForce(physx::PxRigidBody* rb) override;
 	void update(double dt) override;
 
 	double getK() const;

@@ -25,6 +25,15 @@ void TornadoForceGen::applyForce(Particle* p) {
 	}
 }
 
+void TornadoForceGen::applyForce(PxRigidBody* rb) {
+	if (withinRange(rb->getGlobalPose().p)) {
+		auto v = getVel(rb->getGlobalPose().p);
+		auto diff = v - rb->getLinearVelocity();
+		auto f = _k1 * diff + _k2 * diff.magnitude() * diff;
+		rb->addForce(f);
+	}
+}
+
 bool TornadoForceGen::withinRange(PxVec3 const& pos) const {
 	return (pos - _pos).magnitude() < _r;
 }

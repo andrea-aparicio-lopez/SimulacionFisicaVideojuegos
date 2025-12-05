@@ -26,6 +26,14 @@ void WindForceGen::applyForce(Particle* p) {
 	}
 }
 
+void WindForceGen::applyForce(PxRigidBody* rb) {
+	if (withinRange(rb->getGlobalPose().p)) {
+		auto diff = _v - rb->getLinearVelocity();
+		auto f = _k1 * diff + _k2 * diff.magnitude() * diff;
+		rb->addForce(f);
+	}
+}
+
 void WindForceGen::update(double dt) {
 
 }

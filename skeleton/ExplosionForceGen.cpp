@@ -27,6 +27,14 @@ void ExplosionForceGen::applyForce(Particle* p) {
 	}
 }
 
+void ExplosionForceGen::applyForce(PxRigidBody* rb) {
+	auto d = rb->getGlobalPose().p - _pos;
+	auto r_sqrd = pow(_r, 2);
+	if (d.magnitudeSquared() < r_sqrd) {
+		rb->addForce(_k * d / d.magnitudeSquared() * _exp);
+	}
+}
+
 void ExplosionForceGen::update(double dt) {
 	_t += dt;
 	if (_duration < _t) setActive(false);

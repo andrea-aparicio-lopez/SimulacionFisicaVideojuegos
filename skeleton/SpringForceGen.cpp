@@ -22,6 +22,13 @@ void SpringForceGen::applyForce(Particle* p) {
 	p->addForce(force);
 }
 
+void SpringForceGen::applyForce(PxRigidBody* rb) {
+	Vector3 d = rb->getGlobalPose().p - _pos;
+	float delta_x = d.normalize() - _l;
+	Vector3 force = -_k * delta_x * d;
+	rb->addForce(force);
+}
+
 void SpringForceGen::update(double dt) {
 
 }

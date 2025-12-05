@@ -21,6 +21,10 @@ void GravityForceGen::applyForce(Particle* p) {
 	p->addForce(f);
 }
 
+void GravityForceGen::applyForce(PxRigidBody* rb) {
+
+}
+
 void GravityForceGen::update(double dt) {
 
 }

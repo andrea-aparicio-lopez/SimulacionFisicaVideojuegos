@@ -7,6 +7,7 @@ public:
 	~TornadoForceGen();
 
 	virtual void applyForce(Particle* p) override;
+	virtual void applyForce(physx::PxRigidBody* rb) override;
 
 protected:
 	physx::PxVec3 _axis; // Eje central del torbellino

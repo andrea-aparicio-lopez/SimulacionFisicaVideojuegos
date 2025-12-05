@@ -7,6 +7,7 @@ public:
 	DragForceGen(physx::PxVec3 pos, double u);
 
 	void applyForce(Particle* p) override;
+	void applyForce(physx::PxRigidBody* rb) override;
 	void update(double dt) override;
 
 protected:

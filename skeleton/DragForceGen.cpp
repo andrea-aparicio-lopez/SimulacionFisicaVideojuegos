@@ -16,6 +16,10 @@ void DragForceGen::applyForce(Particle* p) {
 	p->addForce(f);
 }
 
+void DragForceGen::applyForce(PxRigidBody* rb) {
+
+}
+
 void DragForceGen::update(double dt) {
 
 }

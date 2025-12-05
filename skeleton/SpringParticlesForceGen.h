@@ -7,6 +7,7 @@ public:
 	~SpringParticlesForceGen();
 
 	void applyForce(Particle* p) override;
+	void applyForce(physx::PxRigidBody* rb) override;
 
 	void setParticles(Particle* p1, Particle* p2);
 

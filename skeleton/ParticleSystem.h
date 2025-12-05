@@ -19,7 +19,7 @@ protected:
 	std::list<Particle*> _particles;
 	std::list<ParticleGen*> _particleGenerators;
 
-	std::list<ForceGenerator*> _forceGeneratos; // La escena es responsable de borrar los generadores de fuerzas, no el sistema
+	std::list<ForceGenerator*> _forceGenerators; // La escena es responsable de borrar los generadores de fuerzas, no el sistema
 
 
 public:
@@ -29,8 +29,8 @@ public:
 
 	virtual void update(double dt);
 
-	friend ParticleGen;
-	friend GaussianGen;
-	friend UniformGen;
+	//friend ParticleGen;
+	//friend GaussianGen;
+	//friend UniformGen;
 };
 

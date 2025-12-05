@@ -34,6 +34,10 @@ void BuoyantForceGen::applyForce(Particle* p) {
 	p->addForce(f);
 }
 
+void BuoyantForceGen::applyForce(PxRigidBody* p) {
+	// TODO
+}
+
 void BuoyantForceGen::update(double dt) {
 
 }

@@ -34,6 +34,10 @@ void SpringParticlesForceGen::applyForce(Particle* p) {
 	}
 }
 
+void SpringParticlesForceGen::applyForce(PxRigidBody* rb) {
+
+}
+
 void SpringParticlesForceGen::setParticles(Particle* p1, Particle* p2) {
 	if (_p1 != nullptr)
 		delete _p1;

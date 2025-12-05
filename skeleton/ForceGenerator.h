@@ -12,6 +12,7 @@ protected:
 public:
 	virtual ~ForceGenerator();
 	virtual void applyForce(Particle* p) = 0;
+	virtual void applyForce(physx::PxRigidBody* rb) = 0;
 	virtual void update(double dt) = 0;
 
 	bool isActive() const;

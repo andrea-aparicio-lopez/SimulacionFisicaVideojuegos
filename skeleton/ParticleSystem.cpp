@@ -21,7 +21,7 @@ void ParticleSystem::addParticleGen(ParticleGen* gen) {
 }
 
 void ParticleSystem::addForceGen(ForceGenerator* gen) {
-	_forceGeneratos.push_back(gen);
+	_forceGenerators.push_back(gen);
 }
 
 void ParticleSystem::update(double dt) {
@@ -32,7 +32,7 @@ void ParticleSystem::update(double dt) {
 			gen->generateP();
 	
 	// aplicar fuerzas y actualizar el generador después
-	for (auto f : _forceGeneratos) {
+	for (auto f : _forceGenerators) {
 		if (f->isActive()) {
 			for (auto p : _particles)
 				f->applyForce(p);
