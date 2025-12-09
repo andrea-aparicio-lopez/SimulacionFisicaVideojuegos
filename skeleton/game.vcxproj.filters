@@ -46,6 +46,8 @@
     <ClCompile Include="RigidBodyGenerator.cpp" />
     <ClCompile Include="RigidBodySystem.cpp" />
     <ClCompile Include="ForceSystem.cpp" />
+    <ClCompile Include="GaussianRBGen.cpp" />
+    <ClCompile Include="SceneSolids.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -93,6 +95,8 @@
     <ClInclude Include="RigidBodyGenerator.h" />
     <ClInclude Include="RigidBodySystem.h" />
     <ClInclude Include="ForceSystem.h" />
+    <ClInclude Include="GaussianRBGen.h" />
+    <ClInclude Include="SceneSolids.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -6,18 +6,22 @@
 
 using namespace physx;
 
-RigidBodySystem::RigidBodySystem(PxScene* gScene) : _gScene(gScene)
+RigidBodySystem::RigidBodySystem(PxScene* gScene, PxPhysics* gPhysics)
+	: _gScene(gScene)
+	, _gPhysics(gPhysics)
 {
 
 }
 
 RigidBodySystem::~RigidBodySystem() {
-	for (auto rb : _rbs)
-		_gScene->removeActor(*rb);
-		
+	//for (auto rb : _rbs)
+	//	_gScene->removeActor(*rb);
+	//	
+	//for (auto ri : _renderItems)
+	//	ri->release();
+
 	for (auto gen : _rbGenerators)
 		delete gen;
-
 }
 
 void RigidBodySystem::addRB(physx::PxRigidBody* rb) {
@@ -40,13 +44,20 @@ PxScene* RigidBodySystem::getScene() const {
 	return _gScene;
 }
 
-void RigidBodySystem::update(double dt) {
-	// crear particulas 
-	for (auto gen : _rbGenerators)
-		if (gen->isActive())
-			gen->generateRigidBody();
+PxPhysics* RigidBodySystem::getPhysics() const {
+	return _gPhysics;
+}
 
-	// aplicar fuerzas y actualizar el generador después
+void RigidBodySystem::update(double dt) {
+	// crear sólidos 
+	for (auto gen : _rbGenerators) {
+		if (gen->isActive()) {
+			gen->update(dt);
+			gen->generateRigidBody();
+		}
+	}
+
+	// aplicar fuerzas
 	for (auto f : _forceGenerators) {
 		if (f->isActive()) {
 			for (auto rb : _rbs)

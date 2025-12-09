@@ -16,10 +16,11 @@
 #include "SceneProyecto.h"
 #include "SceneSprings.h"
 #include "SceneBuoyancy.h"
+#include "SceneSolids.h"
 
 #include <iostream>
 
-std::string display_text = "This is a test";
+std::string display_text = "Press N to activate/deactivate tornado force";
 
 
 using namespace physx;
@@ -71,8 +72,7 @@ void initPhysics(bool interactive)
 	//axis = new Axis();
 
 	// SCENE
-	//s = new SceneSprings();
-	s = new SceneBuoyancy();
+	s = new SceneSolids(gScene, gPhysics);
 	s->start();
 }
 

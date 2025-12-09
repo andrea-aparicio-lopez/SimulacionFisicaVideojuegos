@@ -9,7 +9,7 @@ class RenderItem;
 class RigidBodySystem
 {
 public: 
-	RigidBodySystem(physx::PxScene* gScene);
+	RigidBodySystem(physx::PxScene* gScene, physx::PxPhysics* gPhysics);
 	~RigidBodySystem();
 
 public:
@@ -19,12 +19,9 @@ public:
 	void addForceGen(ForceGenerator* gen);
 
 	physx::PxScene* getScene() const;
+	physx::PxPhysics* getPhysics() const;
 
 	virtual void update(double dt);
-
-protected:
-	double _genTime = 1000.; // ms
-	double t = 0.;
 
 protected:
 	std::list<physx::PxRigidBody*> _rbs;
@@ -34,5 +31,6 @@ protected:
 	std::list<ForceGenerator*> _forceGenerators;
 
 	physx::PxScene* _gScene;
+	physx::PxPhysics* _gPhysics;
 };
 

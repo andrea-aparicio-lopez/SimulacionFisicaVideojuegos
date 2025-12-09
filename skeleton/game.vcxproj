@@ -263,6 +263,7 @@
     <ClCompile Include="ForceSystem.cpp" />
     <ClCompile Include="Forest.cpp" />
     <ClCompile Include="GaussianGen.cpp" />
+    <ClCompile Include="GaussianRBGen.cpp" />
     <ClCompile Include="GravityForceGen.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ParticleGen.cpp" />
@@ -283,6 +284,7 @@
     <ClCompile Include="SceneProyecto.cpp" />
     <ClCompile Include="ScenePSystem.cpp" />
     <ClCompile Include="SceneProjectiles.cpp" />
+    <ClCompile Include="SceneSolids.cpp" />
     <ClCompile Include="SceneSprings.cpp" />
     <ClCompile Include="SpringForceGen.cpp" />
     <ClCompile Include="SpringParticlesForceGen.cpp" />
@@ -306,6 +308,7 @@
     <ClInclude Include="ForceSystem.h" />
     <ClInclude Include="Forest.h" />
     <ClInclude Include="GaussianGen.h" />
+    <ClInclude Include="GaussianRBGen.h" />
     <ClInclude Include="GravityForceGen.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ParticleGen.h" />
@@ -326,6 +329,7 @@
     <ClInclude Include="SceneProyecto.h" />
     <ClInclude Include="ScenePSystem.h" />
     <ClInclude Include="SceneProjectiles.h" />
+    <ClInclude Include="SceneSolids.h" />
     <ClInclude Include="SceneSprings.h" />
     <ClInclude Include="SpringForceGen.h" />
     <ClInclude Include="SpringParticlesForceGen.h" />
