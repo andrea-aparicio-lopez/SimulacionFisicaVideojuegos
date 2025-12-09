@@ -31,12 +31,11 @@ void ParticleSystem::update(double dt) {
 		if(gen->isActive())
 			gen->generateP();
 	
-	// aplicar fuerzas y actualizar el generador después
+	// aplicar fuerzas
 	for (auto f : _forceGenerators) {
 		if (f->isActive()) {
 			for (auto p : _particles)
 				f->applyForce(p);
-			f->update(dt);
 		}
 	}
 

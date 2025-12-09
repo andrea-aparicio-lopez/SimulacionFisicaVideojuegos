@@ -34,7 +34,7 @@ void WeatherParticleSys::update(double dt) {
 	for (auto gen : _particleGenerators) 
 		gen->setPos(_player->getPos() + _offset);
 
-	for (auto gen : _forceGeneratos)
+	for (auto gen : _forceGenerators)
 		gen->setPos(_player->getPos());
 	
 	ParticleSystem::update(dt);

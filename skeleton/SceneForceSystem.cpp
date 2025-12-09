@@ -1,6 +1,7 @@
 #include "SceneForceSystem.h"
 #include "Particle.h"
 #include "ParticleSystem.h"
+#include "ForceSystem.h"
 #include "GaussianGen.h"
 #include "GravityForceGen.h"
 #include "WindForceGen.h"
@@ -15,10 +16,12 @@ SceneForceSystem::SceneForceSystem() : Scene() {
 }
 
 SceneForceSystem::~SceneForceSystem() {
+	delete _forceSys;
 	delete _pSystem;
 }
 
 void SceneForceSystem::start() {
+	_forceSys = new ForceSystem();
 	_pSystem = new ParticleSystem();
 
 	// PARTÍCULAS
@@ -54,22 +57,27 @@ void SceneForceSystem::start() {
 	// FUERZAS
 	// Gravedad
 	ForceGenerator* forceGen = new GravityForceGen(PxVec3(0));
+	_forceSys->addForceGen(forceGen);
 	_pSystem->addForceGen(forceGen);
 
 	// Viento
 	//forceGen = new WindForceGen(PxVec3(0,100,0), PxVec3(80, 50, 100), PxVec3(0,0,-200));
+	//_forceSys->addForceGen(forceGen);
 	//_pSystem->addForceGen(forceGen);
 
 	// Torbellino
 	//forceGen = new TornadoForceGen(PxVec3(0), PxVec3(0,1,0), 100, 6);
+	//_forceSys->addForceGen(forceGen);
 	//_pSystem->addForceGen(forceGen); 
 
 	// Explosión
 	_explosion = new ExplosionForceGen(PxVec3(0), 50, 6000, 2);
+	_forceSys->addForceGen(_explosion);
 	_pSystem->addForceGen(_explosion); 
 }
 
 void SceneForceSystem::integrate(double dt) {
+	_forceSys->update(dt);
 	_pSystem->update(dt);
 }
 

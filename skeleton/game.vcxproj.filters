@@ -45,6 +45,7 @@
     <ClCompile Include="DragForceGen.cpp" />
     <ClCompile Include="RigidBodyGenerator.cpp" />
     <ClCompile Include="RigidBodySystem.cpp" />
+    <ClCompile Include="ForceSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -91,6 +92,7 @@
     <ClInclude Include="DragForceGen.h" />
     <ClInclude Include="RigidBodyGenerator.h" />
     <ClInclude Include="RigidBodySystem.h" />
+    <ClInclude Include="ForceSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

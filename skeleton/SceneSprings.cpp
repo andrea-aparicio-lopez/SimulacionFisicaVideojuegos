@@ -1,5 +1,6 @@
 #include "SceneSprings.h"
 #include "ParticleSystem.h"
+#include "ForceSystem.h"
 #include "SpringForceGen.h"
 #include "SpringParticlesForceGen.h"
 #include "ElasticBandForceGen.h"
@@ -20,13 +21,13 @@ SceneSprings::~SceneSprings() {
 	delete _pSystemAnchor;
 	delete _anchor;
 
-	for (auto gen : _forceGens)
-		delete gen;
+	delete _forceSys;
 
 	Scene::~Scene();
 }
 
 void SceneSprings::start() {
+	_forceSys = new ForceSystem();
 
 	// ---------- MUELLE 1: Partícula unida a punto fijo -----------------
 
@@ -34,17 +35,17 @@ void SceneSprings::start() {
 
 	_pSystemAnchor = new ParticleSystem();
 	ForceGenerator* gravityGen = new GravityForceGen(PxVec3(0));
+	_forceSys->addForceGen(gravityGen);
 	_pSystemAnchor->addForceGen(gravityGen);
-	_forceGens.push_back(gravityGen);
 
 	_springAnchorForceGen = new SpringForceGen(_anchor->transform()->p, 12, 2);
+	_forceSys->addForceGen(_springAnchorForceGen);
 	_pSystemAnchor->addForceGen(_springAnchorForceGen);
-	_forceGens.push_back(_springAnchorForceGen);
 
 	_windForceGen = new WindForceGen(PxVec3(0), PxVec3(100, 25, 100), PxVec3(15, 0, 0));
 	_windForceGen->setActive(false);
+	_forceSys->addForceGen(_windForceGen);
 	_pSystemAnchor->addForceGen(_windForceGen);
-	_forceGens.push_back(_windForceGen);
 
 	_pAnchored = new Particle(_anchor->transform()->p - PxVec3(0,20,0), PxVec3(0), PxVec3(0), PxVec4(0.2, 0.8, 0.1, 1.), 1.f, 3.f, DBL_MAX, DBL_MAX);
 	_pSystemAnchor->addParticle(_pAnchored);
@@ -62,6 +63,8 @@ void SceneSprings::start() {
 	Particle* p2 = new Particle(PxVec3(0, 10, 0), PxVec3(0), PxVec3(0), PxVec4(0.9, 0.4, 0.6, 1.), 1.f, 3.f, DBL_MAX, DBL_MAX);
 	springGen->setParticles(p1, p2);
 
+	_forceSys->addForceGen(springGen);
+
 	_pSystemJoinedParticles->addForceGen(springGen);
 	_pSystemJoinedParticles->addParticle(p1);
 	_pSystemJoinedParticles->addParticle(p2);
@@ -71,6 +74,8 @@ void SceneSprings::start() {
 	p1 = new Particle(PxVec3(10, 30, -10), PxVec3(0), PxVec3(0), PxVec4(0.3, 0.2, 0.8, 1.), 1.f, 3.f, DBL_MAX, DBL_MAX);
 	p2 = new Particle(PxVec3(10, 5, -10), PxVec3(0), PxVec3(0), PxVec4(0.6, 0.4, 0.9, 1.), 1.f, 3.f, DBL_MAX, DBL_MAX);
 	springGen->setParticles(p1, p2);
+
+	_forceSys->addForceGen(springGen);
 
 	_pSystemJoinedParticles->addForceGen(springGen);
 	_pSystemJoinedParticles->addParticle(p1);
@@ -82,6 +87,7 @@ void SceneSprings::start() {
 
 	for (int i = 0; i < 6; ++i) {
 		springGen = new SpringParticlesForceGen(PxVec3(0), 10., 2.);
+		_forceSys->addForceGen(springGen);
 		if (i == 0)
 			p1 = new Particle(PxVec3(30, 5*i + 30, -30), PxVec3(0), PxVec3(0), PxVec4(0.1 * 1.5 * i, 0.6, 0.1, 1.), 1.f, 3.f, DBL_MAX, DBL_MAX);
 		else p1 = p2;
@@ -97,6 +103,7 @@ void SceneSprings::start() {
 }
 
 void SceneSprings::integrate(double dt) {
+	_forceSys->update(dt);
 	_pSystemAnchor->update(dt);
 	_pSystemJoinedParticles->update(dt);
 	_pSystemSlinky->update(dt);

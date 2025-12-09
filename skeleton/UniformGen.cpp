@@ -16,7 +16,7 @@ UniformGen::UniformGen(ParticleSystem* sys, PxVec3 pos, float vel, PxVec3 dir,
 }
 
 UniformGen::~UniformGen() {
-	delete _pModel;
+	ParticleGen::~ParticleGen();
 }
 
 void UniformGen::generateP() {

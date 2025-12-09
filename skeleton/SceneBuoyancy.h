@@ -2,7 +2,7 @@
 #include "Scene.h"
 
 class ParticleSystem;
-class ForceGenerator;
+class ForceSystem;
 class Target;
 class Particle;
 
@@ -20,9 +20,7 @@ public:
 protected:
     Target* _water;
     ParticleSystem* _pSys;
-    ForceGenerator* _buoyantForceGen;
-    ForceGenerator* _gravityForceGen;
-    ForceGenerator* _dragForceGen;
+    ForceSystem* _forceSys;
 
     Particle* _p;
 };

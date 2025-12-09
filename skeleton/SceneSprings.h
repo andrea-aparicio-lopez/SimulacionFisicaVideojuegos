@@ -4,6 +4,7 @@
 #include <vector> 
 
 class ParticleSystem;
+class ForceSystem;
 class ForceGenerator;
 class SpringForceGen;
 
@@ -22,7 +23,8 @@ public:
 	void processKey(unsigned char key, const physx::PxTransform& camera) override;
 
 protected:
-	std::vector<ForceGenerator*> _forceGens;
+	ForceSystem* _forceSys;
+	//std::vector<ForceGenerator*> _forceGens;
 	ForceGenerator* _windForceGen;
 	SpringForceGen* _springAnchorForceGen;
 

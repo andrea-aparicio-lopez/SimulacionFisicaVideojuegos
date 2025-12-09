@@ -260,6 +260,7 @@
     <ClCompile Include="ExplosionForceGen.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
+    <ClCompile Include="ForceSystem.cpp" />
     <ClCompile Include="Forest.cpp" />
     <ClCompile Include="GaussianGen.cpp" />
     <ClCompile Include="GravityForceGen.cpp" />
@@ -302,6 +303,7 @@
     <ClInclude Include="ExplosionForceGen.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="ForceGenerator.h" />
+    <ClInclude Include="ForceSystem.h" />
     <ClInclude Include="Forest.h" />
     <ClInclude Include="GaussianGen.h" />
     <ClInclude Include="GravityForceGen.h" />

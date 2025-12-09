@@ -7,6 +7,7 @@
 class Player;
 class Floor;
 class ParticleSystem;
+class ForceSystem;
 class ForceGenerator;
 class Obstacle;
 class Projectile;
@@ -29,6 +30,7 @@ protected:
 	Forest* _forest;
 	
 	ParticleSystem* _weatherSys;
+	ForceSystem* _forceSys;
 
 	ForceGenerator* _gravityGen;
 	ForceGenerator* _windGen;

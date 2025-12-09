@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 
+class ForceSystem;
 class ParticleSystem;
 class ExplosionForceGen;
 
@@ -16,6 +17,7 @@ public:
 	void processKey(unsigned char key, const physx::PxTransform& camera) override;
 
 protected:
+	ForceSystem* _forceSys;
 	ParticleSystem* _pSystem;
 	ExplosionForceGen* _explosion;
 };

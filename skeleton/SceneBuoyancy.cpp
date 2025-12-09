@@ -5,6 +5,7 @@
 #include "BuoyantForceGen.h"
 #include "GravityForceGen.h"
 #include "DragForceGen.h"
+#include "ForceSystem.h"
 
 #include <iostream>
 
@@ -17,9 +18,7 @@ SceneBuoyancy::SceneBuoyancy() {
 SceneBuoyancy::~SceneBuoyancy() {
 	delete _water;
 	delete _pSys;
-	delete _buoyantForceGen;
-	delete _gravityForceGen;
-	delete _dragForceGen;
+	delete _forceSys;
 
 	Scene::~Scene();
 }
@@ -27,16 +26,20 @@ SceneBuoyancy::~SceneBuoyancy() {
 void SceneBuoyancy::start() {
 	_water = new Target(PxVec3(0, 50, 0), PxVec3(30, 0.2, 30), PxVec4(0.1, 0.1, 1, 1));
 
+	_forceSys = new ForceSystem();
 	_pSys = new ParticleSystem();
 
-	_gravityForceGen = new GravityForceGen(PxVec3(0));
-	_pSys->addForceGen(_gravityForceGen);
+	auto gravityForceGen = new GravityForceGen(PxVec3(0));
+	_forceSys->addForceGen(gravityForceGen);
+	_pSys->addForceGen(gravityForceGen);
 
-	_dragForceGen = new DragForceGen(PxVec3(0), 0.5);
-	_pSys->addForceGen(_dragForceGen);
+	auto dragForceGen = new DragForceGen(PxVec3(0), 0.5);
+	_forceSys->addForceGen(dragForceGen);
+	_pSys->addForceGen(dragForceGen);
 
-	_buoyantForceGen = new BuoyantForceGen(_water->transform()->p, 1000.f);
-	_pSys->addForceGen(_buoyantForceGen);
+	auto buoyantForceGen = new BuoyantForceGen(_water->transform()->p, 1000.f);
+	_forceSys->addForceGen(buoyantForceGen);
+	_pSys->addForceGen(buoyantForceGen);
 
 	// Partícula 1 sobre el agua inicialmente
 	Particle* p = new Particle(_water->transform()->p + PxVec3(-10, 10, 10), PxVec3(0), PxVec3(0), PxVec4(0.8, 0.8, 0.8, 1.), 1.f, 1500.f, DBL_MAX, DBL_MAX);
@@ -67,6 +70,7 @@ void SceneBuoyancy::start() {
 }
 
 void SceneBuoyancy::integrate(double dt) {
+	_forceSys->update(dt);
 	_pSys->update(dt);
 }
 

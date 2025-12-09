@@ -1,6 +1,7 @@
 #include "SceneProyecto.h"
 #include "Player.h"
 #include "Floor.h"
+#include "ForceSystem.h"
 #include "WeatherParticleSys.h"
 #include "Particle.h"
 #include "GaussianGen.h"
@@ -24,9 +25,7 @@ SceneProyecto::~SceneProyecto() {
 	delete _ground;
 	delete _forest;
 	delete _weatherSys;
-	delete _gravityGen;
-	delete _windGen;
-	delete _tornadoGen;
+	delete _forceSys;
 
 	for (auto obs : _obstacles)
 		delete obs;
@@ -42,19 +41,24 @@ void SceneProyecto::start() {
 	_player->setPos(PxVec3(0, _player->getHeight(), 0));
 	_ground = new Floor(PxVec3(0), PxVec4(1, 1, 1,1));
 
+	_forceSys = new ForceSystem();
+
 	// AMBIENTE
 	_weatherSys = new WeatherParticleSys(_player);
 
 	// Gravedad
 	_gravityGen = new GravityForceGen(PxVec3(0), PxVec3(0,-3,0));
+	_forceSys->addForceGen(_gravityGen);
 	_weatherSys->addForceGen(_gravityGen);
 
 	// Viento
 	_windGen = new WindForceGen(_player->getPos(), PxVec3(100, 30, 10), PxVec3(-15,-5,0));
+	_forceSys->addForceGen(_windGen);
 	_weatherSys->addForceGen(_windGen);
 
 	// Tornado
 	_tornadoGen = new TornadoForceGen(_player->getPos() + PxVec3(100,0,0), PxVec3(0, 0, 1), 10, 10);
+	_forceSys->addForceGen(_tornadoGen);
 	_weatherSys->addForceGen(_tornadoGen);
 
 
@@ -65,7 +69,6 @@ void SceneProyecto::start() {
 	_obstacles.push_back(new Obstacle(PxVec3(440, 3, 0), _player));
 
 	// ÁRBOLES
-	// TODO: clase environment que agrupe todos los árboles y los vaya generando/borrando según avance el player
 	_forest = new Forest(_player);
 
 
@@ -76,7 +79,10 @@ void SceneProyecto::start() {
 }
 
 void SceneProyecto::integrate(double dt) {
+	_forceSys->update(dt);
+
 	_player->update(dt);
+
 	for (auto obs : _obstacles)
 		obs->update(dt);
 
