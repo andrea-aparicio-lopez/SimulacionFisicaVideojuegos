@@ -48,6 +48,8 @@
     <ClCompile Include="ForceSystem.cpp" />
     <ClCompile Include="GaussianRBGen.cpp" />
     <ClCompile Include="SceneSolids.cpp" />
+    <ClCompile Include="PlayerSolid.cpp" />
+    <ClCompile Include="GroundSolid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -97,6 +99,8 @@
     <ClInclude Include="ForceSystem.h" />
     <ClInclude Include="GaussianRBGen.h" />
     <ClInclude Include="SceneSolids.h" />
+    <ClInclude Include="PlayerSolid.h" />
+    <ClInclude Include="GroundSolid.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

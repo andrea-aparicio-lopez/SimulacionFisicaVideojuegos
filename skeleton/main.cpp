@@ -67,12 +67,12 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-
+	
 	// AXIS
 	//axis = new Axis();
 
 	// SCENE
-	s = new SceneSolids(gScene, gPhysics);
+	s = new SceneProyecto(gScene, gPhysics);
 	s->start();
 }
 
@@ -97,6 +97,9 @@ void cleanupPhysics(bool interactive)
 {
 	PX_UNUSED(interactive);
 
+	//delete axis;
+	delete s;
+
 	// Rigid Body ++++++++++++++++++++++++++++++++++++++++++
 	gScene->release();
 	gDispatcher->release();
@@ -108,8 +111,7 @@ void cleanupPhysics(bool interactive)
 	
 	gFoundation->release();
 
-	//delete axis;
-	delete s;
+
 }
 
 // Function called when a key is pressed

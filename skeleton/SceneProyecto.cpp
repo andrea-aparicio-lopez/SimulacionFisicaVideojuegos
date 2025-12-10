@@ -1,6 +1,6 @@
 #include "SceneProyecto.h"
 #include "Player.h"
-#include "Floor.h"
+//#include "Floor.h"
 #include "ForceSystem.h"
 #include "WeatherParticleSys.h"
 #include "Particle.h"
@@ -11,12 +11,17 @@
 #include "Obstacle.h"
 #include "Projectile.h"
 #include "Forest.h"
+#include "GroundSolid.h"
 
 #include <iostream>
 
 using namespace physx;
 
-SceneProyecto::SceneProyecto() : Scene() {
+SceneProyecto::SceneProyecto(PxScene* gScene, PxPhysics* gPhysics) 
+	: Scene() 
+	, _gScene(gScene)
+	, _gPhysics(gPhysics)
+{
 
 }
 
@@ -37,9 +42,10 @@ SceneProyecto::~SceneProyecto() {
 }
 
 void SceneProyecto::start() {
-	_player = new Player(PxVec3(0, 0, 0));
+	_player = new Player(_gScene, _gPhysics, PxVec3(0, 0, 0));
 	_player->setPos(PxVec3(0, _player->getHeight(), 0));
-	_ground = new Floor(PxVec3(0), PxVec4(1, 1, 1,1));
+	//_ground = new Floor(PxVec3(0), PxVec4(1, 1, 1,1));
+	_ground = new GroundSolid(_gScene, _gPhysics, PxVec3(0), PxVec3(1000, 0.1, 1000), PxVec4(.7,.7,.7,1));
 
 	_forceSys = new ForceSystem();
 

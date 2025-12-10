@@ -3,6 +3,8 @@
 #include <PxPhysicsAPI.h>
 #include <list>
 
+#include "PlayerSolid.h"
+
 class Particle;
 class ParticleGen;
 class ParticleSystem;
@@ -11,14 +13,14 @@ class Projectile;
 class Player
 {
 public:
-	Player(physx::PxVec3 pos);
+	Player(physx::PxScene* gScene, physx::PxPhysics* gPhysics, physx::PxVec3 pos);
 	~Player();
 
 	void update(double dt);
 	void handleInput(unsigned char key);
 
 public:
-	physx::PxVec3 getPos() const;
+	physx::PxVec3 getPos();
 	void setPos(physx::PxVec3 pos);
 
 	float getHeight() const;
@@ -28,7 +30,8 @@ public:
 	void shoot();
 
 protected:
-	Particle* _player;
+	//Particle* _player;
+	PlayerSolid _playerActor;
 	ParticleGen* _trailGen;
 	ParticleSystem* _trailSys;
 

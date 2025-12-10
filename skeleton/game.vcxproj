@@ -265,10 +265,12 @@
     <ClCompile Include="GaussianGen.cpp" />
     <ClCompile Include="GaussianRBGen.cpp" />
     <ClCompile Include="GravityForceGen.cpp" />
+    <ClCompile Include="GroundSolid.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ParticleGen.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerSolid.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="main.cpp" />
@@ -310,10 +312,12 @@
     <ClInclude Include="GaussianGen.h" />
     <ClInclude Include="GaussianRBGen.h" />
     <ClInclude Include="GravityForceGen.h" />
+    <ClInclude Include="GroundSolid.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ParticleGen.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerSolid.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />

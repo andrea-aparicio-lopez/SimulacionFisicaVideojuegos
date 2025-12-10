@@ -5,7 +5,7 @@
 #include <list>
 
 class Player;
-class Floor;
+class GroundSolid;
 class ParticleSystem;
 class ForceSystem;
 class ForceGenerator;
@@ -16,7 +16,7 @@ class Forest;
 class SceneProyecto : public Scene
 {
 public:
-	SceneProyecto();
+	SceneProyecto(physx::PxScene* gScene, physx::PxPhysics* gPhysics);
 	~SceneProyecto();
 
 	void start() override;
@@ -25,8 +25,13 @@ public:
 	void processKey(unsigned char key, const physx::PxTransform& camera) override;
 
 protected:
+	physx::PxScene* _gScene;
+	physx::PxPhysics* _gPhysics;
+
+protected:
 	Player* _player;
-	Floor* _ground;
+	//Floor* _ground;
+	GroundSolid* _ground;
 	Forest* _forest;
 	
 	ParticleSystem* _weatherSys;
