@@ -3,26 +3,29 @@
 #include "ParticleSystem.h"
 #include "TrailParticleGen.h"
 #include "Projectile.h"
+#include "GaussianRBGen.h"
+#include "RigidBodySystem.h"
+#include "ImpulseForceGen.h"
+#include "ForceSystem.h"
 
 #include <iostream>
 
 using namespace physx;
 
 Player::Player(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
-	//_player(new Particle(pos, PxVec3(0, 0, 0), PxVec3(0), PxVec4(0.3, 0.55, 0.3, 1), 1.0, 50., 0., 0.))
-	: _playerActor(PlayerSolid(gScene, gPhysics, pos))
+	: _playerSolid(PlayerSolid(gScene, gPhysics, pos))
 {
-	// ! BORRAR
-	// Inicializar RenderItem de _player
-	//PxBoxGeometry geo = PxBoxGeometry(1,_halfHeight*2,1);
-	//PxShape* shape = CreateShape(geo);
-	//auto item = new RenderItem(shape, _player->getTr(), _player->getColor());
-	//_player->setRenderItem(item);
-	
+	_playerRBSystem = new RigidBodySystem(gScene, gPhysics);
+	_playerRBSystem->addRB(_playerSolid.getActor());
+
+	_runImpulseForceGen = new ImpulseForceGen(pos, RUN_IMPULSE);
+	_runImpulseForceGen->setActive(false);
+	_forceSys.addForceGen(_runImpulseForceGen);
+	_playerRBSystem->addForceGen(_runImpulseForceGen);
 
 	// RASTRO
 	_trailSys = new ParticleSystem();
-	_trailGen = new TrailParticleGen(_trailSys, pos);
+	_trailGen = new TrailParticleGen(_trailSys, _playerSolid.getBottomLeftPos());
 	_trailSys->addParticleGen(_trailGen);
 
 }
@@ -41,6 +44,9 @@ void Player::update(double dt) {
 	//	_trailGen->setPos(_player->getPos() - PxVec3(_player->getSize(), _halfHeight, 0));
 	//	_trailSys->update(dt);
 	//}
+	if (_running) _playerSolid.getActor()->setLinearVelocity(PxVec3(10, 0, 0));
+
+	_playerRBSystem->update(dt);
 
 	for (auto p : _projectiles)
 		p->integrate(dt);
@@ -49,8 +55,8 @@ void Player::update(double dt) {
 void Player::handleInput(unsigned char key) {
 	switch (toupper(key)) {
 	case ' ':
-		//if (_player->getVel() == PxVec3(0))
-		//	_player->setVel(PxVec3(10, 0, 0));
+		if (!_running) _running = true;
+			
 		//else shoot();
 		break;
 	default:
@@ -59,13 +65,15 @@ void Player::handleInput(unsigned char key) {
 }
 
 PxVec3 Player::getPos() {
-	//return _player->getPos();
-	return _playerActor.getActor()->getGlobalPose().p;
+	return _playerSolid.getActor()->getGlobalPose().p;
 }
 
 void Player::setPos(PxVec3 pos) {
-	//_player->setPos(pos);
-	_playerActor.getActor()->setGlobalPose(PxTransform(pos));
+	_playerSolid.getActor()->setGlobalPose(PxTransform(pos));
+}
+
+PxVec3 Player::getBottomPos() const {
+	return _playerSolid.getBottomPos();
 }
 
 float Player::getHeight() const {

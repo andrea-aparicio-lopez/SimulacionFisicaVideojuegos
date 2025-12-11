@@ -10,11 +10,13 @@ public:
 	~PlayerSolid();
 
 	inline physx::PxRigidDynamic* getActor() { return _actor; }
+	inline physx::PxVec3 getBottomPos() const { return _actor->getGlobalPose().p - physx::PxVec3(0, BODY_HY + BOARD_HY, 0); }
+	inline physx::PxVec3 getBottomLeftPos() const { return _actor->getGlobalPose().p - physx::PxVec3(BOARD_HX/2, BODY_HY + BOARD_HY, 0); }
 
 protected:
 	physx::PxScene* _gScene;
 
-	physx::PxRigidDynamic* _actor;
+	physx::PxRigidDynamic* _actor;  // cuerpo: actor principal
 	physx::PxRigidDynamic* _headActor;
 	physx::PxRigidDynamic* _boardActor;
 

@@ -78,7 +78,7 @@ void SceneProyecto::start() {
 
 
 	_camera = GetCamera();
-	_camera->setPosition(_player->getPos() + PxVec3(0, 0, 40));
+	_camera->setPosition(_player->getPos() + PxVec3(-10, 0, 40));
 	_camera->setDirection(_player->getPos() - _camera->getEye());
 
 }
@@ -97,7 +97,7 @@ void SceneProyecto::integrate(double dt) {
 	_forest->update(dt);
 
 	_weatherSys->update(dt);
-	//_camera->setPosition(_player->getPos() + PxVec3(0, 0, 50));
+	_camera->setPosition(_player->getPos() + PxVec3(0, 0, 40));
 }
 
 void SceneProyecto::processKey(unsigned char key, const physx::PxTransform& camera) {

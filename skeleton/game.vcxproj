@@ -266,6 +266,7 @@
     <ClCompile Include="GaussianRBGen.cpp" />
     <ClCompile Include="GravityForceGen.cpp" />
     <ClCompile Include="GroundSolid.cpp" />
+    <ClCompile Include="ImpulseForceGen.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ParticleGen.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
@@ -313,6 +314,7 @@
     <ClInclude Include="GaussianRBGen.h" />
     <ClInclude Include="GravityForceGen.h" />
     <ClInclude Include="GroundSolid.h" />
+    <ClInclude Include="ImpulseForceGen.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ParticleGen.h" />
     <ClInclude Include="ParticleSystem.h" />

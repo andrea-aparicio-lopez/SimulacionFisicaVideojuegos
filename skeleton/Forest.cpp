@@ -8,7 +8,7 @@ using namespace physx;
 Forest::Forest(Player* player)
 	: _player(player)
 {
-	auto playerPos = _player->getPos();
+	auto playerPos = PxVec3(_player->getPos().x, 0, _player->getPos().z);
 
 	_trees.push_back(new Tree(playerPos + PxVec3(-80, 0, -40), 3.0f, 0.3f, 4, 2.0));
 	_trees.push_back(new Tree(playerPos + PxVec3(-60, 0, -30), 3.0f, 0.3f, 5, 2.0));

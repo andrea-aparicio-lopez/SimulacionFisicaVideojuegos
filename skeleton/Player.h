@@ -4,10 +4,13 @@
 #include <list>
 
 #include "PlayerSolid.h"
+#include "ForceSystem.h"
 
 class Particle;
 class ParticleGen;
 class ParticleSystem;
+class RigidBodyGen;
+class RigidBodySystem;
 class Projectile;
 
 class Player
@@ -23,22 +26,38 @@ public:
 	physx::PxVec3 getPos();
 	void setPos(physx::PxVec3 pos);
 
+	physx::PxVec3 getBottomPos() const;
+
 	float getHeight() const;
 	float getHalfHeight() const;
 
 public:
 	void shoot();
+	//void jump();
 
 protected:
-	//Particle* _player;
-	PlayerSolid _playerActor;
+	PlayerSolid _playerSolid;
+
+	ForceSystem _forceSys;
+
+	ForceGenerator* _runImpulseForceGen;
+	ForceGenerator* _jumpImpulseForceGen;
+
+	RigidBodySystem* _playerRBSystem;
+	RigidBodySystem* _snowBallRBSystem;
+
 	ParticleGen* _trailGen;
 	ParticleSystem* _trailSys;
 
 	std::list<Projectile*> _projectiles;
 
 protected:
-	float _halfHeight = 1.f;
+	bool _running = false;
 
+protected:
+	const float _halfHeight = 1.f;
+
+	const physx::PxVec3 RUN_IMPULSE = physx::PxVec3(500,0,0);
+	const physx::PxVec3 JUMP_IMPULSE = physx::PxVec3(0,30,0);
 };
 

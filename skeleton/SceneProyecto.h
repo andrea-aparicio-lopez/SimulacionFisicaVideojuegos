@@ -30,7 +30,6 @@ protected:
 
 protected:
 	Player* _player;
-	//Floor* _ground;
 	GroundSolid* _ground;
 	Forest* _forest;
 	

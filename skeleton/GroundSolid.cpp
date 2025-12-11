@@ -5,9 +5,11 @@ using namespace physx;
 
 GroundSolid::GroundSolid(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos, PxVec3 h, PxVec4 color)
 {
+	auto mat = gPhysics->createMaterial(0.2f, 0.f, 0.95f);
+
 	auto tr = PxTransform(pos);
 	auto geo = PxBoxGeometry(h);
-	auto shape = CreateShape(geo);
+	auto shape = CreateShape(geo, mat);
 	_actor = gPhysics->createRigidStatic(tr);
 	_actor->attachShape(*shape);
 
