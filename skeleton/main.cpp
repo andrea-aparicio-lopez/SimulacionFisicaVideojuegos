@@ -68,12 +68,18 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	
+
+	gScene->setVisualizationParameter(PxVisualizationParameter::eSCALE, 1.0f);
+	gScene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_SHAPES, 5.0f);
+	gScene->setVisualizationParameter(PxVisualizationParameter::eJOINT_LOCAL_FRAMES, 1.0f);
+	gScene->setVisualizationParameter(PxVisualizationParameter::eJOINT_LIMITS, 1.0f);
 	// AXIS
 	//axis = new Axis();
 
 	// SCENE
 	s = new SceneProyecto(gScene, gPhysics);
 	s->start();
+
 }
 
 

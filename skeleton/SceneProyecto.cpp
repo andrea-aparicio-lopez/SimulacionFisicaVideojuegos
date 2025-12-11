@@ -42,9 +42,8 @@ SceneProyecto::~SceneProyecto() {
 }
 
 void SceneProyecto::start() {
-	_player = new Player(_gScene, _gPhysics, PxVec3(0, 0, 0));
+	_player = new Player(_gScene, _gPhysics, PxVec3(0, 5, 0));
 	_player->setPos(PxVec3(0, _player->getHeight(), 0));
-	//_ground = new Floor(PxVec3(0), PxVec4(1, 1, 1,1));
 	_ground = new GroundSolid(_gScene, _gPhysics, PxVec3(0), PxVec3(1000, 0.1, 1000), PxVec4(.7,.7,.7,1));
 
 	_forceSys = new ForceSystem();
@@ -98,7 +97,7 @@ void SceneProyecto::integrate(double dt) {
 	_forest->update(dt);
 
 	_weatherSys->update(dt);
-	_camera->setPosition(_player->getPos() + PxVec3(0, 0, 50));
+	//_camera->setPosition(_player->getPos() + PxVec3(0, 0, 50));
 }
 
 void SceneProyecto::processKey(unsigned char key, const physx::PxTransform& camera) {

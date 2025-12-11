@@ -1,44 +1,60 @@
 #include "PlayerSolid.h"
 #include "RenderUtils.hpp"
 
+#include <iostream>
+
 using namespace physx;
 
 PlayerSolid::PlayerSolid(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
 	: _gScene(gScene)
 {
 	auto actorTr = PxTransform(pos);
-	_actor = gPhysics->createRigidDynamic(actorTr);
-
 	_playerMat = gPhysics->createMaterial(0.3f, 0.2f, 0.95f);
 
-	// BODY
+	// BODY ACTOR
+	_actor = gPhysics->createRigidDynamic(actorTr);
+	_actor->setRigidDynamicLockFlags(PxRigidDynamicLockFlag::eLOCK_LINEAR_Z | PxRigidDynamicLockFlag::eLOCK_ANGULAR_X | PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y);
+	//_actor->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+
 	auto bodyGeo = PxBoxGeometry(BODY_HX, BODY_HY, BODY_HZ);
-	auto bodyShape = CreateShape(bodyGeo, _playerMat);
-	//bodyShape->setLocalPose(PxTransform(PxVec3(0)));
-	_actor->attachShape(*bodyShape);
+	auto bodyShape = _actor->createShape(bodyGeo, *_playerMat);
 
 	_bodyRI = new RenderItem(bodyShape, _actor, BODY_COLOR);
 
-	// HEAD
-	//auto headTr = PxTransform(pos + PxVec3(0, BODY_HY, 0));
-	//auto headGeo = PxSphereGeometry(HEAD_R);
-	//auto headShape = CreateShape(headGeo, _playerMat);
-	//headShape->setLocalPose(headTr);
-	//_actor->attachShape(*headShape);
 
-	//_headRI = new RenderItem(headShape, _actor, HEAD_COLOR);
+	// HEAD ACTOR
+	_headActor = gPhysics->createRigidDynamic(actorTr);
+
+	auto headGeo = PxSphereGeometry(HEAD_R);
+	auto headShape = _headActor->createShape(headGeo, *_playerMat);
+
+	_headRI = new RenderItem(headShape, _headActor, HEAD_COLOR);
+
 
 	// TODO:
-	// BOARD 
-	//auto boardTr
+	// BOARD ACTOR
+	_boardActor = gPhysics->createRigidDynamic(actorTr);
+	auto boardGeo = PxBoxGeometry(BOARD_HX, BOARD_HY, BOARD_HZ);
+	auto boardShape = _boardActor->createShape(boardGeo, *_playerMat);
+	_boardRI = new RenderItem(boardShape, _boardActor, BOARD_COLOR);
 
 	PxRigidBodyExt::updateMassAndInertia(*_actor, 10.f);
+	PxRigidBodyExt::updateMassAndInertia(*_headActor, 10.f);
+	PxRigidBodyExt::updateMassAndInertia(*_boardActor, 10.f);
+
+	// JOINTS
+	auto neck = PxFixedJointCreate(*gPhysics, _actor, PxTransform(PxVec3(0,BODY_HY,0)), _headActor, PxTransform(PxVec3(0,-HEAD_R* 1.3,0)));
+	auto legs = PxFixedJointCreate(*gPhysics, _actor, PxTransform(PxVec3(0, -BODY_HY, 0)), _boardActor, PxTransform(PxVec3(0, BOARD_HY, 0)));
+
 
 
 	_gScene->addActor(*_actor);
+	_gScene->addActor(*_headActor);
+	_gScene->addActor(*_boardActor);
 }
 
 PlayerSolid::~PlayerSolid() {
 	_bodyRI->release();
 	_gScene->removeActor(*_actor);
+	_gScene->removeActor(*_headActor);
 }
