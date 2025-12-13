@@ -1,5 +1,7 @@
 #pragma once
 #include "ForceGenerator.h"
+
+// Fuerza que se aplica una sola vez, luego se desactiva
 class ImpulseForceGen : public ForceGenerator
 {
 public:

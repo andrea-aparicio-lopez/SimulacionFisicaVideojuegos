@@ -10,6 +10,8 @@ public:
 	~PlayerSolid();
 
 	inline physx::PxRigidDynamic* getActor() { return _actor; }
+	inline physx::PxRigidDynamic* getHeadActor() { return _headActor; }
+	inline physx::PxRigidDynamic* getBoardActor() { return _boardActor; }
 	inline physx::PxVec3 getBottomPos() const { return _actor->getGlobalPose().p - physx::PxVec3(0, BODY_HY + BOARD_HY, 0); }
 	inline physx::PxVec3 getBottomLeftPos() const { return _actor->getGlobalPose().p - physx::PxVec3(BOARD_HX/2, BODY_HY + BOARD_HY, 0); }
 

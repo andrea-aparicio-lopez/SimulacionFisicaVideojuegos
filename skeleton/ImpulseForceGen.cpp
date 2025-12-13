@@ -16,10 +16,12 @@ ImpulseForceGen::~ImpulseForceGen() {
 
 void ImpulseForceGen::applyForce(Particle* p) {
 	p->addForce(_impulse);
+	_active = false;
 }
 
 void ImpulseForceGen::applyForce(physx::PxRigidBody* rb) {
 	rb->addForce(_impulse);
+	_active = false;
 }
 
 void ImpulseForceGen::update(double dt) {

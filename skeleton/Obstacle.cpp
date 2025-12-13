@@ -47,10 +47,10 @@ Obstacle::~Obstacle() {
 }
 
 void Obstacle::update(double dt) {
-	if (_alive && _player->getPos().x > _tr->p.x) {
-		explode();
-	}
-	else if (_explPartGen->isActive()) _explPartGen->setActive(false);
+	//if (_alive && _player->getPos().x > _tr->p.x) {
+	//	explode();
+	//}
+	if (_explPartGen->isActive()) _explPartGen->setActive(false);
 	_explSys->update(dt);
 }
 

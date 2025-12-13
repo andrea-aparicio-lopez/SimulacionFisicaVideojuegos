@@ -140,6 +140,8 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 {
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
+
+	 s->onCollision(actor1, actor2);
 }
 
 

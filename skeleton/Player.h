@@ -23,6 +23,8 @@ public:
 	void handleInput(unsigned char key);
 
 public:
+	PlayerSolid& getPlayerSolid() { return _playerSolid; }
+
 	physx::PxVec3 getPos();
 	void setPos(physx::PxVec3 pos);
 
@@ -31,16 +33,19 @@ public:
 	float getHeight() const;
 	float getHalfHeight() const;
 
+	bool getCanJump() const;
+	void setCanJump(bool v);
+
 public:
+	void jump();
 	void shoot();
-	//void jump();
 
 protected:
 	PlayerSolid _playerSolid;
 
 	ForceSystem _forceSys;
 
-	ForceGenerator* _runImpulseForceGen;
+	//ForceGenerator* _runImpulseForceGen;
 	ForceGenerator* _jumpImpulseForceGen;
 
 	RigidBodySystem* _playerRBSystem;
@@ -53,6 +58,7 @@ protected:
 
 protected:
 	bool _running = false;
+	bool _canJump = false;
 
 protected:
 	const float _halfHeight = 1.f;

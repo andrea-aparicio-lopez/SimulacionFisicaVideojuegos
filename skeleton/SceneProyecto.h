@@ -23,6 +23,10 @@ public:
 
 	void integrate(double dt) override;
 	void processKey(unsigned char key, const physx::PxTransform& camera) override;
+	void onCollision(physx::PxActor* actor1, physx::PxActor* actor2) override;
+
+protected:
+	bool isPlayerActor(physx::PxActor* actor);	// Gestión de colisiones
 
 protected:
 	physx::PxScene* _gScene;
@@ -42,8 +46,22 @@ protected:
 
 	std::list<Obstacle*> _obstacles;
 	std::list<Projectile*> _projectiles;
+
 	
 	Camera* _camera;
 
+
+protected:
+	enum Gamestate {
+		START,
+		RUNNING,
+		WIN,
+		LOSE
+	};
+
+	Gamestate _state = START;
+
+public:
+	void setState(Gamestate state) { _state = state; }
 };
 

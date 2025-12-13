@@ -16,7 +16,6 @@ public:
 
 	void update(double dt);
 
-protected:
 	void explode();
 
 protected:

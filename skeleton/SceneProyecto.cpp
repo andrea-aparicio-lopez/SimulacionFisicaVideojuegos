@@ -1,6 +1,5 @@
 #include "SceneProyecto.h"
 #include "Player.h"
-//#include "Floor.h"
 #include "ForceSystem.h"
 #include "WeatherParticleSys.h"
 #include "Particle.h"
@@ -12,6 +11,7 @@
 #include "Projectile.h"
 #include "Forest.h"
 #include "GroundSolid.h"
+#include "GameObjectData.h"
 
 #include <iostream>
 
@@ -116,13 +116,59 @@ void SceneProyecto::processKey(unsigned char key, const physx::PxTransform& came
 		_tornadoGen->isActive() ? std::cout << "Desactivando torbellino\n" : std::cout << "Activando torbellino\n";
 		_tornadoGen->setActive(!_tornadoGen->isActive());
 		break;
-	case 'M':
-	{
-		// Proyectil disparado desde la cámara
-		_projectiles.push_back(new Projectile(camera.p, camera.q.rotate({ 0,0,-1 }), 80.f));
-		break;
-	}
+	//case 'M':
+	//{
+	//	// Proyectil disparado desde la cámara
+	//	_projectiles.push_back(new Projectile(camera.p, camera.q.rotate({ 0,0,-1 }), 80.f));
+	//	break;
+	//}
 	default:
 		break;
 	}
+}
+
+void SceneProyecto::onCollision(PxActor* actor1, PxActor* actor2) 
+{
+	if (isPlayerActor(actor1) || isPlayerActor(actor2)) {
+		bool p = isPlayerActor(actor1);
+		PxActor* playerActor = p ? actor1 : actor2;
+		PxActor* otherActor = p ? actor2 : actor1;
+
+		auto otherData = reinterpret_cast<GameObjectData*>(otherActor->userData);
+		if (otherData->type == GameObjectType::Ground) { // Colisiones player - ground
+			_player->setCanJump(true);
+		}
+		else if (otherData->type == GameObjectType::Obstacle) {	// Colisiones player - obstacle
+			// Obstaculo explota?
+			// TODO: lose
+			std::cout << "YOU LOSE\n";
+		}
+	}
+	else { 	// Colisiones snowball - obstacle
+		auto data1 = reinterpret_cast<GameObjectData*>(actor1->userData);
+		auto data2 = reinterpret_cast<GameObjectData*>(actor2->userData);
+
+		if (data1->type == GameObjectType::Snowball || data2->type == GameObjectType::Snowball) 
+		{
+			auto snowballData = (data1->type == GameObjectType::Snowball) ? data1 : data2;
+			auto otherData = (data1->type == GameObjectType::Snowball) ? data2 : data1;
+
+			// TODO
+			//auto snowball = static_cast<Snowball*>(snowballData->object);
+			//snowball->onImpact();
+
+			if (otherData->type == GameObjectType::Obstacle) {
+				auto obstacle = static_cast<Obstacle*>(otherData->object);
+				obstacle->explode();
+			}
+		}
+	}
+}
+
+bool SceneProyecto::isPlayerActor(PxActor* actor) {
+	auto data = reinterpret_cast<GameObjectData*>(actor->userData);
+
+	return data->type == GameObjectType::PlayerBody
+		|| data->type == GameObjectType::PlayerHead
+		|| data->type == GameObjectType::PlayerBoard;
 }

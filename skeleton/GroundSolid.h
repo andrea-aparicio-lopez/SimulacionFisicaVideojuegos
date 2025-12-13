@@ -12,6 +12,8 @@ public:
 				physx::PxVec4 color = physx::PxVec4(1));
 	~GroundSolid();
 
+	physx::PxRigidStatic* getActor() { return _actor; }
+
 protected:
 	physx::PxRigidStatic* _actor;
 

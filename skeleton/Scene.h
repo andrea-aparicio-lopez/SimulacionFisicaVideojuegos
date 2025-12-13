@@ -2,6 +2,7 @@
 
 namespace physx {
 	class PxTransform;
+	class PxActor;
 }
 
 class Scene
@@ -15,5 +16,6 @@ public:
 
 	virtual void integrate(double dt) = 0;
 	virtual void processKey(unsigned char key, const physx::PxTransform& camera) = 0;
+	virtual void onCollision(physx::PxActor* actor1, physx::PxActor* actor2) {}
 };
 

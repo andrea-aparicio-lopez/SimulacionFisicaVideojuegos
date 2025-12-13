@@ -1,5 +1,6 @@
 #include "GroundSolid.h"
 #include "RenderUtils.hpp"
+#include "GameObjectData.h"
 
 using namespace physx;
 
@@ -12,6 +13,11 @@ GroundSolid::GroundSolid(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos, PxVec
 	auto shape = CreateShape(geo, mat);
 	_actor = gPhysics->createRigidStatic(tr);
 	_actor->attachShape(*shape);
+
+	GameObjectData* data = new GameObjectData();
+	data->type = GameObjectType::Ground;
+	data->object = this;
+	_actor->userData = data;
 
 	_renderItem = new RenderItem(shape, _actor, color);
 	gScene->addActor(*_actor);

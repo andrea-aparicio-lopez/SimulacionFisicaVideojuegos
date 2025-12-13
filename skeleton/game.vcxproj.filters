@@ -103,6 +103,7 @@
     <ClInclude Include="PlayerSolid.h" />
     <ClInclude Include="GroundSolid.h" />
     <ClInclude Include="ImpulseForceGen.h" />
+    <ClInclude Include="GameObjectData.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

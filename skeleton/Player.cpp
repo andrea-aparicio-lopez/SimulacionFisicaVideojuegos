@@ -18,10 +18,10 @@ Player::Player(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
 	_playerRBSystem = new RigidBodySystem(gScene, gPhysics);
 	_playerRBSystem->addRB(_playerSolid.getActor());
 
-	_runImpulseForceGen = new ImpulseForceGen(pos, RUN_IMPULSE);
-	_runImpulseForceGen->setActive(false);
-	_forceSys.addForceGen(_runImpulseForceGen);
-	_playerRBSystem->addForceGen(_runImpulseForceGen);
+	_jumpImpulseForceGen = new ImpulseForceGen(pos, JUMP_IMPULSE);
+	_jumpImpulseForceGen->setActive(false);
+	_forceSys.addForceGen(_jumpImpulseForceGen);
+	_playerRBSystem->addForceGen(_jumpImpulseForceGen);
 
 	// RASTRO
 	_trailSys = new ParticleSystem();
@@ -56,8 +56,10 @@ void Player::handleInput(unsigned char key) {
 	switch (toupper(key)) {
 	case ' ':
 		if (!_running) _running = true;
-			
-		//else shoot();
+		else jump();
+		break;
+	case 'S':
+		if (_running) shoot();
 		break;
 	default:
 		break;
@@ -81,6 +83,19 @@ float Player::getHeight() const {
 }
 float Player::getHalfHeight() const {
 	return _halfHeight;
+}
+
+bool Player::getCanJump() const {
+	return _canJump;
+}
+
+void Player::setCanJump(bool v) {
+	_canJump = v;
+}
+
+void Player::jump() {
+	if (_canJump)
+		std::cout << "Saltandoooo\n";
 }
 
 void Player::shoot() {
