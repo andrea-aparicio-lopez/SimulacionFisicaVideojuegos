@@ -16,6 +16,8 @@ PlayerSolid::PlayerSolid(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
 	_actor = gPhysics->createRigidDynamic(actorTr);
 	_actor->setRigidDynamicLockFlags(PxRigidDynamicLockFlag::eLOCK_LINEAR_Z | PxRigidDynamicLockFlag::eLOCK_ANGULAR_X | PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y);
 	//_actor->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+	_actor->setAngularDamping(10);
+	_actor->setMaxAngularVelocity(4.0f);
 
 	auto bodyGeo = PxBoxGeometry(BODY_HX, BODY_HY, BODY_HZ);
 	auto bodyShape = _actor->createShape(bodyGeo, *_playerMat);
@@ -49,9 +51,9 @@ PlayerSolid::PlayerSolid(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
 	_boardActor->userData = data;
 
 
-	PxRigidBodyExt::updateMassAndInertia(*_actor, 10.f);
-	PxRigidBodyExt::updateMassAndInertia(*_headActor, 10.f);
-	PxRigidBodyExt::updateMassAndInertia(*_boardActor, 10.f);
+	PxRigidBodyExt::updateMassAndInertia(*_actor, 1.f);
+	PxRigidBodyExt::updateMassAndInertia(*_headActor, 1.f);
+	PxRigidBodyExt::updateMassAndInertia(*_boardActor, 1.f);
 
 
 	// JOINTS

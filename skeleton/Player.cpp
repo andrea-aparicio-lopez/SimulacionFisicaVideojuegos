@@ -26,12 +26,12 @@ Player::Player(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
 	// RASTRO
 	_trailSys = new ParticleSystem();
 	_trailGen = new TrailParticleGen(_trailSys, _playerSolid.getBottomLeftPos());
+	_trailGen->setActive(false);
 	_trailSys->addParticleGen(_trailGen);
 
 }
 
 Player::~Player() {
-	//delete _player;
 	delete _trailSys;
 
 	for (auto p : _projectiles)
@@ -39,31 +39,15 @@ Player::~Player() {
 }
 
 void Player::update(double dt) {
-	//_player->integrate(dt);
-	//if (_player->getVel() != PxVec3(0)) {
-	//	_trailGen->setPos(_player->getPos() - PxVec3(_player->getSize(), _halfHeight, 0));
-	//	_trailSys->update(dt);
-	//}
-	if (_running) _playerSolid.getActor()->setLinearVelocity(PxVec3(10, 0, 0));
-
+	if (_running) {
+		_playerSolid.getActor()->setLinearVelocity(PxVec3(10, _playerSolid.getActor()->getLinearVelocity().y, 0));
+		_trailGen->setPos(_playerSolid.getBottomLeftPos());
+	}
 	_playerRBSystem->update(dt);
+	_trailSys->update(dt);
 
 	for (auto p : _projectiles)
 		p->integrate(dt);
-}
-
-void Player::handleInput(unsigned char key) {
-	switch (toupper(key)) {
-	case ' ':
-		if (!_running) _running = true;
-		else jump();
-		break;
-	case 'S':
-		if (_running) shoot();
-		break;
-	default:
-		break;
-	}
 }
 
 PxVec3 Player::getPos() {
@@ -93,12 +77,33 @@ void Player::setCanJump(bool v) {
 	_canJump = v;
 }
 
+bool Player::getRunning() const {
+	return _running;
+}
+
+void Player::setRunning(bool v) {
+	_running = v;
+}
+
+void Player::startRun() {
+	_running = true;
+	_trailGen->setActive(true);
+}
+
+void Player::onGroundContact() {
+	if (_running) {
+		_canJump = true;
+		_trailGen->setActive(true);
+	}
+}
+
 void Player::jump() {
 	if (_canJump) {
-		std::cout << "Saltandoooo\n";
-		// Salto
+		_jumpImpulseForceGen->setActive(true);
+		_trailGen->setActive(false);
 		_canJump = false;
 	}
+	_playerSolid.getActor()->addTorque(PxVec3(0, 0, 5000));
 }
 
 void Player::shoot() {

@@ -42,9 +42,9 @@ SceneProyecto::~SceneProyecto() {
 }
 
 void SceneProyecto::start() {
+	_ground = new GroundSolid(_gScene, _gPhysics, PxVec3(0), PxVec3(1000, 0.1, 1000), PxVec4(.7,.7,.7,1));
 	_player = new Player(_gScene, _gPhysics, PxVec3(0, 5, 0));
 	_player->setPos(PxVec3(0, _player->getHeight(), 0));
-	_ground = new GroundSolid(_gScene, _gPhysics, PxVec3(0), PxVec3(1000, 0.1, 1000), PxVec4(.7,.7,.7,1));
 
 	_forceSys = new ForceSystem();
 
@@ -101,7 +101,6 @@ void SceneProyecto::integrate(double dt) {
 }
 
 void SceneProyecto::processKey(unsigned char key, const physx::PxTransform& camera) {
-	_player->handleInput(key);
 
 	switch (toupper(key)) {
 	case 'G':
@@ -122,6 +121,16 @@ void SceneProyecto::processKey(unsigned char key, const physx::PxTransform& came
 	//	_projectiles.push_back(new Projectile(camera.p, camera.q.rotate({ 0,0,-1 }), 80.f));
 	//	break;
 	//}
+	case ' ':
+		if (_state == START) {
+			_player->startRun();
+			_state = RUNNING;
+		}
+		else if(_state == RUNNING) _player->jump();
+		break;
+	case 'Z':
+		if (_state == RUNNING) _player->shoot();
+		break;
 	default:
 		break;
 	}
@@ -134,9 +143,10 @@ void SceneProyecto::onCollision(PxActor* actor1, PxActor* actor2)
 		PxActor* playerActor = p ? actor1 : actor2;
 		PxActor* otherActor = p ? actor2 : actor1;
 
+		auto playerData = reinterpret_cast<GameObjectData*>(playerActor->userData);
 		auto otherData = reinterpret_cast<GameObjectData*>(otherActor->userData);
 		if (otherData->type == GameObjectType::Ground) { // Colisiones player - ground
-			_player->setCanJump(true);
+			_player->onGroundContact();
 		}
 		else if (otherData->type == GameObjectType::Obstacle) {	// Colisiones player - obstacle
 			auto obstacle = static_cast<Obstacle*>(otherData->object);

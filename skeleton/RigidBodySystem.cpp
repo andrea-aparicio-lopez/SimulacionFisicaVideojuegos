@@ -3,7 +3,7 @@
 #include "ForceGenerator.h"
 #include "RenderUtils.hpp"
 
-
+#include <iostream>
 using namespace physx;
 
 RigidBodySystem::RigidBodySystem(PxScene* gScene, PxPhysics* gPhysics)

@@ -20,7 +20,6 @@ public:
 	~Player();
 
 	void update(double dt);
-	void handleInput(unsigned char key);
 
 public:
 	PlayerSolid& getPlayerSolid() { return _playerSolid; }
@@ -35,6 +34,12 @@ public:
 
 	bool getCanJump() const;
 	void setCanJump(bool v);
+
+	bool getRunning() const;
+	void setRunning(bool v);
+
+	void startRun();
+	void onGroundContact();
 
 public:
 	void jump();
@@ -62,7 +67,6 @@ protected:
 protected:
 	const float _halfHeight = 1.f;
 
-	const physx::PxVec3 RUN_IMPULSE = physx::PxVec3(500,0,0);
-	const physx::PxVec3 JUMP_IMPULSE = physx::PxVec3(0,30,0);
+	const physx::PxVec3 JUMP_IMPULSE = physx::PxVec3(0,18000,0);
 };
 
