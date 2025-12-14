@@ -68,10 +68,10 @@ void SceneProyecto::start() {
 
 
 	// OBSTACULOS
-	_obstacles.push_back(new Obstacle(PxVec3(20, 3, 0), _player));
-	_obstacles.push_back(new Obstacle(PxVec3(200, 3, 0), _player));
-	_obstacles.push_back(new Obstacle(PxVec3(290, 3, 0), _player));
-	_obstacles.push_back(new Obstacle(PxVec3(440, 3, 0), _player));
+	_obstacles.push_back(new Obstacle(_gScene, _gPhysics, PxVec3(20, 3, 0)));
+	_obstacles.push_back(new Obstacle(_gScene, _gPhysics, PxVec3(200, 3, 0)));
+	_obstacles.push_back(new Obstacle(_gScene, _gPhysics, PxVec3(290, 3, 0)));
+	_obstacles.push_back(new Obstacle(_gScene, _gPhysics, PxVec3(440, 3, 0)));
 
 	// ÁRBOLES
 	_forest = new Forest(_player);
@@ -139,9 +139,10 @@ void SceneProyecto::onCollision(PxActor* actor1, PxActor* actor2)
 			_player->setCanJump(true);
 		}
 		else if (otherData->type == GameObjectType::Obstacle) {	// Colisiones player - obstacle
-			// Obstaculo explota?
+			auto obstacle = static_cast<Obstacle*>(otherData->object);
+			obstacle->explode();
 			// TODO: lose
-			std::cout << "YOU LOSE\n";
+			//std::cout << "YOU LOSE\n";
 		}
 	}
 	else { 	// Colisiones snowball - obstacle

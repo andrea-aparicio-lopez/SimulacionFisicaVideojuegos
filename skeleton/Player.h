@@ -45,7 +45,6 @@ protected:
 
 	ForceSystem _forceSys;
 
-	//ForceGenerator* _runImpulseForceGen;
 	ForceGenerator* _jumpImpulseForceGen;
 
 	RigidBodySystem* _playerRBSystem;

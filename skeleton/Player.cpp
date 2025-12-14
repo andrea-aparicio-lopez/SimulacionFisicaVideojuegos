@@ -94,8 +94,11 @@ void Player::setCanJump(bool v) {
 }
 
 void Player::jump() {
-	if (_canJump)
+	if (_canJump) {
 		std::cout << "Saltandoooo\n";
+		// Salto
+		_canJump = false;
+	}
 }
 
 void Player::shoot() {
