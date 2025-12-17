@@ -9,11 +9,11 @@ class RigidBodyGenerator
 {
 public:
 	RigidBodyGenerator(RigidBodySystem* sys, physx::PxVec3 pos, float m, physx::PxVec3 v, physx::PxVec3 w, physx::PxMaterial* mat = nullptr);
-	~RigidBodyGenerator();
+	virtual ~RigidBodyGenerator();
 
 public:
 	inline physx::PxVec3 getPos() const { return _pos; }
-	inline void setPos(physx::PxVec3 pos) { _pos = pos; }
+	inline virtual void setPos(physx::PxVec3 pos) { _pos = pos; }
 
 	inline physx::PxVec3 getV() const { return _v; }
 	inline void setV(physx::PxVec3 v) { _v = v; }

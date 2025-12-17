@@ -15,6 +15,12 @@ public:
 	inline physx::PxVec3 getBottomPos() const { return _actor->getGlobalPose().p - physx::PxVec3(0, BODY_HY + BOARD_HY, 0); }
 	inline physx::PxVec3 getBottomLeftPos() const { return _boardActor->getGlobalPose().p - physx::PxVec3(BOARD_HX, BOARD_HY, 0); }
 
+	inline physx::PxVec3 getForwardDir() const { return _actor->getGlobalPose().q.rotate(physx::PxVec3(1, 0, 0)).getNormalized(); }
+
+	physx::PxVec3 getShootingPos() const { return _actor->getGlobalPose().p + SHOOTING_POS_OFFSET * getForwardDir(); }
+	physx::PxVec3 getShootingDir() const { return (getForwardDir() + SHOOTING_DIR_OFFSET).getNormalized(); }
+
+
 protected:
 	physx::PxScene* _gScene;
 
@@ -32,7 +38,7 @@ protected:
 protected:
 	const physx::PxVec3 POS = { 0,0,0 };
 	const physx::PxVec3 V = { 10, 0, 0 };
-	const physx::PxVec3 W = { 10, 0, 0 };	// w o fuerza y fricción?
+	const physx::PxVec3 W = { 10, 0, 0 };
 
 	const float BODY_HX = .75f;
 	const float	BODY_HY = 1.5f;
@@ -46,6 +52,7 @@ protected:
 	const physx::PxVec4 HEAD_COLOR = { 0.7, 0.1, 0.3, 1 };
 	const physx::PxVec4 BOARD_COLOR = { 0.2, 0.1, 0.1, 1 };
 
-
+	const float SHOOTING_POS_OFFSET = 0.5f;
+	const physx::PxVec3 SHOOTING_DIR_OFFSET = { 0.f, .15f, 0.f };
 };
 

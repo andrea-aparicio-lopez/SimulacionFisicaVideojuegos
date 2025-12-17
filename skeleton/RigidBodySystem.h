@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+#include <vector>
 #include <PxPhysicsAPI.h>
 
 class RigidBodyGenerator;
@@ -10,7 +11,7 @@ class RigidBodySystem
 {
 public: 
 	RigidBodySystem(physx::PxScene* gScene, physx::PxPhysics* gPhysics);
-	~RigidBodySystem();
+	virtual ~RigidBodySystem();
 
 public:
 	void addRB(physx::PxRigidBody* rb);
@@ -26,7 +27,7 @@ public:
 protected:
 	std::list<physx::PxRigidBody*> _rbs;
 	std::list<RenderItem*> _renderItems;
-	std::list<RigidBodyGenerator*> _rbGenerators;
+	std::vector<RigidBodyGenerator*> _rbGenerators;
 
 	std::list<ForceGenerator*> _forceGenerators;
 

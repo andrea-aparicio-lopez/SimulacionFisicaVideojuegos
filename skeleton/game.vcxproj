@@ -268,6 +268,8 @@
     <ClCompile Include="GroundSolid.cpp" />
     <ClCompile Include="ImpulseForceGen.cpp" />
     <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="ObstacleGen.cpp" />
+    <ClCompile Include="ObstacleSystem.cpp" />
     <ClCompile Include="ParticleGen.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -281,6 +283,8 @@
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="RigidBodyGenerator.cpp" />
     <ClCompile Include="RigidBodySystem.cpp" />
+    <ClCompile Include="RigidGameObject.cpp" />
+    <ClCompile Include="RigidGameObjectSystem.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneBuoyancy.cpp" />
     <ClCompile Include="SceneForceSystem.cpp" />
@@ -289,6 +293,9 @@
     <ClCompile Include="SceneProjectiles.cpp" />
     <ClCompile Include="SceneSolids.cpp" />
     <ClCompile Include="SceneSprings.cpp" />
+    <ClCompile Include="Snowball.cpp" />
+    <ClCompile Include="SnowballGen.cpp" />
+    <ClCompile Include="SnowballSystem.cpp" />
     <ClCompile Include="SpringForceGen.cpp" />
     <ClCompile Include="SpringParticlesForceGen.cpp" />
     <ClCompile Include="Target.cpp" />
@@ -317,6 +324,8 @@
     <ClInclude Include="GroundSolid.h" />
     <ClInclude Include="ImpulseForceGen.h" />
     <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="ObstacleGen.h" />
+    <ClInclude Include="ObstacleSystem.h" />
     <ClInclude Include="ParticleGen.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
@@ -330,6 +339,8 @@
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="RigidBodyGenerator.h" />
     <ClInclude Include="RigidBodySystem.h" />
+    <ClInclude Include="RigidGameObject.h" />
+    <ClInclude Include="RigidGameObjectSystem.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneBuoyancy.h" />
     <ClInclude Include="SceneForceSystem.h" />
@@ -338,6 +349,9 @@
     <ClInclude Include="SceneProjectiles.h" />
     <ClInclude Include="SceneSolids.h" />
     <ClInclude Include="SceneSprings.h" />
+    <ClInclude Include="Snowball.h" />
+    <ClInclude Include="SnowballGen.h" />
+    <ClInclude Include="SnowballSystem.h" />
     <ClInclude Include="SpringForceGen.h" />
     <ClInclude Include="SpringParticlesForceGen.h" />
     <ClInclude Include="Target.h" />

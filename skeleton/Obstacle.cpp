@@ -10,7 +10,7 @@
 using namespace physx;
 
 Obstacle::Obstacle(PxScene* gScene, PxPhysics* gPhysics,  PxVec3 pos)
-	: _gScene(gScene)
+	: RigidGameObject()
 {
 	// ------- SOLIDO RÍGIDO -------
 	auto tr = PxTransform(pos);
@@ -52,27 +52,6 @@ Obstacle::Obstacle(PxScene* gScene, PxPhysics* gPhysics,  PxVec3 pos)
 }
 
 Obstacle::~Obstacle() {
-	delete _explSys;
-	delete _explForceGen;
-	if(_renderItem != nullptr) _renderItem->release();
-
-	delete _actor->userData;
-	_actor->userData = nullptr;
-
-
-}
-
-void Obstacle::update(double dt) {
-	if (!_alive && _actor != nullptr) {
-		_actor->release();
-		_actor = nullptr;
-
-		_renderItem->release();
-		_renderItem = nullptr;
-	}
-
-	_explSys->update(dt);
-	if (_explPartGen->isActive()) _explPartGen->setActive(false);
 
 }
 
@@ -81,7 +60,5 @@ void Obstacle::explode() {
 		_alive = false;
 		_explPartGen->setActive(true);
 		_explForceGen->setActive(true);
-		
-		//_actor->setActorFlag(PxActorFlag::eDISABLE_SIMULATION, true);
 	}
 }

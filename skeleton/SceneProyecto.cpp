@@ -12,6 +12,8 @@
 #include "Forest.h"
 #include "GroundSolid.h"
 #include "GameObjectData.h"
+#include "Snowball.h"
+#include "ObstacleSystem.h"
 
 #include <iostream>
 
@@ -31,12 +33,7 @@ SceneProyecto::~SceneProyecto() {
 	delete _forest;
 	delete _weatherSys;
 	delete _forceSys;
-
-	for (auto obs : _obstacles)
-		delete obs;
-
-	for (auto p : _projectiles)
-		delete p;
+	delete _obstacleSys;
 
 	Scene::~Scene();
 }
@@ -68,10 +65,7 @@ void SceneProyecto::start() {
 
 
 	// OBSTACULOS
-	_obstacles.push_back(new Obstacle(_gScene, _gPhysics, PxVec3(20, 3, 0)));
-	_obstacles.push_back(new Obstacle(_gScene, _gPhysics, PxVec3(200, 3, 0)));
-	_obstacles.push_back(new Obstacle(_gScene, _gPhysics, PxVec3(290, 3, 0)));
-	_obstacles.push_back(new Obstacle(_gScene, _gPhysics, PxVec3(440, 3, 0)));
+	_obstacleSys = new ObstacleSystem(_gScene, _gPhysics, _player);
 
 	// ÁRBOLES
 	_forest = new Forest(_player);
@@ -88,15 +82,16 @@ void SceneProyecto::integrate(double dt) {
 
 	_player->update(dt);
 
-	for (auto obs : _obstacles)
-		obs->update(dt);
+	//for (auto obs : _obstacles)
+	//	obs->update(dt);
+	if (_state == Gamestate::RUNNING) {
+		_obstacleSys->update(dt);
+		_forest->update(dt);
 
-	for (auto p : _projectiles)
-		p->integrate(dt);
-
-	_forest->update(dt);
+	}
 
 	_weatherSys->update(dt);
+
 	_camera->setPosition(_player->getPos() + PxVec3(0, 0, 40));
 }
 
@@ -115,12 +110,6 @@ void SceneProyecto::processKey(unsigned char key, const physx::PxTransform& came
 		_tornadoGen->isActive() ? std::cout << "Desactivando torbellino\n" : std::cout << "Activando torbellino\n";
 		_tornadoGen->setActive(!_tornadoGen->isActive());
 		break;
-	//case 'M':
-	//{
-	//	// Proyectil disparado desde la cámara
-	//	_projectiles.push_back(new Projectile(camera.p, camera.q.rotate({ 0,0,-1 }), 80.f));
-	//	break;
-	//}
 	case ' ':
 		if (_state == START) {
 			_player->startRun();
@@ -128,7 +117,7 @@ void SceneProyecto::processKey(unsigned char key, const physx::PxTransform& came
 		}
 		else if(_state == RUNNING) _player->jump();
 		break;
-	case 'Z':
+	case 'Q':
 		if (_state == RUNNING) _player->shoot();
 		break;
 	default:
@@ -165,8 +154,8 @@ void SceneProyecto::onCollision(PxActor* actor1, PxActor* actor2)
 			auto otherData = (data1->type == GameObjectType::Snowball) ? data2 : data1;
 
 			// TODO
-			//auto snowball = static_cast<Snowball*>(snowballData->object);
-			//snowball->onImpact();
+			auto snowball = static_cast<Snowball*>(snowballData->object);
+			snowball->onImpact();
 
 			if (otherData->type == GameObjectType::Obstacle) {
 				auto obstacle = static_cast<Obstacle*>(otherData->object);

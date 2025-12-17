@@ -11,7 +11,8 @@ class ParticleGen;
 class ParticleSystem;
 class RigidBodyGen;
 class RigidBodySystem;
-class Projectile;
+//class Projectile;
+class SnowballSystem;
 
 class Player
 {
@@ -53,12 +54,12 @@ protected:
 	ForceGenerator* _jumpImpulseForceGen;
 
 	RigidBodySystem* _playerRBSystem;
-	RigidBodySystem* _snowBallRBSystem;
+	SnowballSystem* _snowballSystem;
 
 	ParticleGen* _trailGen;
 	ParticleSystem* _trailSys;
 
-	std::list<Projectile*> _projectiles;
+	//std::list<Projectile*> _projectiles;
 
 protected:
 	bool _running = false;

@@ -58,7 +58,7 @@ Particle::Particle(Particle* const& other)
 }
 
 Particle::~Particle() {
-	_renderItem->release();
+	if(_renderItem != nullptr) _renderItem->release();
 	delete _tr;
 }
 

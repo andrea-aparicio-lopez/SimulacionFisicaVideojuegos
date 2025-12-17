@@ -7,6 +7,8 @@
 #include "RigidBodySystem.h"
 #include "ImpulseForceGen.h"
 #include "ForceSystem.h"
+#include "SnowballSystem.h"
+#include "SnowballGen.h"
 
 #include <iostream>
 
@@ -29,13 +31,16 @@ Player::Player(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
 	_trailGen->setActive(false);
 	_trailSys->addParticleGen(_trailGen);
 
+	// BOLAS DE NIEVE
+	_snowballSystem = new SnowballSystem(gScene, gPhysics);
+	auto snowballGen = new SnowballGen(_snowballSystem);
+	snowballGen->setActive(false);
+	_snowballSystem->addRBGen(snowballGen);
 }
 
 Player::~Player() {
 	delete _trailSys;
-
-	for (auto p : _projectiles)
-		delete p;
+	delete _snowballSystem;
 }
 
 void Player::update(double dt) {
@@ -44,10 +49,10 @@ void Player::update(double dt) {
 		_trailGen->setPos(_playerSolid.getBottomLeftPos());
 	}
 	_playerRBSystem->update(dt);
-	_trailSys->update(dt);
+	_snowballSystem->update(dt);
 
-	for (auto p : _projectiles)
-		p->integrate(dt);
+	_trailSys->update(dt);
+	
 }
 
 PxVec3 Player::getPos() {
@@ -107,6 +112,5 @@ void Player::jump() {
 }
 
 void Player::shoot() {
-	// TODO: cambiar proyectiles a sistema sólidos
-	_projectiles.push_back(new Projectile(getPos(), PxVec3(1,0.15,0), 60.f, PxVec4(1,0,0.8,1)));
+	_snowballSystem->shoot(_playerSolid.getShootingPos(), _playerSolid.getShootingDir());
 }

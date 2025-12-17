@@ -9,8 +9,8 @@ class GroundSolid;
 class ParticleSystem;
 class ForceSystem;
 class ForceGenerator;
-class Obstacle;
-class Projectile;
+//class Obstacle;
+class ObstacleSystem;
 class Forest;
 
 class SceneProyecto : public Scene
@@ -44,8 +44,9 @@ protected:
 	ForceGenerator* _windGen;
 	ForceGenerator* _tornadoGen;
 
-	std::list<Obstacle*> _obstacles;
-	std::list<Projectile*> _projectiles;
+	ObstacleSystem* _obstacleSys;
+	//std::list<Obstacle*> _obstacles;
+	//std::list<Projectile*> _projectiles;
 
 	
 	Camera* _camera;

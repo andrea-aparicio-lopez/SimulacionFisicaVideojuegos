@@ -51,6 +51,13 @@
     <ClCompile Include="PlayerSolid.cpp" />
     <ClCompile Include="GroundSolid.cpp" />
     <ClCompile Include="ImpulseForceGen.cpp" />
+    <ClCompile Include="Snowball.cpp" />
+    <ClCompile Include="RigidGameObject.cpp" />
+    <ClCompile Include="RigidGameObjectSystem.cpp" />
+    <ClCompile Include="SnowballSystem.cpp" />
+    <ClCompile Include="SnowballGen.cpp" />
+    <ClCompile Include="ObstacleSystem.cpp" />
+    <ClCompile Include="ObstacleGen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -104,6 +111,13 @@
     <ClInclude Include="GroundSolid.h" />
     <ClInclude Include="ImpulseForceGen.h" />
     <ClInclude Include="GameObjectData.h" />
+    <ClInclude Include="Snowball.h" />
+    <ClInclude Include="RigidGameObject.h" />
+    <ClInclude Include="RigidGameObjectSystem.h" />
+    <ClInclude Include="SnowballSystem.h" />
+    <ClInclude Include="SnowballGen.h" />
+    <ClInclude Include="ObstacleSystem.h" />
+    <ClInclude Include="ObstacleGen.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
