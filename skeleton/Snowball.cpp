@@ -31,7 +31,7 @@ Snowball::Snowball(physx::PxScene* gScene, physx::PxPhysics* gPhysics, physx::Px
 	PxRigidBodyExt::updateMassAndInertia(*actor, 1.f);
 	actor->setLinearVelocity(v);
 
-	//gScene->addActor(*_actor); // Added to system Aggregate
+	gScene->addActor(*_actor);
 
 
 

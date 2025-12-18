@@ -26,7 +26,7 @@ Obstacle::Obstacle(PxScene* gScene, PxPhysics* gPhysics,  PxVec3 pos)
 	data->object = this;
 	_actor->userData = data;
 
-	//gScene->addActor(*_actor); // Added to system Aggregate
+	gScene->addActor(*_actor);
 
 
 	// -------- EXPLOSIÓN --------

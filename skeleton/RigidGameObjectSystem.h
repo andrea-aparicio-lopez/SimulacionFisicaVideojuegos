@@ -15,7 +15,5 @@ public:
 
 protected:
 	std::list<RigidGameObject*> _gameObjects;
-
-	physx::PxAggregate* _aggregate;
 };
 
