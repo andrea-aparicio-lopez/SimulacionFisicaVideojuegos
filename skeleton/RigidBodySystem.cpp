@@ -3,7 +3,6 @@
 #include "ForceGenerator.h"
 #include "RenderUtils.hpp"
 
-#include <iostream>
 using namespace physx;
 
 RigidBodySystem::RigidBodySystem(PxScene* gScene, PxPhysics* gPhysics)
@@ -14,11 +13,11 @@ RigidBodySystem::RigidBodySystem(PxScene* gScene, PxPhysics* gPhysics)
 }
 
 RigidBodySystem::~RigidBodySystem() {
-	//for (auto rb : _rbs)
-	//	_gScene->removeActor(*rb);
-	//	
-	//for (auto ri : _renderItems)
-	//	ri->release();
+	for (auto ri : _renderItems)
+		ri->release();
+		
+	for (auto rb : _rbs)
+		_gScene->removeActor(*rb);
 
 	for (auto gen : _rbGenerators)
 		delete gen;

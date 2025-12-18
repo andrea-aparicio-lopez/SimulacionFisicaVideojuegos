@@ -3,8 +3,6 @@
 #include "ParticleSystem.h"
 #include "GaussianGen.h"
 
-#include <iostream>
-
 RigidGameObject::RigidGameObject() {
 
 }
@@ -16,6 +14,8 @@ RigidGameObject::~RigidGameObject() {
 		delete _actor->userData;
 		_actor->userData = nullptr;
 	}
+
+	_actor->release();
 
 	delete _explSys;
 	delete _explForceGen;

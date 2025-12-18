@@ -1,7 +1,6 @@
 #include "SnowballGen.h"
 #include "Snowball.h"
 #include "RigidGameObjectSystem.h"
-#include <iostream>
 
 using namespace physx;
 

@@ -5,7 +5,6 @@
 #include "ExplosionForceGen.h"
 #include "GameObjectData.h"
 
-#include <iostream>
 
 using namespace physx;
 
@@ -27,7 +26,7 @@ Obstacle::Obstacle(PxScene* gScene, PxPhysics* gPhysics,  PxVec3 pos)
 	data->object = this;
 	_actor->userData = data;
 
-	gScene->addActor(*_actor); // TODO: add actor to aggregate from RBSystem
+	//gScene->addActor(*_actor); // Added to system Aggregate
 
 
 	// -------- EXPLOSIÓN --------

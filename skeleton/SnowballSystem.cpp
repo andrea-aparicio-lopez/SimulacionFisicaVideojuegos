@@ -1,6 +1,5 @@
 #include "SnowballSystem.h"
-#include "SnowballGen.h" 
-#include <iostream>
+#include "SnowballGen.h"
 
 using namespace physx;
 

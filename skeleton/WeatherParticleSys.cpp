@@ -3,7 +3,6 @@
 #include "GaussianGen.h"
 #include "WindForceGen.h"
 #include "particle.h"
-#include <iostream>
 
 using namespace physx;
 

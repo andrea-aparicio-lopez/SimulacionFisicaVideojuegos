@@ -6,7 +6,6 @@
 #include "RenderUtils.hpp"
 #include "GameObjectData.h"
 
-#include <iostream>
 using namespace physx;
 
 Snowball::Snowball(physx::PxScene* gScene, physx::PxPhysics* gPhysics, physx::PxVec3 pos, physx::PxVec3 v)
@@ -32,7 +31,7 @@ Snowball::Snowball(physx::PxScene* gScene, physx::PxPhysics* gPhysics, physx::Px
 	PxRigidBodyExt::updateMassAndInertia(*actor, 1.f);
 	actor->setLinearVelocity(v);
 
-	gScene->addActor(*_actor); // TODO: add actor to aggregate from RBSystem
+	//gScene->addActor(*_actor); // Added to system Aggregate
 
 
 

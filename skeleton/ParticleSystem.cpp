@@ -4,7 +4,6 @@
 #include "ForceGenerator.h"
 
 #include <algorithm>
-#include <iostream>
 
 ParticleSystem::ParticleSystem() {}
 

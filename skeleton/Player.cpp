@@ -14,8 +14,6 @@
 #include "ElasticBandForceGen.h"
 #include "WindForceGen.h"
 
-#include <iostream>
-
 using namespace physx;
 
 Player::Player(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)

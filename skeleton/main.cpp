@@ -41,7 +41,7 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
-Axis* axis;
+//Axis* axis;
 Scene* s;
 
 
@@ -74,8 +74,6 @@ void initPhysics(bool interactive)
 	gScene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_SHAPES, 5.0f);
 	gScene->setVisualizationParameter(PxVisualizationParameter::eJOINT_LOCAL_FRAMES, 1.0f);
 	gScene->setVisualizationParameter(PxVisualizationParameter::eJOINT_LIMITS, 1.0f);
-	// AXIS
-	//axis = new Axis();
 
 	// SCENE
 	s = new SceneProyecto(gScene, gPhysics, display_text1, display_text2);

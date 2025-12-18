@@ -25,6 +25,8 @@ public:
 protected:
 	physx::PxScene* _gScene;
 
+	physx::PxAggregate* _aggregate;
+
 	physx::PxRigidDynamic* _actor;  // cuerpo: actor principal
 	physx::PxRigidDynamic* _headActor;
 	physx::PxRigidDynamic* _boardActor;

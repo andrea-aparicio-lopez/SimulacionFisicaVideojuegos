@@ -1,8 +1,6 @@
 #include "ExplosionForceGen.h"
 #include "Particle.h"
 
-#include <iostream>
-
 using namespace physx;
 
 ExplosionForceGen::ExplosionForceGen(PxVec3 pos, double r, double k, double t)

@@ -3,8 +3,6 @@
 #include "RigidBodyGenerator.h"
 #include "ObstacleGen.h"
 
-#include <iostream>
-
 using namespace physx;
 
 ObstacleSystem::ObstacleSystem(PxScene* gScene, PxPhysics* gPhysics, Player* player)

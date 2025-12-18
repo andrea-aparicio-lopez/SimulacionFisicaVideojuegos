@@ -8,8 +8,6 @@
 #include "TornadoForceGen.h"
 #include "ExplosionForceGen.h"
 
-#include <iostream>
-
 using namespace physx;
 
 SceneForceSystem::SceneForceSystem() : Scene() {

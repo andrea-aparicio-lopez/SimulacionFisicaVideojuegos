@@ -1,6 +1,5 @@
 #include "BuoyantForceGen.h"
 #include "Particle.h"
-#include <iostream>
 
 using namespace physx;
 
@@ -35,7 +34,6 @@ void BuoyantForceGen::applyForce(Particle* p) {
 }
 
 void BuoyantForceGen::applyForce(PxRigidBody* p) {
-	// TODO
 }
 
 void BuoyantForceGen::update(double dt) {

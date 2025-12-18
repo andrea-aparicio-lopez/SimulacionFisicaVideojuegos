@@ -1,8 +1,6 @@
 #include "GravityForceGen.h"
 #include "Particle.h"
 
-#include <iostream>
-
 using namespace physx;
 
 GravityForceGen::GravityForceGen(PxVec3 pos, PxVec3 g)

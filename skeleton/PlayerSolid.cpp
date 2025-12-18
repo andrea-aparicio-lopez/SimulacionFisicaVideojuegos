@@ -2,8 +2,6 @@
 #include "RenderUtils.hpp"
 #include "GameObjectData.h"
 
-#include <iostream>
-
 using namespace physx;
 
 PlayerSolid::PlayerSolid(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
@@ -61,24 +59,37 @@ PlayerSolid::PlayerSolid(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
 	auto legs = PxFixedJointCreate(*gPhysics, _actor, PxTransform(PxVec3(0, -BODY_HY, 0)), _boardActor, PxTransform(PxVec3(0, BOARD_HY, 0)));
 
 
-	_gScene->addActor(*_actor);
-	_gScene->addActor(*_headActor);
-	_gScene->addActor(*_boardActor);
+	// AGGREGATE
+	PxU32 nbActors = 3;     // Max number of actors expected in the aggregate
+	bool selfCollisions = false;
+	_aggregate = gPhysics->createAggregate(nbActors, selfCollisions);
+
+	_aggregate->addActor(*_actor);
+	_aggregate->addActor(*_headActor);
+	_aggregate->addActor(*_boardActor);
+
+	_gScene->addAggregate(*_aggregate);
 
 }
 
 PlayerSolid::~PlayerSolid() {
 	_bodyRI->release();
+	_headRI->release();
+	_boardRI->release();
+
+	_gScene->removeAggregate(*_aggregate);
 
 	delete _actor->userData;
 	_actor->userData = nullptr;
-	_gScene->removeActor(*_actor);
+	_actor->release();
 
 	delete _headActor->userData;
 	_headActor->userData = nullptr;
-	_gScene->removeActor(*_headActor);
+	_headActor->release();
 
 	delete _boardActor->userData;
 	_boardActor->userData = nullptr;
-	_gScene->removeActor(*_boardActor);
+	_boardActor->release();
+
+	_aggregate->release();
 }
