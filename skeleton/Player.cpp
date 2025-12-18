@@ -9,6 +9,10 @@
 #include "ForceSystem.h"
 #include "SnowballSystem.h"
 #include "SnowballGen.h"
+#include "GravityForceGen.h"
+#include "DragForceGen.h"
+#include "ElasticBandForceGen.h"
+#include "WindForceGen.h"
 
 #include <iostream>
 
@@ -36,6 +40,39 @@ Player::Player(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
 	auto snowballGen = new SnowballGen(_snowballSystem);
 	snowballGen->setActive(false);
 	_snowballSystem->addRBGen(snowballGen);
+
+	// BUFANDA
+	auto gravityGen = new GravityForceGen(PxVec3(0, -9.8, 0));
+	_forceSys.addForceGen(gravityGen);
+
+	_scarfWind = new WindForceGen(_playerSolid.getScarfPos(), PxVec3(50, 10, 10), PxVec3(-2, 0, 0)); // viento más suave que el del clima
+	_forceSys.addForceGen(_scarfWind);
+
+	auto dragGen = new DragForceGen(PxVec3(0), 0.75);
+	_forceSys.addForceGen(dragGen);
+
+	_scarf = new ParticleSystem();
+	_scarf->addForceGen(gravityGen);
+	_scarf->addForceGen(dragGen);
+	_scarf->addForceGen(_scarfWind);
+
+	Particle *p1, *p2;
+	for (int i = 0; i < 15; ++i) {
+		auto springGen = new ElasticBandForceGen(PxVec3(0), 150., .1);
+		_forceSys.addForceGen(springGen);
+		if (i == 0) {
+			p1 = new Particle(_playerSolid.getScarfPos(), PxVec3(0), PxVec3(0), PxVec4(0.05 *  i , 0.3, 0.6, 1.), .2f, .1f, DBL_MAX, DBL_MAX);
+			_scarfAnchor = p1;
+		}
+		else p1 = p2;
+		p2 = new Particle(_playerSolid.getScarfPos(), PxVec3(0), PxVec3(0), PxVec4(0.05 * i, 0.3, 0.6, 1.), .2f, .1f, DBL_MAX, DBL_MAX);
+
+		springGen->setParticles(p1, p2);
+
+		_scarf->addForceGen(springGen);
+		_scarf->addParticle(p1);
+	}
+	_scarf->addParticle(p2);
 }
 
 Player::~Player() {
@@ -47,12 +84,15 @@ void Player::update(double dt) {
 	if (_running) {
 		_playerSolid.getActor()->setLinearVelocity(PxVec3(10, _playerSolid.getActor()->getLinearVelocity().y, 0));
 		_trailGen->setPos(_playerSolid.getBottomLeftPos());
+		_scarfWind->setPos(_playerSolid.getScarfPos());
 	}
 	_playerRBSystem->update(dt);
 	_snowballSystem->update(dt);
 
 	_trailSys->update(dt);
 	
+	_scarfAnchor->setPos(_playerSolid.getScarfPos());
+	_scarf->update(dt);
 }
 
 PxVec3 Player::getPos() {

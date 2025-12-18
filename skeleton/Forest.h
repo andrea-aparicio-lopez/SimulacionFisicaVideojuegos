@@ -17,6 +17,7 @@ protected:
 	Player* _player;
 	std::list<Tree*> _trees;
 
-	float _fovX = 100.f;
+	float _fovX_left = 80.f;
+	float _fovX_right = 160.f;
 };
 

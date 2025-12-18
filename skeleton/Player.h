@@ -59,7 +59,9 @@ protected:
 	ParticleGen* _trailGen;
 	ParticleSystem* _trailSys;
 
-	//std::list<Projectile*> _projectiles;
+	ParticleSystem* _scarf;
+	Particle* _scarfAnchor;
+	ForceGenerator* _scarfWind;
 
 protected:
 	bool _running = false;
@@ -68,6 +70,6 @@ protected:
 protected:
 	const float _halfHeight = 1.f;
 
-	const physx::PxVec3 JUMP_IMPULSE = physx::PxVec3(0,18000,0);
+	const physx::PxVec3 JUMP_IMPULSE = physx::PxVec3(0,10000,0);
 };
 

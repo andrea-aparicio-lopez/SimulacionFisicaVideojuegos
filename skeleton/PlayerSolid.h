@@ -20,6 +20,7 @@ public:
 	physx::PxVec3 getShootingPos() const { return _actor->getGlobalPose().p + SHOOTING_POS_OFFSET * getForwardDir(); }
 	physx::PxVec3 getShootingDir() const { return (getForwardDir() + SHOOTING_DIR_OFFSET).getNormalized(); }
 
+	inline physx::PxVec3 getScarfPos() const { return _headActor->getGlobalPose().p - physx::PxVec3(0,HEAD_R,0); }
 
 protected:
 	physx::PxScene* _gScene;

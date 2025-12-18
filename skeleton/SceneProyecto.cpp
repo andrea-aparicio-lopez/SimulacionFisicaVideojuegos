@@ -54,18 +54,22 @@ void SceneProyecto::start() {
 	_weatherSys->addForceGen(_gravityGen);
 
 	// Viento
-	_windGen = new WindForceGen(_player->getPos(), PxVec3(100, 30, 10), PxVec3(-15,-5,0));
+	_windGen = new WindForceGen(_player->getPos(), PxVec3(120, 50, 10), PxVec3(-15,-5,0));
 	_forceSys->addForceGen(_windGen);
 	_weatherSys->addForceGen(_windGen);
+	_windGen->setActive(false);
 
 	// Tornado
 	_tornadoGen = new TornadoForceGen(_player->getPos() + PxVec3(100,0,0), PxVec3(0, 0, 1), 10, 10);
 	_forceSys->addForceGen(_tornadoGen);
 	_weatherSys->addForceGen(_tornadoGen);
+	_tornadoGen->setActive(false);
+
 
 
 	// OBSTACULOS
 	_obstacleSys = new ObstacleSystem(_gScene, _gPhysics, _player);
+
 
 	// ÁRBOLES
 	_forest = new Forest(_player);
@@ -113,6 +117,8 @@ void SceneProyecto::processKey(unsigned char key, const physx::PxTransform& came
 	case ' ':
 		if (_state == START) {
 			_player->startRun();
+			_windGen->setActive(true);
+			_tornadoGen->setActive(true);
 			_state = RUNNING;
 		}
 		else if(_state == RUNNING) _player->jump();
