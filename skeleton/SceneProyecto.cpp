@@ -9,7 +9,7 @@
 #include "TornadoForceGen.h"
 #include "Obstacle.h"
 #include "Projectile.h"
-#include "Forest.h"
+#include "Environment.h"
 #include "GroundSolid.h"
 #include "GameObjectData.h"
 #include "Snowball.h"
@@ -34,7 +34,7 @@ SceneProyecto::SceneProyecto(PxScene* gScene, PxPhysics* gPhysics, std::string& 
 SceneProyecto::~SceneProyecto() {
 	delete _player;
 	delete _ground;
-	delete _forest;
+	delete _environment;
 	delete _finishFlag;
 	delete _weatherSys;
 	delete _forceSys;
@@ -76,8 +76,8 @@ void SceneProyecto::start() {
 	_obstacleSys = new ObstacleSystem(_gScene, _gPhysics, _player);
 
 
-	// ÁRBOLES
-	_forest = new Forest(_player);
+	// ÁRBOLES Y MONTAÑAS
+	_environment = new Environment(_player);
 
 	// META
 	_finishFlag = new FinishFlag(PxVec3(FINISH_LINE, 0, -5));
@@ -95,9 +95,9 @@ void SceneProyecto::integrate(double dt) {
 
 	_player->update(dt);
 
-		_obstacleSys->update(dt);
+	_obstacleSys->update(dt);
 	if (_state == Gamestate::RUNNING) {
-		_forest->update(dt);
+		_environment->update(dt);
 		if (_player->getPos().x >= FINISH_LINE)
 			endGame();
 	}

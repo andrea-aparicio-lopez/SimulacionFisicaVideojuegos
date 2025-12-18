@@ -6,11 +6,11 @@ class Player;
 class Tree;
 class Mountain;
 
-class Forest
+class Environment
 {
 public:
-	Forest(Player* player);
-	~Forest();
+	Environment(Player* player);
+	~Environment();
 
 	void update(double dt);
 

@@ -1,4 +1,4 @@
-#include "Forest.h"
+#include "Environment.h"
 #include "Player.h"
 #include "Tree.h"
 #include "Mountain.h"
@@ -6,7 +6,7 @@
 
 using namespace physx;
 
-Forest::Forest(Player* player)
+Environment::Environment(Player* player)
 	: _player(player)
 {
 	auto playerPos = PxVec3(_player->getPos().x, 0, _player->getPos().z);
@@ -62,12 +62,12 @@ Forest::Forest(Player* player)
 	_mountains.push_back(new Mountain(playerPos + PxVec3(850, 0, -200)));
 }
 
-Forest::~Forest() {
+Environment::~Environment() {
 	for (auto t : _trees)
 		delete t;
 }
 
-void Forest::update(double dt) {
+void Environment::update(double dt) {
 	auto playerPos = _player->getPos();
 
 	for (auto t : _trees) {

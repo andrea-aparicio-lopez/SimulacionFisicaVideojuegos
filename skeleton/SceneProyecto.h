@@ -10,7 +10,7 @@ class ParticleSystem;
 class ForceSystem;
 class ForceGenerator;
 class ObstacleSystem;
-class Forest;
+class Environment;
 class FinishFlag;
 
 class SceneProyecto : public Scene
@@ -41,7 +41,7 @@ protected:
 protected:
 	Player* _player;
 	GroundSolid* _ground;
-	Forest* _forest;
+	Environment* _environment;
 	FinishFlag* _finishFlag;
 	
 	ParticleSystem* _weatherSys;

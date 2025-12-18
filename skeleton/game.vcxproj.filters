@@ -35,7 +35,7 @@
     <ClCompile Include="WeatherParticleSys.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Tree.cpp" />
-    <ClCompile Include="Forest.cpp" />
+    <ClCompile Include="Environment.cpp" />
     <ClCompile Include="SpringForceGen.cpp" />
     <ClCompile Include="SceneSprings.cpp" />
     <ClCompile Include="SpringParticlesForceGen.cpp" />
@@ -96,7 +96,7 @@
     <ClInclude Include="WeatherParticleSys.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Tree.h" />
-    <ClInclude Include="Forest.h" />
+    <ClInclude Include="Environment.h" />
     <ClInclude Include="SpringForceGen.h" />
     <ClInclude Include="SceneSprings.h" />
     <ClInclude Include="SpringParticlesForceGen.h" />

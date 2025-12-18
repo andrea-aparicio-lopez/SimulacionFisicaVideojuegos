@@ -262,7 +262,7 @@
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="ForceSystem.cpp" />
-    <ClCompile Include="Forest.cpp" />
+    <ClCompile Include="Environment.cpp" />
     <ClCompile Include="GaussianGen.cpp" />
     <ClCompile Include="GaussianRBGen.cpp" />
     <ClCompile Include="GravityForceGen.cpp" />
@@ -319,7 +319,7 @@
     <ClInclude Include="Floor.h" />
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="ForceSystem.h" />
-    <ClInclude Include="Forest.h" />
+    <ClInclude Include="Environment.h" />
     <ClInclude Include="GameObjectData.h" />
     <ClInclude Include="GaussianGen.h" />
     <ClInclude Include="GaussianRBGen.h" />

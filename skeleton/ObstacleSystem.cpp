@@ -26,8 +26,8 @@ ObstacleSystem::~ObstacleSystem() {
 
 void ObstacleSystem::update(double dt) {
 	_t += dt;
-	if (_t >= GEN_TIME) {
-		_t -= GEN_TIME;
+	if (_t >= GEN_TIME && _player->getRunning()) {
+		_t = 0;
 
 		_canGenerate = true;
 		chooseNextObstacleIndex();
