@@ -37,9 +37,10 @@ public:
 	void setCanJump(bool v);
 
 	bool getRunning() const;
-	void setRunning(bool v);
+	//void setRunning(bool v);
 
 	void startRun();
+	void endRun();
 	void onGroundContact();
 
 public:
@@ -66,10 +67,12 @@ protected:
 protected:
 	bool _running = false;
 	bool _canJump = false;
+	double _jumpTimer = 0.;
 
 protected:
 	const float _halfHeight = 1.f;
 
 	const physx::PxVec3 JUMP_IMPULSE = physx::PxVec3(0,10000,0);
+	const double JUMP_TIMER = 1.;
 };
 

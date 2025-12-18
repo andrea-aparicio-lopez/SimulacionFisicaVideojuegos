@@ -267,6 +267,7 @@
     <ClCompile Include="GravityForceGen.cpp" />
     <ClCompile Include="GroundSolid.cpp" />
     <ClCompile Include="ImpulseForceGen.cpp" />
+    <ClCompile Include="Mountain.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleGen.cpp" />
     <ClCompile Include="ObstacleSystem.cpp" />
@@ -323,6 +324,7 @@
     <ClInclude Include="GravityForceGen.h" />
     <ClInclude Include="GroundSolid.h" />
     <ClInclude Include="ImpulseForceGen.h" />
+    <ClInclude Include="Mountain.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleGen.h" />
     <ClInclude Include="ObstacleSystem.h" />

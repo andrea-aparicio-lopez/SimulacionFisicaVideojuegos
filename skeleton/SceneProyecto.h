@@ -16,7 +16,7 @@ class Forest;
 class SceneProyecto : public Scene
 {
 public:
-	SceneProyecto(physx::PxScene* gScene, physx::PxPhysics* gPhysics);
+	SceneProyecto(physx::PxScene* gScene, physx::PxPhysics* gPhysics, std::string& display_text1, std::string& display_text2);
 	~SceneProyecto();
 
 	void start() override;
@@ -28,9 +28,15 @@ public:
 protected:
 	bool isPlayerActor(physx::PxActor* actor);	// Gestión de colisiones
 
+	void startGame();
+	void endGame();
+
 protected:
 	physx::PxScene* _gScene;
 	physx::PxPhysics* _gPhysics;
+
+	std::string& _display_text1;
+	std::string& _display_text2;
 
 protected:
 	Player* _player;
@@ -45,19 +51,21 @@ protected:
 	ForceGenerator* _tornadoGen;
 
 	ObstacleSystem* _obstacleSys;
-	//std::list<Obstacle*> _obstacles;
-	//std::list<Projectile*> _projectiles;
-
 	
 	Camera* _camera;
 
+	// Puntuación
+	int _score = 0;
+	const int OBSTACLE_DESTROYED_POINTS = 5;
+	const int OBSTACLE_CRASH_POINTS = -3;
+
+	const float FINISH_LINE = 100.f;
 
 protected:
 	enum Gamestate {
 		START,
 		RUNNING,
-		WIN,
-		LOSE
+		FINISH
 	};
 
 	Gamestate _state = START;

@@ -20,7 +20,8 @@
 
 #include <iostream>
 
-std::string display_text = "Press N to activate/deactivate tornado force";
+std::string display_text1 = "";
+std::string display_text2 = "";
 
 
 using namespace physx;
@@ -77,7 +78,7 @@ void initPhysics(bool interactive)
 	//axis = new Axis();
 
 	// SCENE
-	s = new SceneProyecto(gScene, gPhysics);
+	s = new SceneProyecto(gScene, gPhysics, display_text1, display_text2);
 	s->start();
 
 }

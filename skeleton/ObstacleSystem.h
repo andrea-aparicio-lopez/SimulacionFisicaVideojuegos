@@ -21,6 +21,7 @@ protected:
 	const double GEN_TIME = 2.5;
 	const float GEN_DIST_MIN = 70.f;
 	const float GEN_DIST_MAX = 100.f;
+	const float GEN_HEIGHT_MAX = 20.f;
 
 protected:
 	Player* _player; // para conocer la posición
@@ -31,7 +32,8 @@ protected:
 
 	std::mt19937 _mt;
 	std::uniform_int_distribution<> _d_int;
-	std::uniform_real_distribution<float> _d_real;
+	std::uniform_real_distribution<float> _d_dist;
+	std::uniform_real_distribution<float> _d_height;
 
 	enum ObstacleType {
 		ROCK,

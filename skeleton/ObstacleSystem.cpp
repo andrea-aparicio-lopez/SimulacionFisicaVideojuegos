@@ -12,7 +12,8 @@ ObstacleSystem::ObstacleSystem(PxScene* gScene, PxPhysics* gPhysics, Player* pla
 	, _player(player)
 	, _mt()
 	, _d_int(0, ObstacleType::OBSTACLE_TYPE_SIZE-1)
-	, _d_real(GEN_DIST_MIN, GEN_DIST_MAX)
+	, _d_dist(GEN_DIST_MIN, GEN_DIST_MAX)
+	, _d_height(0., GEN_HEIGHT_MAX)
 {
 	auto obsGen1 = new ObstacleGen(this);
 	obsGen1->setActive(false);
@@ -38,7 +39,7 @@ void ObstacleSystem::update(double dt) {
 		chooseNextObstacleIndex();
 
 		PxVec3 dist = getRdDistance();
-		_rbGenerators[_obstacleIndex]->setPos(_player->getPos() + dist);
+		_rbGenerators[_obstacleIndex]->setPos(PxVec3(_player->getPos().x,1.5,0) + dist);
 		_rbGenerators[_obstacleIndex]->setActive(true);
 	}
 
@@ -55,6 +56,7 @@ void ObstacleSystem::chooseNextObstacleIndex() {
 }
 
 PxVec3 ObstacleSystem::getRdDistance() {
-	float d = _d_real(_mt);
-	return PxVec3(d, 0, 0);
+	float d = _d_dist(_mt);
+	float h = _d_height(_mt);
+	return PxVec3(d, h, 0);
 }

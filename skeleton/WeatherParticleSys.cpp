@@ -11,7 +11,7 @@ WeatherParticleSys::WeatherParticleSys(Player* player)
 	: ParticleSystem()
 	, _player(player)
 {
-	auto snowGen = new GaussianGen(this, _player->getPos() +_offset, 0, { 0,-1,0 }, .5, 6);
+	auto snowGen = new GaussianGen(this, _player->getPos() +_offset, 0, { 0,-1,0 }, .5, 10);
 	auto p = new Particle();
 	p->setColor({ 1,1,1,1 });
 	p->setSize(0.1f);
@@ -20,7 +20,7 @@ WeatherParticleSys::WeatherParticleSys(Player* player)
 	p->setDistance(200.);
 	p->removeRenderItem();
 	snowGen->setPModel(p);
-	snowGen->setDistAttributes({ 60,0,0 }, 0.f, { -1, 0, 0 }, .0);
+	snowGen->setDistAttributes({ 80,0,0 }, 0.f, { -1, 0, 0 }, .0);
 	addParticleGen(snowGen);
 
 

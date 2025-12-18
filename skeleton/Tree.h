@@ -14,7 +14,6 @@ public:
 
     physx::PxTransform* getTr();
     std::vector<physx::PxTransform*> getPartsTr();
-    //void updateTr
 
 protected:
     std::vector<RenderItem*> _parts;

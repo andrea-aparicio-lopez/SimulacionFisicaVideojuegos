@@ -2,8 +2,9 @@
 
 #include <list>
 
-class Tree;
 class Player;
+class Tree;
+class Mountain;
 
 class Forest
 {
@@ -16,8 +17,12 @@ public:
 protected:
 	Player* _player;
 	std::list<Tree*> _trees;
+	std::list<Mountain*> _mountains;
 
-	float _fovX_left = 80.f;
-	float _fovX_right = 160.f;
+	float _fovX_trees_left = 80.f;
+	float _fovX_trees_right = 160.f;
+
+	float _fovX_mts_left = 300.f;
+	float _fovX_mts_right = 800.f;
 };
 

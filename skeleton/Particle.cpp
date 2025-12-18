@@ -91,9 +91,11 @@ void Particle::integrate(double dt) {
 		break;
 	}
 
-	_lifetime -= dt;
-	_distance -= (_tr->p - _prevPos).magnitude();
-	_alive = _lifetime > 0. && _distance > 0.;
+	if (_lifetime != DBL_MAX && _distance != DBL_MAX) {
+		_lifetime -= dt;
+		_distance -= (_tr->p - _prevPos).magnitude();
+		_alive = _lifetime > 0. && _distance > 0.;
+	}
 }
 
 physx::PxTransform* Particle::getTr() {

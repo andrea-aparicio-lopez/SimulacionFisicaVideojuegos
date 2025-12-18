@@ -58,6 +58,7 @@
     <ClCompile Include="SnowballGen.cpp" />
     <ClCompile Include="ObstacleSystem.cpp" />
     <ClCompile Include="ObstacleGen.cpp" />
+    <ClCompile Include="Mountain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="SnowballGen.h" />
     <ClInclude Include="ObstacleSystem.h" />
     <ClInclude Include="ObstacleGen.h" />
+    <ClInclude Include="Mountain.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

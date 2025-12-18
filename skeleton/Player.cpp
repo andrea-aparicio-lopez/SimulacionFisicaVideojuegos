@@ -45,7 +45,7 @@ Player::Player(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
 	auto gravityGen = new GravityForceGen(PxVec3(0, -9.8, 0));
 	_forceSys.addForceGen(gravityGen);
 
-	_scarfWind = new WindForceGen(_playerSolid.getScarfPos(), PxVec3(50, 10, 10), PxVec3(-2, 0, 0)); // viento más suave que el del clima
+	_scarfWind = new WindForceGen(_playerSolid.getScarfPos(), PxVec3(50, 10, 10), PxVec3(-1.5, 0, 0)); // viento más suave que el del clima
 	_forceSys.addForceGen(_scarfWind);
 
 	auto dragGen = new DragForceGen(PxVec3(0), 0.75);
@@ -58,7 +58,7 @@ Player::Player(PxScene* gScene, PxPhysics* gPhysics, PxVec3 pos)
 
 	Particle *p1, *p2;
 	for (int i = 0; i < 15; ++i) {
-		auto springGen = new ElasticBandForceGen(PxVec3(0), 150., .1);
+		auto springGen = new ElasticBandForceGen(PxVec3(0), 100., .1);
 		_forceSys.addForceGen(springGen);
 		if (i == 0) {
 			p1 = new Particle(_playerSolid.getScarfPos(), PxVec3(0), PxVec3(0), PxVec4(0.05 *  i , 0.3, 0.6, 1.), .2f, .1f, DBL_MAX, DBL_MAX);
@@ -93,6 +93,8 @@ void Player::update(double dt) {
 	
 	_scarfAnchor->setPos(_playerSolid.getScarfPos());
 	_scarf->update(dt);
+
+	_jumpTimer += dt;
 }
 
 PxVec3 Player::getPos() {
@@ -126,18 +128,25 @@ bool Player::getRunning() const {
 	return _running;
 }
 
-void Player::setRunning(bool v) {
-	_running = v;
-}
+//void Player::setRunning(bool v) {
+//	_running = v;
+//}
 
 void Player::startRun() {
 	_running = true;
 	_trailGen->setActive(true);
 }
 
+void Player::endRun() {
+	_running = false;
+	_trailGen->setActive(false);
+	_playerSolid.getActor()->setLinearDamping(4.f);
+}
+
 void Player::onGroundContact() {
-	if (_running) {
+	if (_running && _jumpTimer >= JUMP_TIMER) {
 		_canJump = true;
+		_jumpTimer = 0.;
 		_trailGen->setActive(true);
 	}
 }

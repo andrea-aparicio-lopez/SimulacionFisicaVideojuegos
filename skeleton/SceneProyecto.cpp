@@ -15,14 +15,17 @@
 #include "Snowball.h"
 #include "ObstacleSystem.h"
 
+#include <algorithm>
 #include <iostream>
 
 using namespace physx;
 
-SceneProyecto::SceneProyecto(PxScene* gScene, PxPhysics* gPhysics) 
+SceneProyecto::SceneProyecto(PxScene* gScene, PxPhysics* gPhysics, std::string& display_text1, std::string& display_text2)
 	: Scene() 
 	, _gScene(gScene)
 	, _gPhysics(gPhysics)
+	, _display_text1(display_text1)
+	, _display_text2(display_text2)
 {
 
 }
@@ -39,8 +42,8 @@ SceneProyecto::~SceneProyecto() {
 }
 
 void SceneProyecto::start() {
-	_ground = new GroundSolid(_gScene, _gPhysics, PxVec3(0), PxVec3(1000, 0.1, 1000), PxVec4(.7,.7,.7,1));
-	_player = new Player(_gScene, _gPhysics, PxVec3(0, 5, 0));
+	_ground = new GroundSolid(_gScene, _gPhysics, PxVec3(500,0,0), PxVec3(1000, 0.2, 500), PxVec4(1,1,1,1));
+	_player = new Player(_gScene, _gPhysics, PxVec3(0, 8, 0));
 	_player->setPos(PxVec3(0, _player->getHeight(), 0));
 
 	_forceSys = new ForceSystem();
@@ -54,7 +57,7 @@ void SceneProyecto::start() {
 	_weatherSys->addForceGen(_gravityGen);
 
 	// Viento
-	_windGen = new WindForceGen(_player->getPos(), PxVec3(120, 50, 10), PxVec3(-15,-5,0));
+	_windGen = new WindForceGen(_player->getPos(), PxVec3(150, 50, 10), PxVec3(-15,-5,0));
 	_forceSys->addForceGen(_windGen);
 	_weatherSys->addForceGen(_windGen);
 	_windGen->setActive(false);
@@ -79,6 +82,7 @@ void SceneProyecto::start() {
 	_camera->setPosition(_player->getPos() + PxVec3(-10, 0, 40));
 	_camera->setDirection(_player->getPos() - _camera->getEye());
 
+	_display_text1 = "Press SPACE to start";
 }
 
 void SceneProyecto::integrate(double dt) {
@@ -86,12 +90,11 @@ void SceneProyecto::integrate(double dt) {
 
 	_player->update(dt);
 
-	//for (auto obs : _obstacles)
-	//	obs->update(dt);
-	if (_state == Gamestate::RUNNING) {
 		_obstacleSys->update(dt);
+	if (_state == Gamestate::RUNNING) {
 		_forest->update(dt);
-
+		if (_player->getPos().x >= FINISH_LINE)
+			endGame();
 	}
 
 	_weatherSys->update(dt);
@@ -115,12 +118,7 @@ void SceneProyecto::processKey(unsigned char key, const physx::PxTransform& came
 		_tornadoGen->setActive(!_tornadoGen->isActive());
 		break;
 	case ' ':
-		if (_state == START) {
-			_player->startRun();
-			_windGen->setActive(true);
-			_tornadoGen->setActive(true);
-			_state = RUNNING;
-		}
+		if (_state == START) startGame();
 		else if(_state == RUNNING) _player->jump();
 		break;
 	case 'Q':
@@ -146,8 +144,9 @@ void SceneProyecto::onCollision(PxActor* actor1, PxActor* actor2)
 		else if (otherData->type == GameObjectType::Obstacle) {	// Colisiones player - obstacle
 			auto obstacle = static_cast<Obstacle*>(otherData->object);
 			obstacle->explode();
-			// TODO: lose
-			//std::cout << "YOU LOSE\n";
+			_score += OBSTACLE_CRASH_POINTS;
+			_score = max(_score, 0);
+			_display_text2 = "Score: " + std::to_string(_score);
 		}
 	}
 	else { 	// Colisiones snowball - obstacle
@@ -159,13 +158,14 @@ void SceneProyecto::onCollision(PxActor* actor1, PxActor* actor2)
 			auto snowballData = (data1->type == GameObjectType::Snowball) ? data1 : data2;
 			auto otherData = (data1->type == GameObjectType::Snowball) ? data2 : data1;
 
-			// TODO
 			auto snowball = static_cast<Snowball*>(snowballData->object);
 			snowball->onImpact();
 
 			if (otherData->type == GameObjectType::Obstacle) {
 				auto obstacle = static_cast<Obstacle*>(otherData->object);
 				obstacle->explode();
+				_score += OBSTACLE_DESTROYED_POINTS;
+				_display_text2 = "Score: " + std::to_string(_score);
 			}
 		}
 	}
@@ -177,4 +177,23 @@ bool SceneProyecto::isPlayerActor(PxActor* actor) {
 	return data->type == GameObjectType::PlayerBody
 		|| data->type == GameObjectType::PlayerHead
 		|| data->type == GameObjectType::PlayerBoard;
+}
+
+void SceneProyecto::startGame() {
+	setState(RUNNING);
+	_player->startRun();
+	_windGen->setActive(true);
+	_tornadoGen->setActive(true);
+	_display_text1 = "";
+	_display_text2 = "Score: " + std::to_string(_score);
+}
+
+void SceneProyecto::endGame() {
+	setState(FINISH);
+	_player->endRun();
+	_windGen->setActive(false);
+	_tornadoGen->setActive(false);
+	// showScore();
+	_display_text1 = "GAME OVER!";
+	_display_text2 = "Final Score: " + std::to_string(_score);
 }
