@@ -258,6 +258,7 @@
     <ClCompile Include="DragForceGen.cpp" />
     <ClCompile Include="ElasticBandForceGen.cpp" />
     <ClCompile Include="ExplosionForceGen.cpp" />
+    <ClCompile Include="FinishFlag.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="ForceSystem.cpp" />
@@ -314,6 +315,7 @@
     <ClInclude Include="DragForceGen.h" />
     <ClInclude Include="ElasticBandForceGen.h" />
     <ClInclude Include="ExplosionForceGen.h" />
+    <ClInclude Include="FinishFlag.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="ForceSystem.h" />

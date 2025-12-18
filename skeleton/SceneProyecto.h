@@ -9,9 +9,9 @@ class GroundSolid;
 class ParticleSystem;
 class ForceSystem;
 class ForceGenerator;
-//class Obstacle;
 class ObstacleSystem;
 class Forest;
+class FinishFlag;
 
 class SceneProyecto : public Scene
 {
@@ -42,6 +42,7 @@ protected:
 	Player* _player;
 	GroundSolid* _ground;
 	Forest* _forest;
+	FinishFlag* _finishFlag;
 	
 	ParticleSystem* _weatherSys;
 	ForceSystem* _forceSys;
@@ -59,7 +60,7 @@ protected:
 	const int OBSTACLE_DESTROYED_POINTS = 5;
 	const int OBSTACLE_CRASH_POINTS = -3;
 
-	const float FINISH_LINE = 100.f;
+	const float FINISH_LINE = 1000.f;
 
 protected:
 	enum Gamestate {

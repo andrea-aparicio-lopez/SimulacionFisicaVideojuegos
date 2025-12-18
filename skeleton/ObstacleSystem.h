@@ -36,8 +36,9 @@ protected:
 	std::uniform_real_distribution<float> _d_height;
 
 	enum ObstacleType {
-		ROCK,
-		HOUSE,
+		BLOCK,
+		//ROCK,
+		//HOUSE,
 		//BONFIRE,
 		OBSTACLE_TYPE_SIZE
 	};

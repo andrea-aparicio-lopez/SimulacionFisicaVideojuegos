@@ -19,10 +19,6 @@ ObstacleSystem::ObstacleSystem(PxScene* gScene, PxPhysics* gPhysics, Player* pla
 	obsGen1->setActive(false);
 	_rbGenerators.push_back(obsGen1);
 
-	auto obsGen2 = new ObstacleGen(this);
-	obsGen2->setActive(false);
-	_rbGenerators.push_back(obsGen2);
-
 	// TODO: Obstáculos diferentes
 }
 

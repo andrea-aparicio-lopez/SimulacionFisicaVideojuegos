@@ -14,6 +14,7 @@
 #include "GameObjectData.h"
 #include "Snowball.h"
 #include "ObstacleSystem.h"
+#include "FinishFlag.h"
 
 #include <algorithm>
 #include <iostream>
@@ -34,6 +35,7 @@ SceneProyecto::~SceneProyecto() {
 	delete _player;
 	delete _ground;
 	delete _forest;
+	delete _finishFlag;
 	delete _weatherSys;
 	delete _forceSys;
 	delete _obstacleSys;
@@ -76,6 +78,9 @@ void SceneProyecto::start() {
 
 	// ÁRBOLES
 	_forest = new Forest(_player);
+
+	// META
+	_finishFlag = new FinishFlag(PxVec3(FINISH_LINE, 0, -5));
 
 
 	_camera = GetCamera();
